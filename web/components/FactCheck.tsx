@@ -57,11 +57,6 @@ export default function FactCheck({ fact }: { fact: FactCheckType }) {
                           存檔快照
                         </a>
                       )}
-                      {!hasShot && (
-                        <span className="rounded bg-slate-50 px-1.5 py-0.5 text-[11px] text-slate-400">
-                          截圖待補
-                        </span>
-                      )}
                     </div>
                     {hasShot && (
                       <button

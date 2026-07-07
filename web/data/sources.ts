@@ -17,14 +17,19 @@ export const SOURCES: SourceRef[] = [
     url: "https://asiansurfing.org/2026/06/quota-places/",
   },
   {
+    outlet: "亞洲衝浪總會 ASF",
+    title: "2024 亞錦賽國家排行（PDF）",
+    url: "https://www.surfingsingapore.com/_files/ugd/54f516_51da7a274a8d45f7b2c0ebfdcc8b793e.pdf",
+  },
+  {
+    outlet: "LiveHeats",
+    title: "2025 亞錦賽官方賽果（女子：陳宛榆7、鍾昀蓉13）",
+    url: "https://liveheats.com/events/404396/divisions/716342/result",
+  },
+  {
     outlet: "運動部",
     title: "我國參加國際綜合性運動賽會國家代表隊培訓參賽實施計畫",
     url: "https://www.sports.gov.tw/CL/1660",
-  },
-  {
-    outlet: "中央社",
-    title: "亞運衝浪取消男子2名額 協會重申放寬後仍未達標",
-    url: "https://www.cna.com.tw/news/aspt/202607060348.aspx",
   },
   {
     outlet: "聯合報",
