@@ -4,13 +4,13 @@ import Nav from "@/components/Nav";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://aichi-nagoya-2026issue.vercel.app"),
-  title: "拿到門票，卻上不了場｜2026 亞運衝浪選手困境懶人包",
+  title: "拿到 4 個亞運席次，為什麼無法出賽？｜2026 亞運衝浪爭議懶人包",
   description:
-    "台灣衝浪隊拚下 2026 名古屋亞運 4 席，卻有 2 席被作廢。這是一份逐句查證的懶人包——每一個說法旁邊，都有來源與截圖。",
+    "從取得亞運名額、協會選拔，到最後代表資格審查，帶你看懂台灣衝浪隊這次爭議的完整過程。每個說法旁邊，都有官方來源與截圖。",
   openGraph: {
-    title: "拿到門票，卻上不了場｜2026 亞運衝浪選手困境懶人包",
+    title: "拿到 4 個亞運席次，為什麼無法代表國家出賽？",
     description:
-      "台灣衝浪隊拚下 4 席、被作廢 2 席。逐句查證，每個說法都有來源與截圖。",
+      "從取得亞運名額、協會選拔，到代表資格審查，帶你看懂台灣衝浪隊這次爭議。每個說法都有官方來源與截圖。",
     type: "website",
     locale: "zh_TW",
     images: [
@@ -18,14 +18,14 @@ export const metadata: Metadata = {
         url: "/og.png",
         width: 1200,
         height: 630,
-        alt: "拿到門票，卻上不了場：2026 亞運衝浪選手困境懶人包",
+        alt: "拿到 4 個亞運席次，為什麼無法出賽？2026 亞運衝浪爭議懶人包",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "拿到門票，卻上不了場｜2026 亞運衝浪選手困境懶人包",
-    description: "台灣衝浪隊拚下 4 席、被作廢 2 席。逐句查證，每個說法都有來源。",
+    title: "拿到 4 個亞運席次，為什麼無法代表國家出賽？",
+    description: "從取得名額、協會選拔到代表資格審查，帶你看懂這次爭議。每個說法都有官方來源。",
     images: ["/og.png"],
   },
 };

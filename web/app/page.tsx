@@ -2,6 +2,7 @@ import Link from "next/link";
 import Countdown from "@/components/Countdown";
 import CoreStats from "@/components/CoreStats";
 import Timeline from "@/components/Timeline";
+import TimelineStages from "@/components/TimelineStages";
 import Conclusion from "@/components/Conclusion";
 import CountriesTeaser from "@/components/CountriesTeaser";
 import Poll from "@/components/Poll";
@@ -17,14 +18,13 @@ export default function Home() {
           <p className="inline-block rounded-full bg-white/15 px-4 py-1 text-sm font-medium">
             2026 名古屋亞運 · 衝浪
           </p>
-          <h1 className="mt-6 text-4xl font-black leading-tight sm:text-5xl">
-            拿到門票，
-            <br className="sm:hidden" />
-            卻上不了場
+          <h1 className="mt-6 text-3xl font-black leading-tight sm:text-[2.75rem]">
+            拿到 4 個亞運席次，
+            <br className="hidden sm:block" />
+            為什麼無法代表國家出賽？
           </h1>
-          <p className="mx-auto mt-5 max-w-xl text-lg leading-relaxed text-white/85">
-            台灣衝浪隊拚下 4 個亞運席次，卻有 2 席被作廢。九月就要開賽，選手還站不上場。
-            這是一份逐句查證的懶人包——每個說法旁邊，都有來源與截圖。
+          <p className="mx-auto mt-5 max-w-2xl text-lg leading-relaxed text-white/85">
+            從取得亞運名額、協會選拔，到最後代表資格審查，帶你看懂台灣衝浪隊這次爭議的完整過程。每個說法旁邊，都有官方來源與截圖。
           </p>
           <div className="mt-8 flex flex-col items-center gap-3">
             <span className="text-sm text-white/70">距離名古屋亞運開幕</span>
@@ -60,6 +60,7 @@ export default function Home() {
             點開每則的「查證」標籤，看它的來源與可信度。
           </p>
         </header>
+        <TimelineStages />
         <Timeline />
       </section>
 

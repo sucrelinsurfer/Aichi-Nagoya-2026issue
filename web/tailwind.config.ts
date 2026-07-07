@@ -4,6 +4,17 @@ const config: Config = {
   content: [
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
+    "./data/**/*.{js,ts}",
+  ],
+  safelist: [
+    "bg-red-500",
+    "bg-emerald-500",
+    "bg-amber",
+    "bg-slate-400",
+    "bg-sky-500",
+    "bg-wave",
+    "bg-coral",
+    "bg-emerald-500",
   ],
   theme: {
     extend: {
