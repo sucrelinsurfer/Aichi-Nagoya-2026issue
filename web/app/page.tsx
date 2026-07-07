@@ -89,7 +89,15 @@ export default function Home() {
       </section>
 
       <footer className="border-t border-slate-100 px-6 py-10 text-center text-sm text-slate-400">
-        本站為公民倡議與事實查證用途，內容持續更新。© 2026
+        <a
+          href="https://github.com/sucrelinsurfer/Aichi-Nagoya-2026issue"
+          target="_blank"
+          rel="noreferrer noopener"
+          className="font-medium text-slate-500 underline underline-offset-2 hover:text-wave"
+        >
+          GitHub · 開放協作與原始碼
+        </a>
+        <p className="mt-2">本站為公民倡議與事實查證用途，內容持續更新。© 2026</p>
       </footer>
     </main>
   );
