@@ -131,6 +131,10 @@ export const TIMELINE: TimelineItem[] = [
           url: "https://asiansurfing.org/2026/06/quota-places/",
         },
         {
+          title: "ASF 2024 亞錦賽國家排行（PDF）",
+          url: "https://www.surfingsingapore.com/_files/ugd/54f516_51da7a274a8d45f7b2c0ebfdcc8b793e.pdf",
+        },
+        {
           title: "中央社：協會9點聲明（含各屆名次）",
           url: "https://www.cna.com.tw/news/aspt/202607060348.aspx",
         },
