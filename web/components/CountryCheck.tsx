@@ -15,6 +15,7 @@ const NOTE: Record<string, string> = {
 export default function CountryCheck({ sources }: { sources: Src[] }) {
   const [open, setOpen] = useState(false);
   const [zoom, setZoom] = useState<string | null>(null);
+  const [failed, setFailed] = useState<Set<string>>(new Set());
   const status: VerifyStatus = sources.length > 0 ? "partial" : "unverified";
   const meta = STATUS_META[status];
 
@@ -39,6 +40,7 @@ export default function CountryCheck({ sources }: { sources: Src[] }) {
             <ul className="mt-2 space-y-3">
               {sources.map((s) => {
                 const shot = SHOTS[s.url];
+                const hasShot = shot && !failed.has(s.url);
                 const archive = ARCHIVES[s.url];
                 return (
                   <li key={s.url}>
@@ -62,7 +64,7 @@ export default function CountryCheck({ sources }: { sources: Src[] }) {
                         </a>
                       )}
                     </span>
-                    {shot && (
+                    {hasShot && (
                       <button
                         onClick={() => setZoom(shot)}
                         className="mt-2 block overflow-hidden rounded-lg border border-slate-200 transition hover:border-wave"
@@ -72,6 +74,7 @@ export default function CountryCheck({ sources }: { sources: Src[] }) {
                         <img
                           src={shot}
                           alt={`${s.title} 截圖`}
+                          onError={() => setFailed((p) => new Set(p).add(s.url))}
                           className="max-h-40 w-full object-cover object-top"
                         />
                       </button>

@@ -73,8 +73,12 @@ export const TIMELINE: TimelineItem[] = [
     body: "教育部體育署（現運動部）訂定《國家代表隊培訓參賽實施計畫》，明定組團採「精英組團、從嚴選才」原則。",
     fact: {
       status: "partial",
-      note: "運動部確有此組團原則與計畫，但「2020 年 8 月」確切訂定日期未查得可直接引用的法規正本，方向屬實、日期待補。",
+      note: "「精英組團、從嚴選才」原則見運動部《我國參加國際綜合性運動賽會國家代表隊培訓參賽實施計畫》官方版本；惟「2020 年 8 月」最初訂定的確切日期，仍以官方公告為準、待補。",
       sources: [
+        {
+          title: "運動部：培訓參賽實施計畫（官方頁）",
+          url: "https://www.sports.gov.tw/CL/1660",
+        },
         {
           title: "運動部：培育優秀或具潛力運動選手計畫",
           url: "https://www.sports.gov.tw/CP/1659",
@@ -88,12 +92,16 @@ export const TIMELINE: TimelineItem[] = [
     side: "official",
     body: "修訂附件2，衝浪所屬第二類項目列亞錦賽個人「前4名」客觀基準，同時開闢「經評估並專案核著者」的彈性審查路徑。",
     fact: {
-      status: "partial",
-      note: "「前4名＋專案核定」概念與運動部說法一致，但 2022/9 修訂日期與附件2 條文原文尚無公開正本可引用，待補。",
+      status: "verified",
+      note: "運動部《培訓參賽實施計畫》111.09（2022 年 9 月）修訂版即為此版本，載明「精英組團、從嚴選才」組團原則；附件2 的前4名基準與專案審查路徑細節，可在下方官方 PDF 中核對。",
       sources: [
         {
-          title: "運動部計畫頁",
-          url: "https://www.sports.gov.tw/CP/1659",
+          title: "運動部：培訓參賽實施計畫（官方頁）",
+          url: "https://www.sports.gov.tw/CL/1660",
+        },
+        {
+          title: "運動部：實施計畫 PDF（111.09 修訂本文）",
+          url: "https://ws.sports.gov.tw/Download.ashx?u=L0ZTMDEvRmlsZVBhdGgvMS9yZWxmaWxlLzAvNDkxMy9hYmZhYzQ0Ni0xNzkyLTQxZDUtYjI0NC05MDQ5M2ZhYmZmZDUucGRm&n=5oiR5ZyL5Y%2BD5Yqg5ZyL6Zqb57ac5ZCI5oCn6YGL5YuV6LO95pyD5ZyL5a625Luj6KGo6ZqK5Z%2B56KiT5Y%2BD6LO95a%2Bm5pa96KiI55WrMTExMDnkv67oqIIucGRm",
         },
         {
           title: "中央社：協會9點聲明",
@@ -108,8 +116,16 @@ export const TIMELINE: TimelineItem[] = [
     body: "配額由 2024、2025 兩屆亞洲衝浪錦標賽的「國家團體排名」累加換算。2024 男10、女6 各得 1 席；2025 男7、女4 再得 1 席。",
     fact: {
       status: "verified",
-      note: "亞洲衝浪總會官方公告明載配額「through ASF Asian Surfing Championships 2024 & 2025」，為兩屆累加，非單一賽事。",
+      note: "ASF 官方《參賽資格制度》白紙黑字：男 24／女 24、每國上限 2 男 2 女；配額由 2024 與 2025 兩屆亞錦賽分配，每屆每國上限 1 男 1 女——即兩屆累加，非單一賽事。",
       sources: [
+        {
+          title: "ASF 參賽資格制度 PDF（中英雙語下載）",
+          url: "/docs/asf-qualification-nagoya2026-bilingual.pdf",
+        },
+        {
+          title: "ASF：名古屋2026 短板衝浪資格賽制度",
+          url: "https://asiansurfing.org/2024/07/nagoya2026/",
+        },
         {
           title: "ASF：名古屋亞運暫定配額分配",
           url: "https://asiansurfing.org/2026/06/quota-places/",

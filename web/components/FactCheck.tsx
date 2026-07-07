@@ -7,7 +7,11 @@ import { SHOTS, ARCHIVES } from "@/data/screenshots";
 export default function FactCheck({ fact }: { fact: FactCheckType }) {
   const [open, setOpen] = useState(false);
   const [zoom, setZoom] = useState<string | null>(null);
+  const [failed, setFailed] = useState<Set<string>>(new Set());
   const meta = STATUS_META[fact.status];
+
+  const markFailed = (url: string) =>
+    setFailed((prev) => new Set(prev).add(url));
 
   return (
     <div className="mt-3">
@@ -30,6 +34,7 @@ export default function FactCheck({ fact }: { fact: FactCheckType }) {
             <ul className="mt-3 space-y-3">
               {fact.sources.map((s) => {
                 const shot = SHOTS[s.url];
+                const hasShot = shot && !failed.has(s.url);
                 const archive = s.archive ?? ARCHIVES[s.url];
                 return (
                   <li key={s.url}>
@@ -52,13 +57,13 @@ export default function FactCheck({ fact }: { fact: FactCheckType }) {
                           存檔快照
                         </a>
                       )}
-                      {!shot && (
+                      {!hasShot && (
                         <span className="rounded bg-slate-50 px-1.5 py-0.5 text-[11px] text-slate-400">
                           截圖待補
                         </span>
                       )}
                     </div>
-                    {shot && (
+                    {hasShot && (
                       <button
                         onClick={() => setZoom(shot)}
                         className="mt-2 block overflow-hidden rounded-lg border border-slate-200 transition hover:border-wave"
@@ -68,6 +73,7 @@ export default function FactCheck({ fact }: { fact: FactCheckType }) {
                         <img
                           src={shot}
                           alt={`${s.title} 截圖`}
+                          onError={() => markFailed(s.url)}
                           className="max-h-44 w-full object-cover object-top"
                         />
                       </button>

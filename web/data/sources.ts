@@ -3,8 +3,23 @@ export type SourceRef = { title: string; url: string; outlet: string };
 export const SOURCES: SourceRef[] = [
   {
     outlet: "亞洲衝浪總會 ASF",
+    title: "參賽資格制度 PDF（中英雙語）：男24女24、兩屆亞錦賽累加",
+    url: "/docs/asf-qualification-nagoya2026-bilingual.pdf",
+  },
+  {
+    outlet: "亞洲衝浪總會 ASF",
+    title: "名古屋2026 短板衝浪資格賽制度說明",
+    url: "https://asiansurfing.org/2024/07/nagoya2026/",
+  },
+  {
+    outlet: "亞洲衝浪總會 ASF",
     title: "名古屋亞運暫定配額分配（2024 & 2025 兩屆累加）",
     url: "https://asiansurfing.org/2026/06/quota-places/",
+  },
+  {
+    outlet: "運動部",
+    title: "我國參加國際綜合性運動賽會國家代表隊培訓參賽實施計畫",
+    url: "https://www.sports.gov.tw/CL/1660",
   },
   {
     outlet: "中央社",
