@@ -3,7 +3,8 @@ import FactCheck from "./FactCheck";
 
 const DOT: Record<string, string> = {
   athlete: "bg-coral",
-  official: "bg-slate-400",
+  gov: "bg-sky-500",
+  association: "bg-slate-400",
   fact: "bg-wave",
 };
 
@@ -20,8 +21,12 @@ export default function Timeline() {
           中立事實
         </span>
         <span className="flex items-center gap-1.5">
+          <span className="h-2.5 w-2.5 rounded-full bg-sky-500" />
+          運動部（官方）
+        </span>
+        <span className="flex items-center gap-1.5">
           <span className="h-2.5 w-2.5 rounded-full bg-slate-400" />
-          運動部・協會方
+          衝浪協會（CTSA）
         </span>
       </div>
 
@@ -29,12 +34,12 @@ export default function Timeline() {
         <div className="absolute left-[7px] top-0 h-full w-0.5 bg-wave/20 sm:left-1/2 sm:-translate-x-1/2" />
         <div className="space-y-6">
           {TIMELINE.map((item, i) => {
-            const side = item.side; // official | athlete | undefined(fact)
+            const side = item.side; // gov | association | athlete | undefined(fact)
             const key = side ?? "fact";
             const wrap =
               side === "athlete"
                 ? "sm:w-1/2 sm:pr-10"
-                : side === "official"
+                : (side === "gov" || side === "association")
                 ? "sm:ml-auto sm:w-1/2 sm:pl-10"
                 : "sm:mx-auto sm:w-[78%]";
             return (

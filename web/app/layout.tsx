@@ -6,11 +6,22 @@ export const metadata: Metadata = {
   title: "拿到門票，卻上不了場｜2026 亞運衝浪選手困境懶人包",
   description:
     "台灣衝浪隊拚下 2026 名古屋亞運 4 席，卻有 2 席被作廢。這是一份逐句查證的懶人包——每一個說法旁邊，都有來源與截圖。",
+  icons: {
+    icon: "/favicon.png",
+  },
   openGraph: {
     title: "拿到門票，卻上不了場｜2026 亞運衝浪選手困境懶人包",
     description:
-      "拚下 4 席、被砍 2 席。逐句查證，每個說法都有來源與截圖。",
+      "台灣衝浪隊拚下 4 席、被作廢 2 席。逐句查證，每個說法都有來源與截圖。",
     type: "website",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 1200,
+        alt: "2026 亞運衝浪選手困境懶人包",
+      },
+    ],
   },
 };
 
