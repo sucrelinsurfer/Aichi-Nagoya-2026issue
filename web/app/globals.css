@@ -1,0 +1,24 @@
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap");
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: #f7fbfb;
+  color: #0b1f33;
+  -webkit-font-smoothing: antialiased;
+}
+
+.wave-divider {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 60'%3E%3Cpath fill='%230e7c86' fill-opacity='0.12' d='M0,32L60,37.3C120,43,240,53,360,50.7C480,48,600,32,720,26.7C840,21,960,27,1080,32C1200,37,1320,43,1380,45.3L1440,48L1440,60L0,60Z'/%3E%3C/svg%3E");
+  background-size: cover;
+  background-repeat: no-repeat;
+}

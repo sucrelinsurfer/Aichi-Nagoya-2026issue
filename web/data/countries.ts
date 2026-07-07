@@ -1,0 +1,255 @@
+export type Tier = 1 | 2 | 3;
+
+export type Country = {
+  name: string;
+  flag: string;
+  men: number;
+  women: number;
+  essence: string; // 遴選本質（詳述）
+  tag: string; // 遴選機制（比較表精簡）
+  limit: string; // 關鍵限制（比較表精簡）
+  body: string; // 具體標準與國情限制
+  sources: { title: string; url: string }[];
+};
+
+export const TIER_META: Record<
+  Tier,
+  { label: string; sub: string; dot: string }
+> = {
+  1: {
+    label: "第一級 · 起步與資源受限",
+    sub: "參賽規模 0–1 人",
+    dot: "bg-coral",
+  },
+  2: {
+    label: "第二級 · 體制發展中／受限",
+    sub: "參賽規模 2–3 人",
+    dot: "bg-amber",
+  },
+  3: {
+    label: "第三級 · 陣容完整、制度化",
+    sub: "多為 2 男 2 女滿額",
+    dot: "bg-wave",
+  },
+};
+
+export const COUNTRIES: Record<Tier, Country[]> = {
+  1: [
+    {
+      name: "阿富汗",
+      flag: "🇦🇫",
+      men: 1,
+      women: 0,
+      essence: "100% 海外流亡血統徵召",
+      tag: "海外血統徵召",
+      limit: "無海岸線 · 宗教限制（無女子）",
+      body: "國內因政局與缺乏海岸線完全無法推動衝浪。官方機構「阿富汗衝浪協會（WRAA）」總部設於德國柏林，在葡萄牙埃里塞拉等歐洲衝浪勝地舉辦「海外阿富汗人錦標賽」，徵召具阿富汗血統的海外僑胞或難民二代（如首位代表 Afridun Amu）。受宗教與文化限制，無法選出女子國手。",
+      sources: [
+        { title: "維基百科：Afridun Amu", url: "https://en.wikipedia.org/wiki/Afridun_Amu" },
+        { title: "WRAA 官方組織", url: "http://wordpress.wraa.net/" },
+      ],
+    },
+    {
+      name: "斯里蘭卡",
+      flag: "🇱🇰",
+      men: 1,
+      women: 0,
+      essence: "本土聯賽積分制，受限於出國經費",
+      tag: "全國積分制",
+      limit: "經費不足 · 自砍名額",
+      body: "本身是世界頂級衝浪天堂（阿魯甘灣 Arugam Bay）。斯里蘭卡衝浪聯盟（SFSL）設有年度全國錦標賽積分制，年終積分最高者取得國家隊資格。名額失衡關鍵在於嚴重的國家經濟危機——體育部拿不出完整陣容（2男2女）的出國預算，只能自縮編制，僅補助 1 名最頂尖男子選手。",
+      sources: [
+        { title: "斯里蘭卡衝浪聯盟 SFSL", url: "https://www.instagram.com/surfingsl/" },
+      ],
+    },
+    {
+      name: "新加坡",
+      flag: "🇸🇬",
+      men: 0,
+      women: 1,
+      essence: "海外移地訓練與個人提案審查",
+      tag: "個人提案審查",
+      limit: "無天然浪 · 須自費移訓",
+      body: "國土被印尼、馬來西亞包圍，四周海域沒有可競技的天然湧浪。國內無法辦全國聯賽，協會採「彈性個人化審查」：選手須自費前往峇里島、民丹島或馬來西亞迪沙魯長期訓練，向協會提交參賽計畫與戰績報告，由理事會審查技術水準後直接指派。",
+      sources: [
+        { title: "新加坡衝浪協會", url: "https://www.instagram.com/surfingsingapore/" },
+      ],
+    },
+  ],
+  2: [
+    {
+      name: "黎巴嫩",
+      flag: "🇱🇧",
+      men: 2,
+      women: 0,
+      essence: "海外雙重國籍徵召＋社群影片海選",
+      tag: "海外徵召＋影片海選",
+      limit: "無成熟聯賽（無女子）",
+      body: "頂尖公開組由黎巴嫩衝浪總會直接徵召在美國加州長大、具黎巴嫩血統或雙重國籍的職業／半職業選手。青少年培訓隊則極度草根——18 歲以下選手私訊官方社群帳號、提供衝浪短影片與自我推薦信，由協會內部教練主觀評定。",
+      sources: [
+        { title: "黎巴嫩衝浪總會", url: "https://www.facebook.com/Lebanesesurfingfederation/" },
+      ],
+    },
+    {
+      name: "沙烏地阿拉伯",
+      flag: "🇸🇦",
+      men: 0,
+      women: 2,
+      essence: "安全基礎水性考關＋官方訓練營直升",
+      tag: "水性考關＋訓練營",
+      limit: "起步晚 · 重安全非競技",
+      body: "由沙烏地衝浪聯合會主導。起步極晚，技術規範偏向基本能力安全卡關而非純競技排名：須通過硬性水性測試（著輕便衣物游 50 公尺、水中漂浮移動 2 分鐘、潛水至少 5 公尺）。與 ISA 合作辦培訓認證，選手須全程參與官方訓練營並在官方對抗賽出線。",
+      sources: [
+        { title: "沙烏地衝浪聯合會", url: "https://surfing.sa/?lang=en" },
+      ],
+    },
+    {
+      name: "孟加拉",
+      flag: "🇧🇩",
+      men: 1,
+      women: 1,
+      essence: "國際 NGO 扶持＋單一沙灘錦標賽",
+      tag: "單一沙灘錦標賽",
+      limit: "NGO 扶持 · 缺教練經費",
+      body: "依賴世界最長天然沙灘「科克斯巴扎爾（Cox's Bazar）」。唯一選拔管道是每年在該沙灘的全國衝浪錦標賽。早期選手多為沙灘上謀生的貧困街童，透過 NGO 捐贈的衝浪板學會衝浪並勝出。國內極缺專業教練與經費，國際賽通常止步首輪。",
+      sources: [],
+    },
+    {
+      name: "伊朗",
+      flag: "🇮🇷",
+      men: 1,
+      women: 1,
+      essence: "沙灘區域聯賽＋嚴格服裝宗教審查",
+      tag: "區域選拔賽",
+      limit: "宗教服裝審查（一票否決）",
+      body: "由伊朗衝浪協會主導，每年在阿曼灣「恰巴哈爾（Chabahar）」海灘辦唯一的全國選拔賽，須拿下前三名。一票否決的宗教標準：女性選手在選拔、訓練與出國參賽時，須全程穿著官方全面式防寒泳衣（Burqini）並佩戴水上希賈布，確保不露身體線條；拒絕配合者取消資格。",
+      sources: [],
+    },
+    {
+      name: "馬來西亞",
+      flag: "🇲🇾",
+      men: 1,
+      women: 1,
+      essence: "東北季風賽事積分制",
+      tag: "季風巡迴賽積分",
+      limit: "半年無浪 · 預算受限",
+      body: "浪況高度依賴東北季風。協會（PLOM）在每年 11 月至隔年 3 月冬季辦 2–3 站「馬來西亞衝浪巡迴賽」，年度排名前段的男女入選大名單。限制在於一年有半年（夏季）完全無浪、無法全年維持狀態，加上衝浪非主流奪牌項目，受預算限制常只資助男女各 1 名出國。",
+      sources: [],
+    },
+    {
+      name: "日本",
+      flag: "🇯🇵",
+      men: 1,
+      women: 2,
+      essence: "與 WSL／ISA 深度掛鉤的多軌制",
+      tag: "WSL／ISA 多軌制",
+      limit: "亞運配額少但實質強權",
+      body: "註：此為亞運配額，日本實質為世界超級強權。日本衝浪聯盟（NSA）「波乗りジャパン」選拔：WSL 頂級巡迴（CT）常駐選手（如五十嵐卡諾）無條件保障名額；其餘須在日本 S 聯賽或 WSL 挑戰賽拚殺，依年終日本人世界排名前 8 進入強化指定選手，再經閉門集訓營爭最終名額。青少年須持 NSA 認證級別 2 級以上檢定證書。",
+      sources: [
+        { title: "日本衝浪聯盟 NSA", url: "https://www.nsa-surf.org/" },
+      ],
+    },
+  ],
+  3: [
+    {
+      name: "中華台北",
+      flag: "🇹🇼",
+      men: 2,
+      women: 2,
+      essence: "國內積分選拔＋政府「從嚴選才」雙重門檻（引發爭議）",
+      tag: "積分選拔＋政府門檻",
+      limit: "從嚴選才 · 男子名額自砍",
+      body: "中華民國衝浪運動協會（CTSA）在宜蘭蜜月灣、台東金樽辦全國分齡選拔賽選儲備選手。台灣以團體積分拿滿 2男2女配額，但政府設「從嚴選才」門檻——須在亞錦賽打進前 16 名。2 名女子（亞錦賽第 7、13）通過；2 名男子最佳成績未達前 16，代表權遭作廢不予提名，男子名額自砍。",
+      sources: [
+        { title: "CTSA 中華民國衝浪運動協會", url: "https://www.facebook.com/ctsa.surf/" },
+      ],
+    },
+    {
+      name: "中國",
+      flag: "🇨🇳",
+      men: 2,
+      women: 2,
+      essence: "舉國體制「跨界跨項體能選材」與數字化評級",
+      tag: "跨界選材＋數字評級",
+      limit: "舉國體制 · 封閉特訓",
+      body: "國家隊直接到各省體校，挑 10–15 歲、平衡感與水性佳的武術、體操、蹦床、游泳運動員轉練衝浪（如楊思琪）。已建立全國錦標賽與冠軍賽，遴選極數字化：須在公開組打進全國前 8 或青少年組前 4，才能獲授「一級／二級衝浪運動員」，進海南日月灣或室內浪池全年封閉特訓。",
+      sources: [],
+    },
+    {
+      name: "印度",
+      flag: "🇮🇳",
+      men: 2,
+      women: 2,
+      essence: "兩階段全國積分與科學化／心理高壓評測營",
+      tag: "積分＋評測營",
+      limit: "科學化 · 心理高壓篩選",
+      body: "印度衝浪協會（SFI）正式政策：第一階段在 SFI LiveHeats 全國排名取男女前 8 進初選池；第二階段強制參加 2 天閉門評測營，量化評分（50% 實戰對抗、20% 技術演練、15% 體能、10% 心理抗壓、5% 反興奮劑合規），加總最高前 2 名拿門票。",
+      sources: [
+        { title: "SFI 亞運遴選政策", url: "https://www.surfingfederationofindia.org/development/asian-games-selection-policy" },
+        { title: "SFI LiveHeats 排名", url: "https://liveheats.com/sfi" },
+      ],
+    },
+    {
+      name: "印尼",
+      flag: "🇮🇩",
+      men: 2,
+      women: 2,
+      essence: "世界頂級聯賽大數據淘汰制（競爭最慘烈）",
+      tag: "聯賽大數據淘汰",
+      limit: "60＋分站 · 競爭最慘烈",
+      body: "由印尼衝浪協會（PSOI）與亞洲衝浪合作組織（ASC）營運。全國每年超過 60 場分站賽，透過 LiveHeats 精算所有印尼籍選手年度總積分，只有年終排名男子前 2、女子前 2 的頂尖職業浪人才入選（如 I Made Pajar Ariyana）。",
+      sources: [
+        { title: "ASC：PSOI 全國排名決算", url: "https://asiansurf.co/the-2024-psoi-national-rankings-are-final/" },
+        { title: "LiveHeats PSOI", url: "https://liveheats.com/psoijatim" },
+      ],
+    },
+    {
+      name: "菲律賓",
+      flag: "🇵🇭",
+      men: 2,
+      women: 2,
+      essence: "國家巡迴賽總積分制＋美籍菲裔（Fil-Am）條款",
+      tag: "巡迴賽總積分",
+      limit: "含美籍菲裔條款",
+      body: "由菲律賓衝浪聯盟（UPSA）營運，每年在錫亞高島、拉烏尼翁辦 3–4 站國家巡迴賽，以各站公開組加總總積分入選。美籍菲裔條款開放遴選在夏威夷、加州長大的菲裔天才青少年，只要賽季內回國參選即可依技術徵召。",
+      sources: [
+        { title: "菲律賓衝浪聯盟 UPSA", url: "https://www.facebook.com/pilipinassurfing/" },
+      ],
+    },
+    {
+      name: "馬爾地夫",
+      flag: "🇲🇻",
+      men: 2,
+      women: 2,
+      essence: "頂級浪點「一戰定生死」淘汰賽（政府全額資助）",
+      tag: "一戰定生死淘汰賽",
+      limit: "政府全額資助",
+      body: "由馬爾地夫衝浪協會（MSA）主辦國家錦標賽，直接在馬累附近知名浪點進行數日淘汰賽。不看常年積分，殺入決賽的男女前 2 名直接入選。政府高度支持，出線者國際賽交通、住宿與裝備全額負擔。",
+      sources: [],
+    },
+    {
+      name: "南韓",
+      flag: "🇰🇷",
+      men: 2,
+      women: 2,
+      essence: "國家隊選拔系列賽＋KISS 體能檢測",
+      tag: "選拔賽＋KISS 體檢",
+      limit: "須通過體能檢測",
+      body: "由南韓衝浪協會（KSA）主導，每年在濟州島、襄陽郡辦 2 站選拔賽。選手須具 KSA 正式註冊資格，除兩站實戰排名，還須通過「韓國國家科學體育研究所（KISS）」的體能檢測，確保在低水溫與人造浪池環境具足夠爆發力。",
+      sources: [],
+    },
+    {
+      name: "泰國",
+      flag: "🇹🇭",
+      men: 2,
+      women: 2,
+      essence: "資料整理中",
+      tag: "資料整理中",
+      limit: "待補",
+      body: "依 ASF 官方配額表，泰國同樣取得 2 男 2 女滿額配額。詳細遴選辦法與國情限制待補齊。",
+      sources: [
+        { title: "ASF 配額公告", url: "https://asiansurfing.org/2026/06/quota-places/" },
+      ],
+    },
+  ],
+};
