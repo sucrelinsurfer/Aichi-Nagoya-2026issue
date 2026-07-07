@@ -2,21 +2,21 @@ const STAGES = [
   {
     no: "1",
     title: "取得亞運名額",
-    means: "台灣取得參加這個項目的資格。",
+    means: "台灣靠團體成績，先拿到「能派幾個人出賽」的門票。",
     color: "text-wave",
     ring: "border-wave/30 bg-wave/5",
   },
   {
     no: "2",
     title: "協會選拔",
-    means: "依照協會制度，哪些選手取得優先代表資格。",
+    means: "衝浪協會辦選拔賽，排出「誰最有資格代表台灣」的順位。",
     color: "text-amber",
     ring: "border-amber/30 bg-amber/5",
   },
   {
     no: "3",
     title: "代表資格審查",
-    means: "最終哪些選手可以正式以國家代表身分出賽。",
+    means: "運動部再依競技標準把關，決定「最後誰能正式出賽」。",
     color: "text-coral",
     ring: "border-coral/30 bg-coral/5",
   },
@@ -38,7 +38,7 @@ export default function TimelineStages() {
               <span className="font-bold text-ink">{s.title}</span>
             </div>
             <p className="mt-2 text-sm leading-relaxed text-slate-600">
-              這代表：{s.means}
+              {s.means}
             </p>
           </div>
         ))}

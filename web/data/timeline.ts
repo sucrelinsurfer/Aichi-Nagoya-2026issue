@@ -20,12 +20,20 @@ export type ResultTable = {
   groups: { label: string; rows: string[][] }[];
 };
 
+export type FoldedEntry = {
+  date: string;
+  title: string;
+  body: string;
+  sources: Source[];
+};
+
 export type TimelineItem = {
   date: string;
   title: string;
   body: string;
   side?: Side; // gov＝運動部；association＝協會；athlete＝選手・家長方；省略＝中立事實
   table?: ResultTable;
+  folded?: FoldedEntry[]; // 可摺疊的子事件（例：三場選拔賽細節）
   fact?: FactCheck;
 };
 
@@ -111,7 +119,7 @@ export const TIMELINE: TimelineItem[] = [
   {
     date: "2024–2025",
     title: "兩屆亞錦賽累積團體積分，拿下 4 席",
-    body: "衝浪的亞運名額，不是「個人打進亞錦賽前四名就直接換一張門票」，而是把各國選手的成績換算成團體積分、依國家／地區總排名分配席次。所以台灣這 4 席，是整支中華隊一起打下來的——配額由 2024、2025 兩屆亞錦賽的國家團體排名累加而成，每屆每國最多 1 男 1 女。",
+    body: "衝浪的亞運名額，不是「個人打進亞錦賽前四名就直接換一張門票」，而是把各國選手的成績換算成團體積分、依國家／地區總排名分配席次。所以台灣這 4 席，是整支中華隊一起打下來的——配額由 2024、2025 兩屆亞錦賽的國家團體排名累加而成，每屆每國最多 1 男 1 女。2026 年 3 月，中華奧會據此通知台灣取得這 4 席（男 2、女 2）暫定配額。",
     fact: {
       status: "verified",
       note: "ASF 官方《參賽資格制度》白紙黑字：男 24／女 24、每國上限 2 男 2 女；配額由 2024 與 2025 兩屆亞錦賽分配、每屆每國上限 1 男 1 女——即兩屆累加，非單一賽事、也非個人前4名直接晉級。下方為 ASF 官方文件與配額表。",
@@ -151,66 +159,53 @@ export const TIMELINE: TimelineItem[] = [
     },
   },
   {
-    date: "2025/11/22–11/23",
-    title: "第 1 場儲備培訓選手資格選拔賽",
-    side: "association",
-    body: "衝浪協會在台東金樽漁港舉辦「114年2026亞運衝浪項目儲備培訓選手資格第一場選拔賽」，此為亞運儲備培訓遴選的開端。",
-    fact: {
-      status: "verified",
-      note: "依據衝浪協會官方公告，賽事於 2025 年 11 月 22–23 日在台東金樽舉辦。",
-      sources: [
-        {
-          title: "CTSA：第一場選拔賽公告與簡章說明",
-          url: "https://www.ctsasurf.org/single-post/114%E5%B9%B42026%E4%BA%9E%E9%81%8B%E8%A1%9D%E6%B5%AA%E9%A0%85%E7%9B%AE%E5%84%B2%E5%82%99%E5%9F%B9%E8%A8%93%E9%81%B8-%E8%B3%87%E6%A0%BC%E7%AC%AC%E4%B8%80%E5%A0%B4%E9%81%B8%E6%8B%94%E8%B3%BD",
-        },
-      ],
-    },
-  },
-  {
-    date: "2026/1/17–1/18",
-    title: "第 2 場儲備培訓選手資格選拔賽",
-    side: "association",
-    body: "協會在台東金樽漁港舉辦第二場選拔賽，簡章明列選拔積分為儲備培訓選手名冊建立之依據。",
-    fact: {
-      status: "verified",
-      note: "依據官方競賽規程 PDF，第二場賽事原定於 1 月 24-25 日舉行，後修正為 1 月 17-18 日，地點為台東金樽。",
-      sources: [
-        {
-          title: "CTSA：第二場選拔賽官方頁（競賽規程）",
-          url: "https://www.ctsasurf.org/%E5%89%AF%E6%9C%AC-114%E5%B9%B42026%E4%BA%9E%E9%81%8B%E8%A1%9D%E6%B5%AA%E9%A0%85%E7%9B%AE%E9%81%B8%E6%8B%94%E8%B3%BD%E7%AC%AC1%E5%A0%B4%E7%AB%B6%E8%B3%BD%E8%A6%8F%E7%A8%8B",
-        },
-        {
-          title: "第二場競賽規程 PDF（本站下載）",
-          url: "/docs/ctsa-race2-rules.pdf",
-        },
-      ],
-    },
-  },
-  {
-    date: "2026/3/27–3/29",
-    title: "第 3 場選拔賽暨全國分齡賽",
-    side: "association",
-    body: "協會在宜蘭頭城蜜月灣海域舉辦「115年全國分齡衝浪國家代表隊選拔暨2026亞運衝浪項目儲備培訓選手資格選拔賽第三場」，完成全部三場儲備培訓積分賽事。",
-    fact: {
-      status: "verified",
-      note: "依據官方第三場競賽規程，賽事於 2026 年 3 月 27–29 日於宜蘭蜜月灣舉行，作為儲備培訓選手最後一場選拔。",
-      sources: [
-        {
-          title: "CTSA：第三場選拔賽公告與規程說明",
-          url: "https://www.ctsasurf.org/single-post/115-%E5%B9%B4%E5%85%A8%E5%9C%8B%E5%88%86%E9%BD%A1%E8%A1%9D%E6%B5%AA%E5%9C%8B%E5%AE%B6%E4%BB%A3%E8%A1%A8%E9%9A%8A%E9%81%B8%E6%8B%94-%E6%9A%A8-2026-%E4%BA%9E%E9%81%8B%E8%A1%9D%E6%B5%AA%E9%A0%85%E7%9B%AE%E5%84%B2%E5%82%99%E5%9F%B9%E8%A8%93%E9%81%B8%E6%89%8B%E8%B3%87%E6%A0%BC%E9%81%B8%E6%8B%94%E8%B3%BD",
-        },
-        {
-          title: "第三場競賽規程 PDF（本站下載）",
-          url: "/docs/ctsa-race3-rules.pdf",
-        },
-      ],
-    },
-  },
-  {
     date: "2026/3/30",
     title: "三場選拔賽積分與正備取名次公告",
     side: "association",
-    body: "衝浪協會公告三場積分累計結果與代表隊正備取名單。規程亦載明：選拔積分為儲備培訓名單依據，非正式亞運代表隊名單，最終仍需送運動部審查。",
+    body: "衝浪協會於 2025/11–2026/3 辦理三場選拔賽，並公告三場積分累計結果與代表隊正備取名單。規程亦載明：選拔積分為儲備培訓名單依據，非正式亞運代表隊名單，最終仍需送運動部審查。",
+    folded: [
+      {
+        date: "2025/11/22–23",
+        title: "第 1 場 · 台東金樽漁港",
+        body: "亞運儲備培訓遴選的開端。",
+        sources: [
+          {
+            title: "CTSA：第一場選拔賽公告",
+            url: "https://www.ctsasurf.org/single-post/114%E5%B9%B42026%E4%BA%9E%E9%81%8B%E8%A1%9D%E6%B5%AA%E9%A0%85%E7%9B%AE%E5%84%B2%E5%82%99%E5%9F%B9%E8%A8%93%E9%81%B8-%E8%B3%87%E6%A0%BC%E7%AC%AC%E4%B8%80%E5%A0%B4%E9%81%B8%E6%8B%94%E8%B3%BD",
+          },
+        ],
+      },
+      {
+        date: "2026/1/17–18",
+        title: "第 2 場 · 台東金樽漁港",
+        body: "簡章明列選拔積分為儲備培訓選手名冊之依據；賽期由 1/24–25 修正為 1/17–18。",
+        sources: [
+          {
+            title: "CTSA：第二場官方頁（競賽規程）",
+            url: "https://www.ctsasurf.org/%E5%89%AF%E6%9C%AC-114%E5%B9%B42026%E4%BA%9E%E9%81%8B%E8%A1%9D%E6%B5%AA%E9%A0%85%E7%9B%AE%E9%81%B8%E6%8B%94%E8%B3%BD%E7%AC%AC1%E5%A0%B4%E7%AB%B6%E8%B3%BD%E8%A6%8F%E7%A8%8B",
+          },
+          {
+            title: "第二場競賽規程 PDF（本站下載）",
+            url: "/docs/ctsa-race2-rules.pdf",
+          },
+        ],
+      },
+      {
+        date: "2026/3/27–29",
+        title: "第 3 場暨全國分齡賽 · 宜蘭蜜月灣",
+        body: "三場儲備培訓積分賽事的最後一場。",
+        sources: [
+          {
+            title: "CTSA：第三場公告與規程",
+            url: "https://www.ctsasurf.org/single-post/115-%E5%B9%B4%E5%85%A8%E5%9C%8B%E5%88%86%E9%BD%A1%E8%A1%9D%E6%B5%AA%E5%9C%8B%E5%AE%B6%E4%BB%A3%E8%A1%A8%E9%9A%8A%E9%81%B8%E6%8B%94-%E6%9A%A8-2026-%E4%BA%9E%E9%81%8B%E8%A1%9D%E6%B5%AA%E9%A0%85%E7%9B%AE%E5%84%B2%E5%82%99%E5%9F%B9%E8%A8%93%E9%81%B8%E6%89%8B%E8%B3%87%E6%A0%BC%E9%81%B8%E6%8B%94%E8%B3%BD",
+          },
+          {
+            title: "第三場競賽規程 PDF（本站下載）",
+            url: "/docs/ctsa-race3-rules.pdf",
+          },
+        ],
+      },
+    ],
     table: {
       columns: ["名次", "選手", "三場累積積分"],
       groups: [
@@ -239,25 +234,6 @@ export const TIMELINE: TimelineItem[] = [
         {
           title: "CTSA：三場儲備培訓選拔賽累積積分與成績公告",
           url: "https://www.ctsasurf.org/single-post/%E8%B3%BD%E4%BA%8B%E6%88%90%E7%B8%BE%E5%85%AC%E5%91%8A-115-%E5%B9%B4%E5%85%A8%E5%9C%8B%E5%88%86%E9%BD%A1%E8%A1%9D%E6%B5%AA%E5%9C%8B%E5%AE%B6%E4%BB%A3%E8%A1%A8%E9%9A%8A%E9%81%B8%E6%8B%94%E6%9A%A82026-%E4%BA%9E%E9%81%8B%E8%A1%9D%E6%B5%AA%E9%A0%85%E7%9B%AE%E5%84%B2%E5%82%99%E5%9F%B9%E8%A8%93%E6%89%8B%E8%B3%87%E6%A0%BC%E9%81%B8%E6%8B%94%E8%B3%BD",
-        },
-      ],
-    },
-  },
-  {
-    date: "2026/3/9",
-    title: "中華奧會通知 4 席配額",
-    body: "協會接獲中華奧會通知，依 ASF 資格制度，台灣以團體積分取得男2、女2 共 4 席暫定配額。",
-    fact: {
-      status: "unverified",
-      note: "4 席配額經多家報導與 ASF 官方表證實；惟「3/9 通知」的確切日期無獨立佐證，屬合理但待補。",
-      sources: [
-        {
-          title: "ASF 配額公告",
-          url: "https://asiansurfing.org/2026/06/quota-places/",
-        },
-        {
-          title: "聯合報：我國已獲亞運衝浪4席",
-          url: "https://udn.com/news/story/7005/9580336",
         },
       ],
     },

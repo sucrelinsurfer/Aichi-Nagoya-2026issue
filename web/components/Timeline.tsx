@@ -1,6 +1,7 @@
 import { Fragment } from "react";
 import { TIMELINE, SIDE_META } from "@/data/timeline";
 import FactCheck from "./FactCheck";
+import FoldedRaces from "./FoldedRaces";
 
 const DOT: Record<string, string> = {
   athlete: "bg-coral",
@@ -121,6 +122,7 @@ export default function Timeline() {
                         </table>
                       </div>
                     )}
+                    {item.folded && <FoldedRaces entries={item.folded} />}
                     {item.fact && <FactCheck fact={item.fact} />}
                   </div>
                 </div>
