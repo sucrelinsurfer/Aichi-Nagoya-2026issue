@@ -311,11 +311,11 @@ export const TIMELINE: TimelineItem[] = [
     body: "中華民國衝浪運動協會發9點澄清聲明，否認刻意隱瞞或阻擋選手，重申取得配額不等於最終代表權，未提名係主管機關審查結果。",
     fact: {
       status: "verified",
-      note: "9點聲明 7/6 發布，內容經中時原文報導。",
+      note: "9 點聲明 7/6 由協會官方 Facebook 發布；為防原文遭編輯或刪除，已附上全文截圖存證。",
       sources: [
         {
-          title: "中時：協會長文說明",
-          url: "https://www.chinatimes.com/realtimenews/20260706002916-260403",
+          title: "中華民國衝浪運動協會 官方 FB：9 點聲明全文",
+          url: "https://www.facebook.com/ctsa.surf/posts/1498622405625975",
         },
       ],
     },

@@ -25,6 +25,12 @@ export const SHOTS: Record<string, string | string[]> = {
     "/verifications/race3.png",
   "https://www.ctsasurf.org/single-post/%E8%B3%BD%E4%BA%8B%E6%88%90%E7%B8%BE%E5%85%AC%E5%91%8A-115-%E5%B9%B4%E5%85%A8%E5%9C%8B%E5%88%86%E9%BD%A1%E8%A1%9D%E6%B5%AA%E5%9C%8B%E5%AE%B6%E4%BB%A3%E8%A1%A8%E9%9A%8A%E9%81%B8%E6%8B%94%E6%9A%A82026-%E4%BA%9E%E9%81%8B%E8%A1%9D%E6%B5%AA%E9%A0%85%E7%9B%AE%E5%84%B2%E5%82%99%E5%9F%B9%E8%A8%93%E6%89%8B%E8%B3%87%E6%A0%BC%E9%81%B8%E6%8B%94%E8%B3%BD":
     "/verifications/ctsa-results.png",
+  // 協會 9 點聲明 FB 原文（三張截圖存證，防刪改）
+  "https://www.facebook.com/ctsa.surf/posts/1498622405625975": [
+    "/verifications/ctsa-fb-response-1.png",
+    "/verifications/ctsa-fb-response-2.png",
+    "/verifications/ctsa-fb-response-3.png",
+  ],
 };
 
 // 來源 URL → Wayback 永久存檔快照連結（與截圖互補；歷史網站掛掉時，截圖是後備）。

@@ -1,3 +1,5 @@
+import { Fragment } from "react";
+
 const STAGES = [
   {
     no: "1",
@@ -25,22 +27,35 @@ const STAGES = [
 export default function TimelineStages() {
   return (
     <div className="mb-10 rounded-2xl border border-slate-100 bg-white p-5 shadow-sm sm:p-6">
-      <p className="text-sm font-medium text-slate-500">怕看不完？先看懂三個階段</p>
-      <div className="mt-4 grid gap-3 sm:grid-cols-3">
-        {STAGES.map((s) => (
-          <div key={s.no} className={`rounded-xl border p-4 ${s.ring}`}>
-            <div className="flex items-center gap-2">
-              <span
-                className={`flex h-7 w-7 items-center justify-center rounded-full border border-current text-sm font-black ${s.color}`}
-              >
-                {s.no}
-              </span>
-              <span className="font-bold text-ink">{s.title}</span>
+      <p className="text-sm font-medium text-slate-500">
+        怕看不完？先看懂三個階段的先後順序
+      </p>
+      <div className="mt-4 flex flex-col gap-2 sm:flex-row sm:items-stretch">
+        {STAGES.map((s, i) => (
+          <Fragment key={s.no}>
+            <div className={`flex-1 rounded-xl border p-4 ${s.ring}`}>
+              <div className="flex items-center gap-2">
+                <span
+                  className={`flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-current text-sm font-black ${s.color}`}
+                >
+                  {s.no}
+                </span>
+                <span className="font-bold text-ink">{s.title}</span>
+              </div>
+              <p className="mt-2 text-sm leading-relaxed text-slate-600">
+                {s.means}
+              </p>
             </div>
-            <p className="mt-2 text-sm leading-relaxed text-slate-600">
-              {s.means}
-            </p>
-          </div>
+            {i < STAGES.length - 1 && (
+              <div
+                className="flex items-center justify-center text-slate-300"
+                aria-hidden="true"
+              >
+                <span className="text-xl sm:hidden">↓</span>
+                <span className="hidden text-2xl sm:inline">→</span>
+              </div>
+            )}
+          </Fragment>
         ))}
       </div>
     </div>
