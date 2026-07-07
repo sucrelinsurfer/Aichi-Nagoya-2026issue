@@ -64,6 +64,12 @@ export const STATUS_META: Record<
     chip: "bg-slate-50 text-slate-600 border-slate-200",
   },
   inference: {
+    label: "推論（非事實）",
+    dot: "bg-sky-500",
+    chip: "bg-sky-50 text-sky-700 border-sky-200",
+  },
+};
+
 export const TIMELINE: TimelineItem[] = [
   {
     date: "2020/8",
@@ -304,98 +310,6 @@ export const TIMELINE: TimelineItem[] = [
     date: "2026/7/6",
     title: "協會：發9點聲明重申配額≠代表權",
     side: "association",
-    body: "中華民國衝浪運動協會發9點澄清聲明，否認刻意隱瞞或阻擋選手，重申取得配額不等於最終代表權，未提名係主管機關審查結果。",
-    fact: {
-      status: "verified",
-      note: "9點聲明 7/6 發布，內容經中時原文報導。",
-      sources: [
-        {
-          title: "中時：協會長文說明",
-          url: "https://www.chinatimes.com/realtimenews/20260706002916-260403",
-        },
-      ],
-    },
-  },
-  {
-    date: "2026/7/6",
-    title: "家長・地方：向總統府陳情爭取出賽",
-    side: "athlete",
-    body: "同日，地方鄉親與男子選手家長向總統賴清德、總統府秘書長潘孟安喊話，懇請不要沒收台灣少年的夢想，爭取參賽機會。",
-    fact: {
-      status: "verified",
-      note: "家長向賴清德、潘孟安陳情經 NOWnews 等報導。",
-      sources: [
-        {
-          title: "NOWnews：她求救賴清德、潘孟安",
-          url: "https://www.nownews.com/news/6853763",
-        },
-      ],
-    },
-  },
-];此「二次確認」細節，列為待補。",
-      sources: [],
-    },
-  },
-  {
-    date: "2026/6/26",
-    title: "審查會議：放寬前16名，男子不予提名",
-    side: "official",
-    body: "運動部與國訓中心召開審查會議。因全員未達前4名，依「專案核著」路徑啟動評估，將門檻放寬至亞錦賽前16名。女子2人過關；男子未達前16名，不予提名，男子配額未派員。",
-    fact: {
-      status: "verified",
-      note: "放寬至亞錦賽前16名、女子入選男子出局經多家報導；聯合報 6/22 亦預告「26日召開最終審議會議」。",
-      sources: [
-        {
-          title: "壹蘋：未達亞錦賽前16名門檻",
-          url: "https://news.nextapple.com/sports/20260706/4D575E1874E2B48E8842501772657C07",
-        },
-        {
-          title: "聯合報：我國已獲亞運衝浪4席",
-          url: "https://udn.com/news/story/7005/9580336",
-        },
-      ],
-    },
-  },
-  {
-    date: "2026/6 底",
-    title: "選手與家長：願完全自費出賽",
-    side: "athlete",
-    body: "面對名額作廢，選手與家長表達「不需國家經費、願完全自費前往參賽」，盼保住得來不易的席次。",
-    fact: {
-      status: "partial",
-      note: "家長確有陳情。最知名的「費用我出」出自財經作家陳重銘（第三方），非選手本人；歸屬須清楚。",
-      sources: [
-        {
-          title: "三立：他霸氣開第一槍 費用我出",
-          url: "https://www.setn.com/news/1867685",
-        },
-        {
-          title: "聯合報：家長呼籲保障選手出賽權益",
-          url: "https://udn.com/news/story/7005/9580336",
-        },
-      ],
-    },
-  },
-  {
-    date: "2026/6 底",
-    title: "主管機關：以組團標準未採納自費",
-    side: "official",
-    body: "運動部說明，亞運以爭取優異成績為目標、非累積參賽經驗；在有限資源下須依競爭力與整體效益綜合評估，並非取得配額即派員，對自費提議未予採納。",
-    fact: {
-      status: "partial",
-      note: "運動部「以爭取成績為目標、非派員即參賽」的立場經多家報導；惟對自費提議「正式回絕」的書面紀錄未見。",
-      sources: [
-        {
-          title: "自由體育：運動部回應了",
-          url: "https://sports.ltn.com.tw/news/breakingnews/5490119",
-        },
-      ],
-    },
-  },
-  {
-    date: "2026/7/6",
-    title: "協會：發9點聲明重申配額≠代表權",
-    side: "official",
     body: "中華民國衝浪運動協會發9點澄清聲明，否認刻意隱瞞或阻擋選手，重申取得配額不等於最終代表權，未提名係主管機關審查結果。",
     fact: {
       status: "verified",
