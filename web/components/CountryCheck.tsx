@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { STATUS_META, type VerifyStatus } from "@/data/timeline";
-import { SHOTS } from "@/data/screenshots";
+import { SHOTS, ARCHIVES } from "@/data/screenshots";
 
 type Src = { title: string; url: string };
 
@@ -39,16 +39,29 @@ export default function CountryCheck({ sources }: { sources: Src[] }) {
             <ul className="mt-2 space-y-3">
               {sources.map((s) => {
                 const shot = SHOTS[s.url];
+                const archive = ARCHIVES[s.url];
                 return (
                   <li key={s.url}>
-                    <a
-                      href={s.url}
-                      target="_blank"
-                      rel="noreferrer noopener"
-                      className="font-medium text-wave underline decoration-wave/40 underline-offset-2 hover:decoration-wave"
-                    >
-                      {s.title} ↗
-                    </a>
+                    <span className="flex flex-wrap items-center gap-2">
+                      <a
+                        href={s.url}
+                        target="_blank"
+                        rel="noreferrer noopener"
+                        className="font-medium text-wave underline decoration-wave/40 underline-offset-2 hover:decoration-wave"
+                      >
+                        {s.title} ↗
+                      </a>
+                      {archive && (
+                        <a
+                          href={archive}
+                          target="_blank"
+                          rel="noreferrer noopener"
+                          className="rounded bg-slate-100 px-1.5 py-0.5 text-[11px] text-slate-500 hover:bg-slate-200"
+                        >
+                          存檔快照
+                        </a>
+                      )}
+                    </span>
                     {shot && (
                       <button
                         onClick={() => setZoom(shot)}

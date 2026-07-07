@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { STATUS_META, type FactCheck as FactCheckType } from "@/data/timeline";
-import { SHOTS } from "@/data/screenshots";
+import { SHOTS, ARCHIVES } from "@/data/screenshots";
 
 export default function FactCheck({ fact }: { fact: FactCheckType }) {
   const [open, setOpen] = useState(false);
@@ -30,6 +30,7 @@ export default function FactCheck({ fact }: { fact: FactCheckType }) {
             <ul className="mt-3 space-y-3">
               {fact.sources.map((s) => {
                 const shot = SHOTS[s.url];
+                const archive = s.archive ?? ARCHIVES[s.url];
                 return (
                   <li key={s.url}>
                     <div className="flex flex-wrap items-center gap-2">
@@ -41,9 +42,9 @@ export default function FactCheck({ fact }: { fact: FactCheckType }) {
                       >
                         {s.title} ↗
                       </a>
-                      {s.archive && (
+                      {archive && (
                         <a
-                          href={s.archive}
+                          href={archive}
                           target="_blank"
                           rel="noreferrer noopener"
                           className="rounded bg-slate-100 px-1.5 py-0.5 text-[11px] text-slate-500 hover:bg-slate-200"
