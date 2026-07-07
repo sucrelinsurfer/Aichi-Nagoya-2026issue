@@ -2,6 +2,7 @@ import Link from "next/link";
 import Countdown from "@/components/Countdown";
 import CoreStats from "@/components/CoreStats";
 import Timeline from "@/components/Timeline";
+import Conclusion from "@/components/Conclusion";
 import CountriesTeaser from "@/components/CountriesTeaser";
 import Poll from "@/components/Poll";
 import ShareBar from "@/components/ShareBar";
@@ -60,6 +61,11 @@ export default function Home() {
           </p>
         </header>
         <Timeline />
+      </section>
+
+      {/* Conclusion */}
+      <section className="mx-auto max-w-3xl px-6 pb-4">
+        <Conclusion />
       </section>
 
       {/* Countries context */}

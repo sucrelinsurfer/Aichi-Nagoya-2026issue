@@ -15,11 +15,17 @@ export type FactCheck = {
 
 export type Side = "gov" | "association" | "athlete";
 
+export type ResultTable = {
+  columns: string[];
+  groups: { label: string; rows: string[][] }[];
+};
+
 export type TimelineItem = {
   date: string;
   title: string;
   body: string;
   side?: Side; // gov＝運動部；association＝協會；athlete＝選手・家長方；省略＝中立事實
+  table?: ResultTable;
   fact?: FactCheck;
 };
 
@@ -60,8 +66,8 @@ export const STATUS_META: Record<
   },
   unverified: {
     label: "待查／無獨立佐證",
-    dot: "bg-slate-400",
-    chip: "bg-slate-50 text-slate-600 border-slate-200",
+    dot: "bg-red-500",
+    chip: "bg-red-50 text-red-600 border-red-200",
   },
   inference: {
     label: "推論（非事實）",
@@ -97,22 +103,9 @@ export const TIMELINE: TimelineItem[] = [
     side: "gov",
     body: "修訂附件2，衝浪所屬第二類項目列亞錦賽個人「前4名」客觀基準，同時開闢「經評估並專案核著者」的彈性審查路徑。",
     fact: {
-      status: "verified",
-      note: "運動部《培訓參賽實施計畫》111.09（2022 年 9 月）修訂版即為此版本，載明「從嚴選才、精英組團」原則；附件2 的前4名基準與專案審查路徑細節，可在下方官方 PDF 中核對。",
-      sources: [
-        {
-          title: "運動部：培訓參賽實施計畫（官方頁）",
-          url: "https://www.sports.gov.tw/CL/1660",
-        },
-        {
-          title: "運動部：實施計畫 PDF（111.09 修訂本文）",
-          url: "https://ws.sports.gov.tw/Download.ashx?u=L0ZTMDEvRmlsZVBhdGgvMS9yZWxmaWxlLzAvNDkxMy9hYmZhYzQ0Ni0xNzkyLTQxZDUtYjI0NC05MDQ5M2ZhYmZmZDUucGRm&n=5oiR5ZyL5Y%2BD5Yqg5ZyL6Zqb57ac5ZCI5oCn6YGL5YuV6LO95pyD5ZyL5a625Luj6KGo6ZqK5Z%2B56KiT5Y%2BD6LO95a%2Bm5pa96KiI55WrMTExMDnkv67oqIIucGRm",
-        },
-        {
-          title: "運動部：培育優秀或具潛力運動選手計畫",
-          url: "https://www.sports.gov.tw/CP/1659",
-        },
-      ],
+      status: "unverified",
+      note: "「附件2 列亞錦賽個人前4名基準、並開『經評估並專案核著』彈性路徑」這項細節，目前尚未取得可逐字核對的官方條文，暫列為未查證。",
+      sources: [],
     },
   },
   {
@@ -141,17 +134,17 @@ export const TIMELINE: TimelineItem[] = [
   {
     date: "2024–2025",
     title: "兩屆亞錦賽個人名次",
-    body: "女子選手兩屆成績：2024 年陳宛榆第 13、鍾昀蓉並列第 9；2025 年陳宛榆第 7、鍾昀蓉第 13。男子最佳約第 17 名。四人個人名次皆未達常態「前 4 名」門檻——這也是後來遴選爭議的起點。",
+    body: "女子選手兩屆成績：2024 年陳宛榆第 13、鍾昀蓉並列第 9；2025 年陳宛榆第 7、鍾昀蓉第 13。男子 2025 年：詹博宇（John John Chan）第 17、尤佳琦（Chia-Chi Yu）第 25。四人個人名次皆未達常態「前 4 名」門檻——這也是後來遴選爭議的起點。",
     fact: {
       status: "verified",
-      note: "女子兩屆名次見 ASF 2024 亞錦賽國家排行與 2025 LiveHeats 官方賽果（見下方截圖）。男子最佳第17名；時序表另出現「第25名」查無獨立來源，列為待查。",
+      note: "女子兩屆名次見 ASF 2024 亞錦賽國家排行與 2025 LiveHeats 官方賽果；男子 2025 詹博宇第 17、尤佳琦第 25（見下方截圖）。先前時序表出現的男子「第25名」即尤佳琦，已補正對應。",
       sources: [
         {
           title: "ASF 2024 亞錦賽排行（PDF）：陳宛榆13、鍾昀蓉並列9",
           url: "https://www.surfingsingapore.com/_files/ugd/54f516_51da7a274a8d45f7b2c0ebfdcc8b793e.pdf",
         },
         {
-          title: "ASF 2025 亞錦賽 LiveHeats 賽果：陳宛榆7、鍾昀蓉13",
+          title: "ASF 2025 亞錦賽 LiveHeats 賽果（女：陳7鍾13；男：詹17尤25）",
           url: "https://liveheats.com/events/404396/divisions/716342/result",
         },
       ],
@@ -183,8 +176,12 @@ export const TIMELINE: TimelineItem[] = [
       note: "依據官方競賽規程 PDF，第二場賽事原定於 1 月 24-25 日舉行，後修正為 1 月 17-18 日，地點為台東金樽。",
       sources: [
         {
-          title: "CTSA：第二場選拔賽規程 PDF（競賽規程下載）",
+          title: "CTSA：第二場選拔賽官方頁（競賽規程）",
           url: "https://www.ctsasurf.org/%E5%89%AF%E6%9C%AC-114%E5%B9%B42026%E4%BA%9E%E9%81%8B%E8%A1%9D%E6%B5%AA%E9%A0%85%E7%9B%AE%E9%81%B8%E6%8B%94%E8%B3%BD%E7%AC%AC1%E5%A0%B4%E7%AB%B6%E8%B3%BD%E8%A6%8F%E7%A8%8B",
+        },
+        {
+          title: "第二場競賽規程 PDF（本站下載）",
+          url: "/docs/ctsa-race2-rules.pdf",
         },
       ],
     },
@@ -202,6 +199,10 @@ export const TIMELINE: TimelineItem[] = [
           title: "CTSA：第三場選拔賽公告與規程說明",
           url: "https://www.ctsasurf.org/single-post/115-%E5%B9%B4%E5%85%A8%E5%9C%8B%E5%88%86%E9%BD%A1%E8%A1%9D%E6%B5%AA%E5%9C%8B%E5%AE%B6%E4%BB%A3%E8%A1%A8%E9%9A%8A%E9%81%B8%E6%8B%94-%E6%9A%A8-2026-%E4%BA%9E%E9%81%8B%E8%A1%9D%E6%B5%AA%E9%A0%85%E7%9B%AE%E5%84%B2%E5%82%99%E5%9F%B9%E8%A8%93%E9%81%B8%E6%89%8B%E8%B3%87%E6%A0%BC%E9%81%B8%E6%8B%94%E8%B3%BD",
         },
+        {
+          title: "第三場競賽規程 PDF（本站下載）",
+          url: "/docs/ctsa-race3-rules.pdf",
+        },
       ],
     },
   },
@@ -209,7 +210,28 @@ export const TIMELINE: TimelineItem[] = [
     date: "2026/3/30",
     title: "三場選拔賽積分與正備取名次公告",
     side: "association",
-    body: "衝浪協會公告三場積分累計結果與代表隊正備取名單。男子組正選為尤佳琦 Chia-Chi Yu（2720分）、詹博宇 John John Chan（2530分），備取為劉明讓（2460分）；女子組正選為鍾昀蓉（2860分）、陳宛榆（2720分），備取為陳懷本（2130分）。然而，規程亦載明選拔積分為儲備培訓名單依據，非正式亞運代表隊名單，最終仍需送運動部審查。",
+    body: "衝浪協會公告三場積分累計結果與代表隊正備取名單。規程亦載明：選拔積分為儲備培訓名單依據，非正式亞運代表隊名單，最終仍需送運動部審查。",
+    table: {
+      columns: ["名次", "選手", "三場累積積分"],
+      groups: [
+        {
+          label: "男子組",
+          rows: [
+            ["正選", "尤佳琦 Chia-Chi Yu", "2720"],
+            ["正選", "詹博宇 John John Chan", "2530"],
+            ["備取", "劉明讓", "2460"],
+          ],
+        },
+        {
+          label: "女子組",
+          rows: [
+            ["正選", "鍾昀蓉", "2860"],
+            ["正選", "陳宛榆", "2720"],
+            ["備取", "陳懷本", "2130"],
+          ],
+        },
+      ],
+    },
     fact: {
       status: "verified",
       note: "協會官方公告賽事成績：男子組尤佳琦（2720分）、詹博宇（2530分）；女子組鍾昀蓉（2860分）、陳宛榆（2720分），與報導事實相符。",

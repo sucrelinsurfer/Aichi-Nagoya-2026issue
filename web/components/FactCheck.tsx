@@ -33,8 +33,10 @@ export default function FactCheck({ fact }: { fact: FactCheckType }) {
           {fact.sources.length > 0 ? (
             <ul className="mt-3 space-y-3">
               {fact.sources.map((s) => {
-                const shot = SHOTS[s.url];
-                const hasShot = shot && !failed.has(s.url);
+                const raw = SHOTS[s.url];
+                const shots = (
+                  Array.isArray(raw) ? raw : raw ? [raw] : []
+                ).filter((p) => !failed.has(p));
                 const archive = s.archive ?? ARCHIVES[s.url];
                 return (
                   <li key={s.url}>
@@ -58,20 +60,29 @@ export default function FactCheck({ fact }: { fact: FactCheckType }) {
                         </a>
                       )}
                     </div>
-                    {hasShot && (
-                      <button
-                        onClick={() => setZoom(shot)}
-                        className="mt-2 block overflow-hidden rounded-lg border border-slate-200 transition hover:border-wave"
-                        aria-label="放大截圖"
+                    {shots.length > 0 && (
+                      <div
+                        className={`mt-2 grid gap-2 ${
+                          shots.length > 1 ? "grid-cols-2" : "grid-cols-1"
+                        }`}
                       >
-                        {/* eslint-disable-next-line @next/next/no-img-element */}
-                        <img
-                          src={shot}
-                          alt={`${s.title} 截圖`}
-                          onError={() => markFailed(s.url)}
-                          className="max-h-44 w-full object-cover object-top"
-                        />
-                      </button>
+                        {shots.map((p) => (
+                          <button
+                            key={p}
+                            onClick={() => setZoom(p)}
+                            className="block overflow-hidden rounded-lg border border-slate-200 transition hover:border-wave"
+                            aria-label="放大截圖"
+                          >
+                            {/* eslint-disable-next-line @next/next/no-img-element */}
+                            <img
+                              src={p}
+                              alt={`${s.title} 截圖`}
+                              onError={() => markFailed(p)}
+                              className="max-h-44 w-full object-cover object-top"
+                            />
+                          </button>
+                        ))}
+                      </div>
                     )}
                   </li>
                 );

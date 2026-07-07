@@ -39,7 +39,8 @@ export default function CountryCheck({ sources }: { sources: Src[] }) {
           {sources.length > 0 && (
             <ul className="mt-2 space-y-3">
               {sources.map((s) => {
-                const shot = SHOTS[s.url];
+                const rawShot = SHOTS[s.url];
+                const shot = Array.isArray(rawShot) ? rawShot[0] : rawShot;
                 const hasShot = shot && !failed.has(s.url);
                 const archive = ARCHIVES[s.url];
                 return (

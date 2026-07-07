@@ -1,3 +1,4 @@
+import { Fragment } from "react";
 import { TIMELINE, SIDE_META } from "@/data/timeline";
 import FactCheck from "./FactCheck";
 
@@ -67,6 +68,59 @@ export default function Timeline() {
                     <p className="mt-2 text-[15px] leading-relaxed text-slate-600">
                       {item.body}
                     </p>
+                    {item.table && (
+                      <div className="mt-3 overflow-hidden rounded-lg border border-slate-200">
+                        <table className="w-full text-sm">
+                          <thead>
+                            <tr className="bg-foam text-xs text-slate-500">
+                              {item.table.columns.map((c) => (
+                                <th
+                                  key={c}
+                                  className="px-3 py-2 text-left font-medium"
+                                >
+                                  {c}
+                                </th>
+                              ))}
+                            </tr>
+                          </thead>
+                          <tbody>
+                            {item.table.groups.map((g) => (
+                              <Fragment key={g.label}>
+                                <tr className="border-t border-slate-100 bg-slate-50">
+                                  <td
+                                    colSpan={item.table!.columns.length}
+                                    className="px-3 py-1.5 text-xs font-bold text-ink"
+                                  >
+                                    {g.label}
+                                  </td>
+                                </tr>
+                                {g.rows.map((row, ri) => (
+                                  <tr
+                                    key={g.label + ri}
+                                    className="border-t border-slate-50"
+                                  >
+                                    {row.map((cell, ci) => (
+                                      <td
+                                        key={ci}
+                                        className={`px-3 py-2 ${
+                                          ci === row.length - 1
+                                            ? "tabular-nums font-medium text-wave"
+                                            : ci === 0
+                                            ? "text-slate-500"
+                                            : "text-ink"
+                                        }`}
+                                      >
+                                        {cell}
+                                      </td>
+                                    ))}
+                                  </tr>
+                                ))}
+                              </Fragment>
+                            ))}
+                          </tbody>
+                        </table>
+                      </div>
+                    )}
                     {item.fact && <FactCheck fact={item.fact} />}
                   </div>
                 </div>
