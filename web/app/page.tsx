@@ -2,6 +2,7 @@ import Link from "next/link";
 import Countdown from "@/components/Countdown";
 import CoreStats from "@/components/CoreStats";
 import Timeline from "@/components/Timeline";
+import CountriesTeaser from "@/components/CountriesTeaser";
 import Poll from "@/components/Poll";
 import ShareBar from "@/components/ShareBar";
 import Sources from "@/components/Sources";
@@ -46,7 +47,7 @@ export default function Home() {
       </section>
 
       {/* Core stats */}
-      <section className="mx-auto -mt-12 max-w-4xl px-6">
+      <section className="relative z-10 mx-auto -mt-12 max-w-4xl px-6">
         <CoreStats />
       </section>
 
@@ -59,6 +60,11 @@ export default function Home() {
           </p>
         </header>
         <Timeline />
+      </section>
+
+      {/* Countries context */}
+      <section className="mx-auto max-w-3xl px-6 pb-4">
+        <CountriesTeaser />
       </section>
 
       {/* Poll + Share */}

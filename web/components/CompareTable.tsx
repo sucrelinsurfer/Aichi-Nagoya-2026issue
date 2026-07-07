@@ -1,14 +1,8 @@
-import { COUNTRIES, TIER_META, type Tier } from "@/data/countries";
-
-const TIER_DOT: Record<Tier, string> = {
-  1: "bg-coral",
-  2: "bg-amber",
-  3: "bg-wave",
-};
+import { COUNTRIES, REGIONS, REGION_COLOR } from "@/data/countries";
 
 export default function CompareTable() {
-  const rows = ([1, 2, 3] as Tier[]).flatMap((t) =>
-    COUNTRIES[t].map((c) => ({ ...c, tier: t }))
+  const rows = REGIONS.flatMap((r) =>
+    COUNTRIES.filter((c) => c.region === r)
   );
 
   return (
@@ -16,10 +10,10 @@ export default function CompareTable() {
       <div className="mb-3 flex flex-wrap items-center justify-between gap-2">
         <h2 className="text-lg font-black text-ink">17 國遴選一覽</h2>
         <div className="flex flex-wrap gap-3 text-xs text-slate-500">
-          {([1, 2, 3] as Tier[]).map((t) => (
-            <span key={t} className="flex items-center gap-1.5">
-              <span className={`h-2.5 w-2.5 rounded-full ${TIER_DOT[t]}`} />
-              {TIER_META[t].label.split(" · ")[0]}
+          {REGIONS.map((r) => (
+            <span key={r} className="flex items-center gap-1.5">
+              <span className={`h-2.5 w-2.5 rounded-full ${REGION_COLOR[r]}`} />
+              {r}
             </span>
           ))}
         </div>
@@ -33,7 +27,7 @@ export default function CompareTable() {
               <th className="py-2 pr-3 text-center font-medium">男</th>
               <th className="py-2 pr-3 text-center font-medium">女</th>
               <th className="py-2 pr-3 font-medium">遴選機制</th>
-              <th className="py-2 font-medium">關鍵限制</th>
+              <th className="py-2 font-medium">特色／限制</th>
             </tr>
           </thead>
           <tbody>
@@ -48,7 +42,7 @@ export default function CompareTable() {
                     className="flex items-center gap-2 font-medium text-ink hover:text-wave"
                   >
                     <span
-                      className={`h-2 w-2 shrink-0 rounded-full ${TIER_DOT[c.tier]}`}
+                      className={`h-2 w-2 shrink-0 rounded-full ${REGION_COLOR[c.region]}`}
                     />
                     <span className="text-base">{c.flag}</span>
                     <span className="whitespace-nowrap text-sm">{c.name}</span>
@@ -68,7 +62,7 @@ export default function CompareTable() {
         </table>
       </div>
       <p className="mt-3 text-xs text-slate-400">
-        點國家名稱可跳到下方詳細說明。配額為 ASF 官方數字；灰字限制為重點摘要，完整內容見各國卡片。
+        點國家名稱可跳到下方詳細說明。配額為 ASF 官方數字；顏色僅代表地區，無排名或優劣之意。
       </p>
     </div>
   );

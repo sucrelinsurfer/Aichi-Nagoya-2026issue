@@ -1,6 +1,9 @@
 export type PollOption = { id: string; label: string };
 
+// 想改投票內容？直接改這裡的問題與選項文字即可，前端會自動更新。
 export const POLL_QUESTION = "你認為衝浪選手該不該上場？";
+export const POLL_HINT = "可複選，選好後按「送出投票」。";
+export const POLL_MULTI = true;
 
 export const POLL_OPTIONS: PollOption[] = [
   {
