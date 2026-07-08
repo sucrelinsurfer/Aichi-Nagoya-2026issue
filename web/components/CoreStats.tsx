@@ -1,6 +1,6 @@
 const SUPPORT = [
-  { num: "4", unit: "席", label: "台灣拚下的亞運衝浪配額", tone: "text-wave" },
-  { num: "2", unit: "席", label: "遭作廢、無法派員的男子名額", tone: "text-coral" },
+  { num: "4", unit: "個", label: "台灣拚下的亞運衝浪名額", tone: "text-wave" },
+  { num: "2", unit: "個", label: "遭作廢、無法派員的男子名額", tone: "text-coral" },
   { num: "9", unit: "月", label: "名古屋亞運開賽，時間所剩無幾", tone: "text-amber" },
 ];
 

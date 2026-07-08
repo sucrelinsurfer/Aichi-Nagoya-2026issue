@@ -4,7 +4,7 @@ const STAGES = [
   {
     no: "1",
     title: "取得亞運名額",
-    means: "台灣靠團體成績，先拿到「能派幾個人出賽」的門票。",
+    means: "台灣靠團體成績，先拿到「能派幾個人出賽」的名額。",
     color: "text-wave",
     ring: "border-wave/30 bg-wave/5",
   },

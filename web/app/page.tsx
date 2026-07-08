@@ -21,12 +21,15 @@ export default function Home() {
             2026 名古屋亞運 · 衝浪
           </p>
           <h1 className="mt-6 text-3xl font-black leading-tight sm:text-[2.6rem]">
-            靠選手實績拿到 4 張亞運門票，
+            拿到 4 個亞運名額，
             <br className="hidden sm:block" />
-            運動部卻讓 2 張作廢、不派人
+            最後為什麼只派出 2 位選手？
           </h1>
           <p className="mx-auto mt-5 max-w-2xl text-lg leading-relaxed text-white/85">
-            門票是靠實績賺到的，作廢卻是國內另一套、而且賽後才公布的標準決定的——選手九月無仗可打。這裡每一句主張，旁邊都有官方來源與截圖。
+            到底是哪個環節決定了最後只有 2 位選手出賽？為什麼通過遴選，最後卻不能代表台灣出賽？事件經過、制度依據與官方文件一次整理。
+          </p>
+          <p className="mx-auto mt-3 max-w-xl text-sm text-white/60">
+            每一句主張，旁邊都可點開官方來源與截圖。
           </p>
           <div className="mt-8 flex flex-col items-center gap-3">
             <span className="text-sm text-white/70">距離名古屋亞運開幕</span>
