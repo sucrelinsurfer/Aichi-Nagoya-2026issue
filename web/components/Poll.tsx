@@ -1,30 +1,51 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { POLLS, type PollQuestion } from "@/data/poll";
 
-const SITEKEY = process.env.NEXT_PUBLIC_TURNSTILE_SITEKEY;
+const RECAPTCHA_SITEKEY = process.env.NEXT_PUBLIC_RECAPTCHA_SITEKEY;
 
 type Result = { counts: Record<string, number>; voters: number; demo: boolean };
 
 declare global {
   interface Window {
-    turnstile?: {
-      render: (el: HTMLElement, opts: Record<string, unknown>) => string;
-      getResponse: (id?: string) => string | undefined;
-      reset: (id?: string) => void;
+    grecaptcha?: {
+      ready: (cb: () => void) => void;
+      execute: (siteKey: string, opts: { action: string }) => Promise<string>;
     };
   }
+}
+
+// 向 Google reCAPTCHA v3 取得一次性 token（無介面，等 script 就緒後才會 resolve）
+function getRecaptchaToken(): Promise<string | null> {
+  return new Promise((resolve) => {
+    if (!RECAPTCHA_SITEKEY) return resolve(null);
+    const attempt = () => {
+      if (!window.grecaptcha) return false;
+      window.grecaptcha.ready(() => {
+        window
+          .grecaptcha!.execute(RECAPTCHA_SITEKEY as string, { action: "vote" })
+          .then(resolve)
+          .catch(() => resolve(null));
+      });
+      return true;
+    };
+    if (attempt()) return;
+    const id = setInterval(() => {
+      if (attempt()) clearInterval(id);
+    }, 300);
+    setTimeout(() => {
+      clearInterval(id);
+      resolve(null);
+    }, 8000);
+  });
 }
 
 function QuestionBlock({ q }: { q: PollQuestion }) {
   const KEY = `surf-poll-${q.id}`;
   const [sel, setSel] = useState<Set<string>>(new Set());
   const [result, setResult] = useState<Result | null>(null);
-  const [token, setToken] = useState<string | null>(null);
   const [busy, setBusy] = useState(false);
-  const tsRef = useRef<HTMLDivElement>(null);
-  const widgetId = useRef<string | null>(null);
 
   useEffect(() => {
     try {
@@ -37,27 +58,6 @@ function QuestionBlock({ q }: { q: PollQuestion }) {
     } catch {}
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
-  // Turnstile（只有設了 site key 才啟用）
-  useEffect(() => {
-    if (!SITEKEY || result || !tsRef.current) return;
-    const tryRender = () => {
-      if (window.turnstile && tsRef.current && !widgetId.current) {
-        widgetId.current = window.turnstile.render(tsRef.current, {
-          sitekey: SITEKEY,
-          size: "flexible",
-          callback: (t: string) => setToken(t),
-          "expired-callback": () => setToken(null),
-        });
-        return true;
-      }
-      return false;
-    };
-    if (!tryRender()) {
-      const id = setInterval(() => tryRender() && clearInterval(id), 400);
-      return () => clearInterval(id);
-    }
-  }, [result]);
 
   function pick(id: string) {
     if (result) return;
@@ -78,10 +78,11 @@ function QuestionBlock({ q }: { q: PollQuestion }) {
 
   async function submit() {
     if (result || sel.size === 0 || busy) return;
-    if (SITEKEY && !token) return; // 需通過驗證
     setBusy(true);
     const options = Array.from(sel);
     try {
+      const token = await getRecaptchaToken();
+      if (RECAPTCHA_SITEKEY && !token) throw new Error("recaptcha failed");
       const res = await fetch("/api/vote", {
         method: "POST",
         headers: { "content-type": "application/json" },
@@ -163,14 +164,12 @@ function QuestionBlock({ q }: { q: PollQuestion }) {
         })}
       </div>
 
-      {!done && SITEKEY && <div ref={tsRef} className="mt-4" />}
-
       {!done ? (
         <button
           onClick={submit}
-          disabled={sel.size === 0 || busy || (!!SITEKEY && !token)}
+          disabled={sel.size === 0 || busy}
           className={`mt-4 w-full rounded-xl px-5 py-3 text-sm font-bold transition ${
-            sel.size === 0 || busy || (!!SITEKEY && !token)
+            sel.size === 0 || busy
               ? "cursor-not-allowed bg-slate-100 text-slate-400"
               : "bg-ink text-white hover:bg-wave"
           }`}
@@ -190,13 +189,13 @@ function QuestionBlock({ q }: { q: PollQuestion }) {
 
 export default function Poll() {
   useEffect(() => {
-    if (!SITEKEY) return;
-    if (document.querySelector('script[data-turnstile]')) return;
+    if (!RECAPTCHA_SITEKEY) return;
+    if (document.querySelector("script[data-recaptcha]")) return;
     const s = document.createElement("script");
-    s.src = "https://challenges.cloudflare.com/turnstile/v0/api.js";
+    s.src = `https://www.google.com/recaptcha/api.js?render=${RECAPTCHA_SITEKEY}`;
     s.async = true;
     s.defer = true;
-    s.setAttribute("data-turnstile", "1");
+    s.setAttribute("data-recaptcha", "1");
     document.head.appendChild(s);
   }, []);
 

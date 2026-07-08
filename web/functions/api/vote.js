@@ -1,11 +1,12 @@
 // Cloudflare Pages Function：投票計票 API
 // 需要在 CF Pages 專案綁定：
 //   - KV namespace，變數名 POLL_KV
-//   - 環境變數 TURNSTILE_SECRET（Cloudflare Turnstile 的 Secret Key）＜選用，未設則略過驗證＞
+//   - 環境變數 RECAPTCHA_SECRET（Google reCAPTCHA v3 的 Secret Key）＜選用，未設則略過驗證＞
 // 端點：GET /api/vote?pollId=xxx 取得票數；POST /api/vote 投票
 
 const MAX_OPTIONS = 8;
 const VOTE_TTL = 60 * 60 * 24 * 180; // 一 IP 對同一題的鎖定時間：約 180 天
+const RECAPTCHA_MIN_SCORE = 0.5;
 
 function json(data, status = 200) {
   return new Response(JSON.stringify(data), {
@@ -57,36 +58,45 @@ export async function onRequestPost({ request, env }) {
     .slice(0, MAX_OPTIONS);
   if (opts.length === 0) return json({ error: "bad options" }, 400);
 
-  // Turnstile 驗證（若有設 secret）
-  if (env.TURNSTILE_SECRET) {
-    const ip = request.headers.get("CF-Connecting-IP") || "";
-    const form = new FormData();
-    form.append("secret", env.TURNSTILE_SECRET);
-    form.append("response", token || "");
-    if (ip) form.append("remoteip", ip);
-    const vr = await fetch(
-      "https://challenges.cloudflare.com/turnstile/v0/siteverify",
-      { method: "POST", body: form }
-    );
-    const outcome = await vr.json();
-    if (!outcome.success) return json({ error: "turnstile failed" }, 403);
-  }
-
-  // 一 IP 一票（對同一題）
   const ip = request.headers.get("CF-Connecting-IP") || "unknown";
   const ipHash = await sha256(`${pollId}:${ip}:surf-poll-salt`);
   const votedKey = `voted:${pollId}:${ipHash}`;
-  const already = await env.POLL_KV.get(votedKey);
-  const counts = await getCounts(env, pollId);
-  if (already) {
-    return json({ pollId, counts, already: true }, 200);
+
+  // 先擋掉已投票的請求，省下一次 reCAPTCHA 呼叫，也縮短競態窗口
+  if (await env.POLL_KV.get(votedKey)) {
+    return json({ pollId, counts: await getCounts(env, pollId), already: true }, 200);
   }
 
+  // Google reCAPTCHA v3 驗證（若有設 secret）
+  if (env.RECAPTCHA_SECRET) {
+    const form = new FormData();
+    form.append("secret", env.RECAPTCHA_SECRET);
+    form.append("response", token || "");
+    if (ip !== "unknown") form.append("remoteip", ip);
+    const vr = await fetch(
+      "https://www.google.com/recaptcha/api/siteverify",
+      { method: "POST", body: form }
+    );
+    const outcome = await vr.json();
+    const score = typeof outcome.score === "number" ? outcome.score : 0;
+    if (!outcome.success || score < RECAPTCHA_MIN_SCORE || outcome.action !== "vote") {
+      return json({ error: "recaptcha failed" }, 403);
+    }
+  }
+
+  // reCAPTCHA 呼叫期間可能有其他並發請求搶先投票，這裡再查一次
+  if (await env.POLL_KV.get(votedKey)) {
+    return json({ pollId, counts: await getCounts(env, pollId), already: true }, 200);
+  }
+
+  // 立刻鎖票，把「查詢→鎖定」之間的窗口縮到只剩下面這一次 KV 寫入，
+  // 讓同一 IP 短時間並發投票時，鎖定盡快對後續請求生效
+  await env.POLL_KV.put(votedKey, "1", { expirationTtl: VOTE_TTL });
+
+  const counts = await getCounts(env, pollId);
   for (const o of opts) counts[o] = (counts[o] || 0) + 1;
   counts.__voters = (counts.__voters || 0) + 1;
-
   await env.POLL_KV.put(`counts:${pollId}`, JSON.stringify(counts));
-  await env.POLL_KV.put(votedKey, "1", { expirationTtl: VOTE_TTL });
 
   return json({ pollId, counts, ok: true });
 }
