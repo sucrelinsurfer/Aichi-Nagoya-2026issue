@@ -1,5 +1,7 @@
 const PETITION_URL =
   "https://join.gov.tw/idea/detail/d1a49641-2382-49e5-bcdd-b51db932d771";
+const PETITION_FB_URL =
+  "https://www.facebook.com/ourPED/posts/pfbid0g2JZuRm6mGfDcuNaHPYfnZZKEjxQMXHKyTbt5YPzP5pRLqAtFHXFHyXpWZW3PHjbl";
 const FURTHER_READING_URL = "https://www.thenewslens.com/article/14197";
 
 const ASKS = [
@@ -50,6 +52,17 @@ export default function TakeAction() {
         </a>
         <p className="mt-2 text-xs text-slate-400">
           即時附議進度、提案全文以連署頁為準。附議需完成平臺身分驗證。
+        </p>
+        <p className="mt-2 text-xs text-slate-500">
+          發起連署的臉書貼文：
+          <a
+            href={PETITION_FB_URL}
+            target="_blank"
+            rel="noreferrer noopener"
+            className="font-medium text-wave underline underline-offset-2 hover:text-ink"
+          >
+            看原文 ↗
+          </a>
         </p>
       </div>
 
