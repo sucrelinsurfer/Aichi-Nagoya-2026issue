@@ -3,6 +3,7 @@ import Countdown from "@/components/Countdown";
 import DisputeThree from "@/components/DisputeThree";
 import Timeline from "@/components/Timeline";
 import Conclusion from "@/components/Conclusion";
+import ScaleNote from "@/components/ScaleNote";
 import StanceCompare from "@/components/StanceCompare";
 import CountriesTeaser from "@/components/CountriesTeaser";
 import Poll from "@/components/Poll";
@@ -58,6 +59,7 @@ export default function Home() {
             <DisputeThree />
           </div>
           <Conclusion />
+          <ScaleNote />
           <StanceCompare />
         </div>
       </div>

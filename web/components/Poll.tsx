@@ -53,26 +53,38 @@ function QuestionBlock({ q }: { q: PollQuestion }) {
   const [liveVoters, setLiveVoters] = useState<number | null>(null);
 
   useEffect(() => {
-    let stored = false;
+    let mine: string[] = [];
+    let hadStored = false;
     try {
       const raw = localStorage.getItem(KEY);
       if (raw) {
-        stored = true;
+        hadStored = true;
         const p = JSON.parse(raw);
+        mine = p.mine ?? [];
+        setSel(new Set(mine));
+        // 先用本機快照即時顯示，避免閃爍
         setResult({ counts: p.counts, voters: p.counts.__voters || 0, demo: !!p.demo });
-        setSel(new Set(p.mine ?? []));
       }
     } catch {}
-    // 尚未投票者：抓目前參與人數當社會證明（不透露選項分布）
-    if (!stored) {
-      fetch(`/api/vote?pollId=${encodeURIComponent(q.id)}`)
-        .then((r) => (r.ok ? r.json() : null))
-        .then((d) => {
-          const v = d?.counts?.__voters;
-          if (typeof v === "number" && v > 0) setLiveVoters(v);
-        })
-        .catch(() => {});
-    }
+    // 一律重抓目前票數：已投票者也要看到「最新總數」，而不是自己投票當下的快照。
+    fetch(`/api/vote?pollId=${encodeURIComponent(q.id)}`)
+      .then((r) => (r.ok ? r.json() : null))
+      .then((d) => {
+        const counts = d?.counts;
+        if (!counts) return;
+        const voters = counts.__voters || 0;
+        if (hadStored) {
+          // 已投票 → 用後端最新票數更新畫面，並同步刷新本機快照
+          setResult({ counts, voters, demo: false });
+          try {
+            localStorage.setItem(KEY, JSON.stringify({ counts, mine, demo: false }));
+          } catch {}
+        } else if (voters > 0) {
+          // 尚未投票 → 只顯示目前參與人數（社會證明），不透露分布
+          setLiveVoters(voters);
+        }
+      })
+      .catch(() => {});
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
