@@ -28,7 +28,7 @@ export default function StanceCompare() {
         哪一種比較好？你來判斷
       </h2>
       <p className="mt-2 text-sm leading-relaxed text-slate-500">
-        這件事沒有標準答案。我們把三種立場「誰受益、誰受損」攤開，判斷交給你——看完可以到下方投票。
+        這件事沒有標準答案。本站不表態，只把三種立場「誰受益、誰受損」攤開，判斷交給你——看完可到下方投票。
       </p>
 
       <div className="mt-5 grid gap-3 sm:grid-cols-3">
@@ -56,10 +56,6 @@ export default function StanceCompare() {
           </div>
         ))}
       </div>
-
-      <p className="mt-4 text-xs text-slate-400">
-        本站不對「哪種最好」表態，僅呈現各立場的取捨，供你形成自己的判斷。
-      </p>
     </div>
   );
 }
