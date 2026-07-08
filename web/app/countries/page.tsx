@@ -2,6 +2,7 @@ import Link from "next/link";
 import { COUNTRIES, REGIONS, REGION_COLOR } from "@/data/countries";
 import CompareTable from "@/components/CompareTable";
 import CountryCheck from "@/components/CountryCheck";
+import RosterTable from "@/components/RosterTable";
 
 export const metadata = {
   title: "各國怎麼選？亞運衝浪參賽國遴選標準與國情",
@@ -38,6 +39,8 @@ export default function CountriesPage() {
 
       <div className="mx-auto max-w-3xl space-y-14 px-6 py-16">
         <CompareTable />
+
+        <RosterTable />
 
         {REGIONS.map((region) => {
           const list = COUNTRIES.filter((c) => c.region === region);

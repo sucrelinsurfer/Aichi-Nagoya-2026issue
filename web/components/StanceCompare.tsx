@@ -9,7 +9,7 @@ const STANCES = [
     stance: "拿到名額後仍須競技審查",
     benefit: "國家隊門面",
     benefitTone: "text-sky-600",
-    cost: "新興運動易被舊制度卡住，辛苦賺到的名額可能浪費。",
+    cost: "新興運動易被舊制度卡住，爭取到的名額可能浪費。",
     note: "＝現行政府立場",
   },
   {

@@ -156,8 +156,12 @@ export const TIMELINE: TimelineItem[] = [
           url: "https://www.surfingsingapore.com/_files/ugd/54f516_51da7a274a8d45f7b2c0ebfdcc8b793e.pdf",
         },
         {
-          title: "ASF 2025 亞錦賽 LiveHeats 賽果（女：陳7鍾13；男：詹17尤25）",
+          title: "ASF 2025 亞錦賽 LiveHeats 賽果（女子組：陳宛榆7、鍾昀蓉13）",
           url: "https://liveheats.com/events/404396/divisions/716342/result",
+        },
+        {
+          title: "ASF 2025 亞錦賽 LiveHeats 賽果（男子組：詹博宇17、尤佳琦25）",
+          url: "https://liveheats.com/events/404396/divisions/716341/result",
         },
       ],
     },
