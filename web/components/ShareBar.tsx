@@ -1,13 +1,21 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const SHARE_TEXT =
   "🌊 台灣衝浪隊拚下 2026 名古屋亞運 4 席，卻有 2 席被作廢——九月就要比賽，選手還站不上場。這份懶人包每個說法都附上官方來源與截圖，不是要找戰犯，是想要一個交代。一起看👇";
 
+// 靜態匯出時 server 端沒有 window，先用正式網址當預設，client 掛載後再換成實際網址。
+const DEFAULT_URL = "https://aichi-nagoya-2026issue.pages.dev/";
+
 export default function ShareBar() {
   const [copied, setCopied] = useState(false);
-  const url = typeof window !== "undefined" ? window.location.href : "";
+  const [url, setUrl] = useState(DEFAULT_URL);
+
+  useEffect(() => {
+    // 去掉 #anchor，避免分享出去帶著 #poll 之類的片段
+    setUrl(window.location.href.split("#")[0]);
+  }, []);
 
   const enc = encodeURIComponent(SHARE_TEXT);
   const encUrl = encodeURIComponent(url);
