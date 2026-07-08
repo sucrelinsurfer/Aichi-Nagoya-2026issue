@@ -2,7 +2,6 @@ import Link from "next/link";
 import Countdown from "@/components/Countdown";
 import DisputeThree from "@/components/DisputeThree";
 import Timeline from "@/components/Timeline";
-import TimelineStages from "@/components/TimelineStages";
 import Conclusion from "@/components/Conclusion";
 import StanceCompare from "@/components/StanceCompare";
 import CountriesTeaser from "@/components/CountriesTeaser";
@@ -71,7 +70,6 @@ export default function Home() {
             事件怎麼一步步走到今天。點開每則的「查證」標籤，看它的來源與可信度。
           </p>
         </header>
-        <TimelineStages />
         <Timeline />
       </section>
 

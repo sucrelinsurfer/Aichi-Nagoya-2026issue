@@ -120,9 +120,9 @@ export default function DisputeThree() {
       <div className="mt-4 rounded-xl border border-slate-200 bg-slate-50 px-4 py-4">
         <p className="text-sm font-bold text-ink">核心爭議在哪裡</p>
         <p className="mt-1.5 text-[15px] leading-relaxed text-slate-700">
-          爭議並不是「男子最佳第 17 名到底夠不夠格參賽」，而是——運動部審查採用的評估門檻（例如亞錦賽前 16 名），是
+          明明拿到 4 個名額，為什麼最後只派出 2 位選手？重點不在「男生第 17 名夠不夠強」，而是那條把男生刷掉的門檻——
           <span className="font-bold text-ink">
-            何時確立、依據為何，以及選手在比賽前是否已經知悉這條標準。
+            「亞錦賽前 16 名」到底是什麼時候定的、根據什麼定的？選手在比賽前知不知道？
           </span>
         </p>
       </div>
