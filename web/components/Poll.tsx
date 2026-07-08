@@ -3,7 +3,11 @@
 import { useEffect, useState } from "react";
 import { POLLS, type PollQuestion } from "@/data/poll";
 
-const RECAPTCHA_SITEKEY = process.env.NEXT_PUBLIC_RECAPTCHA_SITEKEY;
+// Site Key 是公開值（本來就會出現在前端 HTML），可安全寫在這裡；環境變數若有設會優先。
+// ⚠️ Secret Key 絕不可寫進程式（repo 公開），只放 Cloudflare 環境變數 RECAPTCHA_SECRET。
+const RECAPTCHA_SITEKEY =
+  process.env.NEXT_PUBLIC_RECAPTCHA_SITEKEY ||
+  "6LdGBkotAAAAAGdX8qN_xiftKi5z8z0hlqoZHUjs";
 
 type Result = { counts: Record<string, number>; voters: number; demo: boolean };
 
