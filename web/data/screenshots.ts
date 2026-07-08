@@ -31,6 +31,12 @@ export const SHOTS: Record<string, string | string[]> = {
     "/verifications/ctsa-fb-response-2.png",
     "/verifications/ctsa-fb-response-3.png",
   ],
+  // ASF 致總統府信件（IG 流傳，三頁影像存證）
+  "https://www.instagram.com/p/Dafrlu6kWsT/": [
+    "/verifications/asf-letter-president-1.jpg",
+    "/verifications/asf-letter-president-2.jpg",
+    "/verifications/asf-letter-president-3.jpg",
+  ],
 };
 
 // 來源 URL → Wayback 永久存檔快照連結（與截圖互補；歷史網站掛掉時，截圖是後備）。
