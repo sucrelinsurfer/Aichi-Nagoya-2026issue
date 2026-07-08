@@ -222,6 +222,13 @@ export default function Poll() {
       {POLLS.map((q) => (
         <QuestionBlock key={q.id} q={q} />
       ))}
+
+      <div className="rounded-xl border border-slate-100 bg-white/60 px-4 py-3">
+        <p className="text-xs font-bold text-slate-500">關於人數統計</p>
+        <p className="mt-1 text-xs leading-relaxed text-slate-400">
+          本投票未綁定實名或帳號，無法確認唯一身分。防止重複投票僅靠三層盡力機制：同一瀏覽器一次（localStorage）、同一 IP 對同題 180 天內一票（IP 雜湊）、reCAPTCHA 阻擋機器人。共用 IP 可能誤擋、使用 VPN 或多裝置仍可能重複。因此這裡的人數與比例屬「非科學的參與傾向」，僅供方向參考，不等同民意調查，也不作為正式統計依據。
+        </p>
+      </div>
     </div>
   );
 }
