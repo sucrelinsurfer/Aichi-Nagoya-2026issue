@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { ROSTERS } from "@/data/rosters";
 import { COUNTRIES } from "@/data/countries";
 
@@ -55,7 +56,7 @@ export default function RosterTable() {
           const q = quotaOf(r.country);
           const v = VERIFY[r.verify];
           return (
-            <div key={r.country} className="rounded-xl border border-slate-100 bg-white p-5 shadow-sm">
+            <div key={r.country} id={r.country} className="scroll-mt-20 rounded-xl border border-slate-100 bg-white p-5 shadow-sm">
               <div className="flex flex-wrap items-center gap-2">
                 <span className="text-2xl">{flagOf(r.country)}</span>
                 <h3 className="text-lg font-bold text-ink">{r.country}</h3>
@@ -90,7 +91,7 @@ export default function RosterTable() {
                 </table>
               </div>
 
-              <div className="mt-2 text-xs">
+              <div className="mt-2 flex flex-wrap items-center gap-x-4 gap-y-1 text-xs">
                 <a
                   href={r.source.url}
                   target="_blank"
@@ -99,6 +100,12 @@ export default function RosterTable() {
                 >
                   {r.source.title} ↗
                 </a>
+                <Link
+                  href={`/countries#${r.country}`}
+                  className="font-medium text-slate-500 hover:text-wave"
+                >
+                  看這國的遴選標準 →
+                </Link>
               </div>
             </div>
           );

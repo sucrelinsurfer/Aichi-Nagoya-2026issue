@@ -12,7 +12,10 @@ export default function Nav() {
             時間軸
           </Link>
           <Link href="/countries" className="text-slate-600 hover:text-wave">
-            參賽國遴選
+            遴選標準
+          </Link>
+          <Link href="/rosters" className="text-slate-600 hover:text-wave">
+            參賽選手
           </Link>
           <Link href="/#poll" className="hidden text-slate-600 hover:text-wave sm:inline">
             投票

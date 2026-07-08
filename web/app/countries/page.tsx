@@ -2,7 +2,7 @@ import Link from "next/link";
 import { COUNTRIES, REGIONS, REGION_COLOR } from "@/data/countries";
 import CompareTable from "@/components/CompareTable";
 import CountryCheck from "@/components/CountryCheck";
-import RosterTable from "@/components/RosterTable";
+import { ROSTERS } from "@/data/rosters";
 
 export const metadata = {
   title: "各國怎麼選？亞運衝浪參賽國遴選標準與國情",
@@ -20,6 +20,7 @@ function QuotaPill({ men, women }: { men: number; women: number }) {
 }
 
 export default function CountriesPage() {
+  const hasRoster = new Set(ROSTERS.map((r) => r.country));
   return (
     <main className="min-h-screen">
       <section className="bg-gradient-to-b from-ink to-wave px-6 pb-16 pt-12 text-white">
@@ -27,20 +28,27 @@ export default function CountriesPage() {
           <Link href="/" className="text-sm text-white/70 hover:text-white">
             ← 回懶人包首頁
           </Link>
-          <h1 className="mt-4 text-3xl font-black sm:text-4xl">各國怎麼選？</h1>
+          <p className="mt-4 inline-block rounded-full bg-white/15 px-3 py-1 text-xs font-medium">
+            制度面・怎麼選
+          </p>
+          <h1 className="mt-3 text-3xl font-black sm:text-4xl">各國遴選標準</h1>
           <p className="mt-4 max-w-2xl leading-relaxed text-white/85">
             同樣是亞運衝浪，17 個參賽國的遴選方式各有脈絡——有的靠海外血統徵召，有的有宗教服裝規範，有的舉國體制跨界選材。看完會更懂：台灣的爭議放在亞洲脈絡裡，是什麼樣的處境。
           </p>
           <p className="mt-3 text-xs text-white/60">
             以地區排列，無排名或優劣之意。配額數字為亞洲衝浪總會（ASF）官方公告；遴選內容整理自官方協會與公開資料，持續補查證。
           </p>
+          <Link
+            href="/rosters"
+            className="mt-5 inline-block rounded-full border border-white/40 px-5 py-2.5 text-sm font-bold text-white transition hover:bg-white/10"
+          >
+            想看「各國實際派誰、排名多少」？→ 參賽選手
+          </Link>
         </div>
       </section>
 
       <div className="mx-auto max-w-3xl space-y-14 px-6 py-16">
         <CompareTable />
-
-        <RosterTable />
 
         {REGIONS.map((region) => {
           const list = COUNTRIES.filter((c) => c.region === region);
@@ -74,6 +82,21 @@ export default function CountriesPage() {
                       {c.body}
                     </p>
                     <CountryCheck sources={c.sources} />
+                    {hasRoster.has(c.name) ? (
+                      <Link
+                        href={`/rosters#${c.name}`}
+                        className="mt-3 inline-block text-xs font-medium text-wave hover:text-ink"
+                      >
+                        看這國實際派出的選手與排名 →
+                      </Link>
+                    ) : (
+                      <Link
+                        href="/rosters"
+                        className="mt-3 inline-block text-xs font-medium text-slate-400 hover:text-wave"
+                      >
+                        實際派出名單：待補・協作中 →
+                      </Link>
+                    )}
                   </article>
                 ))}
               </div>
