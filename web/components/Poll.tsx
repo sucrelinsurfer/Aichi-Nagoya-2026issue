@@ -46,16 +46,29 @@ function QuestionBlock({ q }: { q: PollQuestion }) {
   const [sel, setSel] = useState<Set<string>>(new Set());
   const [result, setResult] = useState<Result | null>(null);
   const [busy, setBusy] = useState(false);
+  const [liveVoters, setLiveVoters] = useState<number | null>(null);
 
   useEffect(() => {
+    let stored = false;
     try {
       const raw = localStorage.getItem(KEY);
       if (raw) {
+        stored = true;
         const p = JSON.parse(raw);
         setResult({ counts: p.counts, voters: p.counts.__voters || 0, demo: !!p.demo });
         setSel(new Set(p.mine ?? []));
       }
     } catch {}
+    // 尚未投票者：抓目前參與人數當社會證明（不透露選項分布）
+    if (!stored) {
+      fetch(`/api/vote?pollId=${encodeURIComponent(q.id)}`)
+        .then((r) => (r.ok ? r.json() : null))
+        .then((d) => {
+          const v = d?.counts?.__voters;
+          if (typeof v === "number" && v > 0) setLiveVoters(v);
+        })
+        .catch(() => {});
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -118,6 +131,11 @@ function QuestionBlock({ q }: { q: PollQuestion }) {
       {q.hint && (
         <p className="mt-1 text-sm text-slate-500">
           {done ? "感謝投票！下方為目前分布。" : q.hint}
+        </p>
+      )}
+      {!done && liveVoters !== null && (
+        <p className="mt-1 text-xs font-medium text-wave">
+          已有 {liveVoters.toLocaleString()} 人投票 · 加入你的一票
         </p>
       )}
       <div className="mt-4 space-y-3">

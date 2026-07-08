@@ -31,7 +31,7 @@ export default function StanceCompare() {
         這件事沒有標準答案。本站不表態，只把三種立場「誰受益、誰受損」攤開，判斷交給你——看完可到下方投票。
       </p>
 
-      <div className="mt-5 grid gap-3 sm:grid-cols-3">
+      <div className="mt-5 grid gap-3 sm:grid-cols-3" id="stances">
         {STANCES.map((s) => (
           <div
             key={s.stance}
@@ -55,6 +55,17 @@ export default function StanceCompare() {
             </div>
           </div>
         ))}
+      </div>
+
+      {/* 導流去投票 */}
+      <div className="mt-6 flex flex-col items-center gap-2 border-t border-slate-100 pt-5">
+        <p className="text-sm font-medium text-ink">你站哪一邊？</p>
+        <a
+          href="#poll"
+          className="inline-flex items-center gap-1.5 rounded-full bg-ink px-6 py-3 text-sm font-bold text-white transition hover:bg-wave"
+        >
+          前往投票，讓你的立場被看見 →
+        </a>
       </div>
     </div>
   );
