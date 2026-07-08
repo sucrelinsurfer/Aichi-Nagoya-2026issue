@@ -45,7 +45,11 @@ export default function Timeline() {
                 ? "sm:ml-auto sm:w-1/2 sm:pl-10"
                 : "sm:mx-auto sm:w-[78%]";
             return (
-              <div key={i} className="relative pl-8 sm:pl-0">
+              <div
+                key={i}
+                id={item.id}
+                className="relative scroll-mt-24 pl-8 sm:pl-0"
+              >
                 <span
                   className={`absolute left-[7px] top-6 z-10 h-3.5 w-3.5 -translate-x-1/2 rounded-full ring-4 ring-foam sm:left-1/2 ${DOT[key]}`}
                 />

@@ -28,6 +28,7 @@ export type FoldedEntry = {
 };
 
 export type TimelineItem = {
+  id?: string; // 供「30 秒看懂」方塊錨點連結用
   date: string;
   title: string;
   body: string;
@@ -117,6 +118,7 @@ export const TIMELINE: TimelineItem[] = [
     },
   },
   {
+    id: "tl-quota",
     date: "2024–2025",
     title: "兩屆亞錦賽累積團體積分，拿下 4 席",
     body: "衝浪的亞運名額，不是「個人打進亞錦賽前四名就直接換一張門票」，而是把各國選手的成績換算成團體積分、依國家／地區總排名分配席次。所以台灣這 4 席，是整支中華隊一起打下來的——配額由 2024、2025 兩屆亞錦賽的國家團體排名累加而成，每屆每國最多 1 男 1 女。2026 年 3 月，中華奧會據此通知台灣取得這 4 席（男 2、女 2）暫定配額。",
@@ -140,6 +142,7 @@ export const TIMELINE: TimelineItem[] = [
     },
   },
   {
+    id: "tl-results",
     date: "2024–2025",
     title: "兩屆亞錦賽個人名次",
     body: "女子選手兩屆成績：2024 年陳宛榆第 13、鍾昀蓉並列第 9；2025 年陳宛榆第 7、鍾昀蓉第 13。男子 2025 年：詹博宇（John John Chan）第 17、尤佳琦（Chia-Chi Yu）第 25。四人個人名次皆未達常態「前 4 名」門檻——這也是後來遴選爭議的起點。",
@@ -159,6 +162,7 @@ export const TIMELINE: TimelineItem[] = [
     },
   },
   {
+    id: "tl-selection",
     date: "2026/3/30",
     title: "三場選拔賽積分與正備取名次公告",
     side: "association",
@@ -249,6 +253,7 @@ export const TIMELINE: TimelineItem[] = [
     },
   },
   {
+    id: "tl-review",
     date: "2026/6/26",
     title: "審查會議：放寬前16名，男子不予提名",
     side: "gov",
@@ -305,6 +310,7 @@ export const TIMELINE: TimelineItem[] = [
     },
   },
   {
+    id: "tl-statement",
     date: "2026/7/6",
     title: "協會：發9點聲明重申配額≠代表權",
     side: "association",
