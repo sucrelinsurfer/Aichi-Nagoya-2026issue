@@ -1,27 +1,24 @@
-const BEATS = [
+const STAGES = [
   {
     no: "1",
-    head: "選手拿到了資格",
-    color: "text-wave",
-    ring: "border-wave/30 bg-wave/5",
-    badge: "border-wave/40 text-wave",
-    body: "台灣的衝浪選手在亞洲賽事打出成績，替台灣拿到 4 個亞運參賽名額（男 2、女 2）。",
+    title: "取得國際名額",
+    body: "台灣透過 2024、2025 兩屆亞錦賽的團體成績，取得男子 2 席、女子 2 席，共 4 個亞運名額。",
   },
   {
     no: "2",
-    head: "女生去，男生被擋下",
-    color: "text-amber",
-    ring: "border-amber/30 bg-amber/5",
-    badge: "border-amber/40 text-amber",
-    body: "2 位女子選手如期出賽；2 位男子選手被運動部評為「成績未達標」，決定不派人——2 個名額就這樣空著、作廢。",
+    title: "協會遴選",
+    body: "中華民國衝浪協會依遴選制度辦選拔賽，排出代表人選（正取、備取）。",
   },
   {
     no: "3",
-    head: "差一名，而且線是賽後才畫的",
-    color: "text-coral",
-    ring: "border-coral/30 bg-coral/5",
-    badge: "border-coral/40 text-coral",
-    body: "男子最佳是亞錦賽第 17 名，運動部把門檻設在第 16 名——差一名。但「第 16 名」這條線，是比賽結束後（6/26 開會、7/6 才公布）才定出來的。",
+    title: "主管機關資格審查",
+    body: "取得名額、通過協會遴選後，仍須由運動部依「精英選材」標準審查，確認最終代表資格。",
+    flag: "爭議發生在這一關",
+  },
+  {
+    no: "4",
+    title: "最終代表資格",
+    body: "通過審查者，才正式成為亞運代表隊、報名出賽。",
   },
 ];
 
@@ -30,54 +27,77 @@ export default function DisputeThree() {
     <div className="rounded-2xl border border-slate-100 bg-white p-5 shadow-sm sm:p-7">
       <p className="text-sm font-medium text-wave">30 秒看懂：到底在吵什麼</p>
       <h2 className="mt-1 text-2xl font-black text-ink sm:text-3xl">
-        門票拿到了，人卻不能去
+        從國際名額到能不能出賽，要過四關
       </h2>
       <p className="mt-2 text-sm leading-relaxed text-slate-500">
-        <span className="font-medium text-slate-600">亞錦賽</span>＝拿門票的資格賽；
-        <span className="font-medium text-slate-600">亞運</span>＝真正要比的那場。台灣在資格賽拿到了門票，但最後誰能去、由運動部審查決定。
+        <span className="font-medium text-slate-600">亞錦賽</span>＝拿名額的資格賽；
+        <span className="font-medium text-slate-600">亞運</span>＝真正要比的那場。一位選手要真正站上亞運，得依序通過下面四個階段——爭議就發生在最後一關。
       </p>
 
-      <div className="mt-5 flex flex-col gap-2 sm:flex-row sm:items-stretch">
-        {BEATS.map((b, i) => (
-          <div key={b.no} className="flex flex-1 flex-col sm:flex-row sm:items-stretch">
-            <div className={`flex-1 rounded-xl border p-4 ${b.ring}`}>
-              <div className="flex items-center gap-2">
-                <span
-                  className={`flex h-7 w-7 shrink-0 items-center justify-center rounded-full border text-sm font-black ${b.badge}`}
-                >
-                  {b.no}
-                </span>
-                <span className={`font-bold ${b.color}`}>{b.head}</span>
-              </div>
-              <p className="mt-2 text-sm leading-relaxed text-slate-600">{b.body}</p>
-            </div>
-            {i < BEATS.length - 1 && (
-              <div
-                className="flex items-center justify-center text-slate-300"
-                aria-hidden="true"
+      {/* 四階段流程 */}
+      <ol className="mt-5 space-y-2">
+        {STAGES.map((s) => {
+          const active = Boolean(s.flag);
+          return (
+            <li
+              key={s.no}
+              className={`flex gap-3 rounded-xl border p-4 ${
+                active
+                  ? "border-amber/40 bg-amber/5"
+                  : "border-slate-200 bg-slate-50/50"
+              }`}
+            >
+              <span
+                className={`flex h-7 w-7 shrink-0 items-center justify-center rounded-full text-sm font-black ${
+                  active
+                    ? "bg-amber text-white"
+                    : "border border-slate-300 text-slate-500"
+                }`}
               >
-                <span className="py-1 text-xl sm:hidden">↓</span>
-                <span className="hidden px-1 text-2xl sm:inline">→</span>
+                {s.no}
+              </span>
+              <div>
+                <div className="flex flex-wrap items-center gap-2">
+                  <span className="font-bold text-ink">{s.title}</span>
+                  {s.flag && (
+                    <span className="rounded-full bg-amber/15 px-2 py-0.5 text-[11px] font-bold text-amber">
+                      {s.flag}
+                    </span>
+                  )}
+                </div>
+                <p className="mt-1 text-sm leading-relaxed text-slate-600">{s.body}</p>
               </div>
-            )}
-          </div>
-        ))}
+            </li>
+          );
+        })}
+      </ol>
+
+      {/* 結果 */}
+      <div className="mt-4 grid gap-2.5 sm:grid-cols-2">
+        <div className="rounded-xl border border-slate-100 bg-white p-4">
+          <p className="text-sm font-bold text-ink">女子 2 名</p>
+          <p className="mt-1 text-[13px] leading-snug text-slate-600">
+            通過審查，獲提名參賽。
+          </p>
+        </div>
+        <div className="rounded-xl border border-slate-100 bg-white p-4">
+          <p className="text-sm font-bold text-ink">男子 2 席</p>
+          <p className="mt-1 text-[13px] leading-snug text-slate-600">
+            協會遴選已產生人選，但運動部審查認定未達代表資格，不予提名——名額未派員、空缺。
+          </p>
+        </div>
       </div>
 
-      {/* 爭議點：講成具體情節 */}
-      <div className="mt-5 rounded-xl border border-coral/20 bg-coral/5 px-4 py-4">
-        <p className="text-sm font-bold text-coral">所以爭議點是這個 👇</p>
+      {/* 核心爭議（中立呈現） */}
+      <div className="mt-4 rounded-xl border border-slate-200 bg-slate-50 px-4 py-4">
+        <p className="text-sm font-bold text-ink">核心爭議在哪裡</p>
         <p className="mt-1.5 text-[15px] leading-relaxed text-slate-700">
-          選手當初備戰，根本不知道要拚到第幾名才算過關。等賽事結束，運動部才劃出「第 16 名」這條線，把男生刷掉。
+          爭議並不是「男子最佳第 17 名到底夠不夠格參賽」，而是——運動部審查採用的評估門檻（例如亞錦賽前 16 名），是
           <span className="font-bold text-ink">
-            我們要問的不是「他夠不夠強」，而是——一條決定選手能不能出賽的標準，憑什麼可以賽後才定、而且事前不公開？
+            何時確立、依據為何，以及選手在比賽前是否已經知悉這條標準。
           </span>
         </p>
       </div>
-
-      <p className="mt-3 text-xs leading-relaxed text-slate-400">
-        補充：這 4 個名額是靠「團體」成績換來、屬於「國家」，最後才由「個人」去比——三個層次不同，也是很多人一開始看不懂的原因。詳見下方〈名額怎麼算〉。
-      </p>
     </div>
   );
 }
