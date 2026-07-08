@@ -9,6 +9,7 @@ import StanceCompare from "@/components/StanceCompare";
 import CountriesTeaser from "@/components/CountriesTeaser";
 import Poll from "@/components/Poll";
 import ShareBar from "@/components/ShareBar";
+import TakeAction from "@/components/TakeAction";
 import Sources from "@/components/Sources";
 
 export default function Home() {
@@ -103,6 +104,11 @@ export default function Home() {
             </div>
           </div>
         </div>
+      </section>
+
+      {/* 行動：公民提案附議 */}
+      <section id="action" className="mx-auto max-w-3xl px-6 pt-16">
+        <TakeAction />
       </section>
 
       {/* Sources */}
