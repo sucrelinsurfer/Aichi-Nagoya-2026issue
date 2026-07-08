@@ -3,15 +3,17 @@ const RULES = [
     when: "賽前・書面",
     rule: "亞錦賽前 4 名",
     note: "《培訓參賽計畫》附件2 載明的客觀基準。",
-    tone: "border-slate-200 bg-white",
+    tone: "border-slate-200 bg-white hover:border-wave/40",
     label: "text-slate-500",
+    href: "#tl-rule4",
   },
   {
     when: "賽後・7/6 口頭",
     rule: "放寬到前 16 名",
     note: "6/26 審查會後才對外公布的標準，男子 17 名差一名出局。",
-    tone: "border-coral/30 bg-coral/5",
+    tone: "border-coral/30 bg-coral/5 hover:border-coral/60",
     label: "text-coral",
+    href: "#tl-review",
   },
 ];
 
@@ -45,14 +47,23 @@ export default function Conclusion() {
         我們不主張任何一位選手一定夠格出賽，也不質疑入選選手的實力。爭點只有一個：把男子刷掉的那條門檻，是<span className="font-bold text-ink">賽後才長出來的</span>。
       </p>
 
-      {/* 賽前 vs 賽後 標準對照 */}
+      {/* 賽前 vs 賽後 標準對照（可點看時間軸查證） */}
       <div className="mt-4 grid gap-2.5 sm:grid-cols-2">
         {RULES.map((r) => (
-          <div key={r.when} className={`rounded-xl border p-4 ${r.tone}`}>
-            <p className={`text-xs font-bold ${r.label}`}>{r.when}</p>
+          <a
+            key={r.when}
+            href={r.href}
+            className={`group rounded-xl border p-4 transition hover:shadow-sm ${r.tone}`}
+          >
+            <div className="flex items-center justify-between">
+              <p className={`text-xs font-bold ${r.label}`}>{r.when}</p>
+              <span className="text-xs font-medium text-slate-300 group-hover:text-wave">
+                查證 →
+              </span>
+            </div>
             <p className="mt-1 text-lg font-black text-ink">{r.rule}</p>
             <p className="mt-1 text-[13px] leading-snug text-slate-500">{r.note}</p>
-          </div>
+          </a>
         ))}
       </div>
 

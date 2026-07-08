@@ -107,6 +107,7 @@ export const TIMELINE: TimelineItem[] = [
     },
   },
   {
+    id: "tl-rule4",
     date: "2022/9",
     title: "修訂：前4名基準＋專案核著彈性路徑",
     side: "gov",

@@ -1,7 +1,6 @@
 import Link from "next/link";
 import Countdown from "@/components/Countdown";
 import DisputeThree from "@/components/DisputeThree";
-import CoreStats from "@/components/CoreStats";
 import Timeline from "@/components/Timeline";
 import TimelineStages from "@/components/TimelineStages";
 import Conclusion from "@/components/Conclusion";
@@ -53,25 +52,16 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 爭點三格（第一屏論點） */}
-      <section id="dispute" className="relative z-10 mx-auto -mt-12 max-w-4xl px-6">
-        <DisputeThree />
-      </section>
-
-      {/* 核心數字：差一名（情緒推力） */}
-      <section className="mx-auto max-w-4xl px-6 pt-8">
-        <CoreStats />
-      </section>
-
-      {/* 我們要求什麼：程序透明訴求 */}
-      <section className="mx-auto max-w-3xl px-6 pt-16">
-        <Conclusion />
-      </section>
-
-      {/* 三種立場對照 */}
-      <section className="mx-auto max-w-3xl px-6 pt-6">
-        <StanceCompare />
-      </section>
+      {/* 事實與訴求：懂爭點 → 賽前vs賽後標準與訴求 → 各方立場 */}
+      <div className="relative z-10 -mt-12">
+        <div className="mx-auto max-w-3xl space-y-6 px-6">
+          <div id="dispute" className="scroll-mt-20">
+            <DisputeThree />
+          </div>
+          <Conclusion />
+          <StanceCompare />
+        </div>
+      </div>
 
       {/* 完整時序（證據，降級） */}
       <section id="timeline" className="mx-auto max-w-3xl px-6 py-16">
