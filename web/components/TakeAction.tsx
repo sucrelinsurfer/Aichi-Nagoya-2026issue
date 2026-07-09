@@ -79,7 +79,7 @@ export default function TakeAction() {
       </p>
 
       <p className="mt-4 border-t border-slate-100 pt-3 text-xs leading-relaxed text-slate-400">
-        此提案由公民發起，非本站發動；本站中立整理事實與各方說法，是否附議由你自行決定。
+        此提案由公民發起，非本站發動。本站中立整理事實與各方說法；若你認同「已取得資格的選手應有出賽機會、制度應公開透明」，我們鼓勵你花一分鐘完成附議——每一筆連署，都是把議題推向被回答的力量。
       </p>
     </div>
   );

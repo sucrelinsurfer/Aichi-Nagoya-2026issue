@@ -37,6 +37,12 @@ export default function Home() {
           </div>
           <div className="mt-8 flex flex-wrap justify-center gap-3">
             <a
+              href="#action"
+              className="rounded-full bg-coral px-6 py-3 text-sm font-bold text-white transition hover:bg-coral/90"
+            >
+              支持連署，一起發聲 →
+            </a>
+            <a
               href="#dispute"
               className="rounded-full bg-white px-6 py-3 text-sm font-bold text-ink transition hover:bg-foam"
             >
@@ -85,11 +91,17 @@ export default function Home() {
         <div className="mx-auto max-w-3xl space-y-8">
           <Poll />
           <div className="rounded-2xl border border-slate-100 bg-white p-6 text-center shadow-sm">
-            <h3 className="text-xl font-bold text-ink">讓更多人看見</h3>
+            <h3 className="text-xl font-bold text-ink">一起連署，讓議題被回答</h3>
             <p className="mx-auto mt-2 max-w-md text-sm text-slate-500">
-              議題被看見，才有被回答的機會。分享出去，也邀運動部給一個公開的說法。
+              已有公民在公共政策平臺發起連署，請求檢討這套參賽制度。多一筆附議，議題就多一分被正視的重量——附議之外，也把它分享出去。
             </p>
-            <div className="mt-5 flex justify-center">
+            <div className="mt-5 flex flex-wrap items-center justify-center gap-3">
+              <a
+                href="#action"
+                className="rounded-full bg-wave px-5 py-2.5 text-sm font-bold text-white transition hover:bg-ink"
+              >
+                前往連署 →
+              </a>
               <ShareBar />
             </div>
           </div>
