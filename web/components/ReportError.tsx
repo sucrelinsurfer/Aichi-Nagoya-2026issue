@@ -54,7 +54,7 @@ export default function ReportError({
   label = "回報這裡有誤",
 }: {
   context?: string;
-  variant?: "link" | "button" | "nav";
+  variant?: "link" | "button" | "nav" | "icon";
   label?: string;
 }) {
   const [mounted, setMounted] = useState(false);
@@ -152,6 +152,28 @@ export default function ReportError({
         className="text-slate-600 transition hover:text-coral"
       >
         {label}
+      </button>
+    ) : variant === "icon" ? (
+      <button
+        onClick={openModal}
+        title="回報這裡有誤"
+        aria-label="回報這裡有誤"
+        className="text-slate-300 transition hover:text-coral"
+      >
+        <svg
+          width="14"
+          height="14"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          aria-hidden="true"
+        >
+          <path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z" />
+          <line x1="4" y1="22" x2="4" y2="15" />
+        </svg>
       </button>
     ) : (
       <button

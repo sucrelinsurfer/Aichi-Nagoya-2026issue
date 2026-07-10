@@ -81,7 +81,10 @@ export default function CountriesPage() {
                     <p className="mt-3 text-[15px] leading-relaxed text-slate-600">
                       {c.body}
                     </p>
-                    <CountryCheck sources={c.sources} />
+                    <CountryCheck
+                      sources={c.sources}
+                      context={`各國遴選｜${c.name}`}
+                    />
                     {hasRoster.has(c.name) ? (
                       <Link
                         href={`/rosters#${c.name}`}

@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { STATUS_META, type VerifyStatus } from "@/data/timeline";
 import { SHOTS, ARCHIVES } from "@/data/screenshots";
+import ReportError from "./ReportError";
 
 type Src = { title: string; url: string };
 
@@ -12,7 +13,13 @@ const NOTE: Record<string, string> = {
   unverified: "內容為公開資料彙整，尚無直接官方連結佐證，列為待查補。",
 };
 
-export default function CountryCheck({ sources }: { sources: Src[] }) {
+export default function CountryCheck({
+  sources,
+  context = "",
+}: {
+  sources: Src[];
+  context?: string;
+}) {
   const [open, setOpen] = useState(false);
   const [zoom, setZoom] = useState<string | null>(null);
   const [failed, setFailed] = useState<Set<string>>(new Set());
@@ -86,6 +93,9 @@ export default function CountryCheck({ sources }: { sources: Src[] }) {
             </ul>
           )}
           <p className="mt-2 text-xs text-slate-400">截圖與存證陸續補上。</p>
+          <div className="mt-3 flex justify-end border-t border-slate-100 pt-2">
+            <ReportError context={context || "各國遴選"} />
+          </div>
         </div>
       )}
 

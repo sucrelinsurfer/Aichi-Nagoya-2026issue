@@ -1,4 +1,5 @@
 import Link from "next/link";
+import ReportError from "@/components/ReportError";
 
 export const metadata = {
   title: "六方關係圖：亞運衝浪爭議誰負責哪一關｜懶人包",
@@ -267,11 +268,14 @@ export default function RelationsPage() {
                       <span className={`h-3 w-3 rounded-full ${t.dot}`} />
                       <h3 className="text-lg font-black text-ink">{u.name}</h3>
                     </div>
-                    <span
-                      className={`shrink-0 rounded-full px-2 py-0.5 text-[11px] font-medium ${t.chip}`}
-                    >
-                      {u.tag}
-                    </span>
+                    <div className="flex shrink-0 items-center gap-1.5">
+                      <span
+                        className={`rounded-full px-2 py-0.5 text-[11px] font-medium ${t.chip}`}
+                      >
+                        {u.tag}
+                      </span>
+                      <ReportError variant="icon" context={`關係圖｜${u.name}`} />
+                    </div>
                   </div>
 
                   <p className="mt-3 text-[13px] leading-relaxed text-slate-600">

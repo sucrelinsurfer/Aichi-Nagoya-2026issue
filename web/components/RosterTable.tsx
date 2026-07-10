@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { ROSTERS } from "@/data/rosters";
 import { COUNTRIES } from "@/data/countries";
+import ReportError from "./ReportError";
 
 const VERIFY = {
   verified: { label: "已證實", chip: "bg-emerald-50 text-emerald-700 border-emerald-200" },
@@ -63,6 +64,9 @@ export default function RosterTable() {
                 <span className="rounded bg-sky-50 px-1.5 py-0.5 text-[11px] font-medium text-sky-700">男 {q.men}</span>
                 <span className="rounded bg-pink-50 px-1.5 py-0.5 text-[11px] font-medium text-pink-700">女 {q.women}</span>
                 <span className={`rounded-full border px-2 py-0.5 text-[11px] font-medium ${v.chip}`}>{v.label}</span>
+                <span className="ml-auto">
+                  <ReportError variant="icon" context={`各國選手｜${r.country}`} />
+                </span>
               </div>
 
               <div className="-mx-5 mt-3 overflow-x-auto px-5">
