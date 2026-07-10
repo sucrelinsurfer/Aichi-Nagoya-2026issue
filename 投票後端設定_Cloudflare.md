@@ -81,11 +81,18 @@ Cloudflare Dashboard → Workers & Pages → 你的專案 → Settings → Build
 
 讓讀者回報「哪裡有誤／補充來源」。前端在每則查證面板旁、導覽列、頁尾都有入口（`components/ReportError.tsx`）。
 
-**不用另外建 KV**——回報與投票共用同一個 `POLL_KV` namespace，回報的 key 都以 `report:` 為前綴，不會跟票數衝突。所以只要投票的 KV 綁好了，回報就能寫入。
+**用獨立的 KV namespace**（跟投票分開，管理較清爽）：
+
+1. Dashboard → Storage & Databases → KV → Create namespace，命名例如 `surf-reports`。
+2. Pages 專案 → Settings → Functions → KV namespace bindings → Add binding：
+   - Variable name：**`REPORT_KV`**（一定要一模一樣）
+   - KV namespace：選剛建立的 `surf-reports`
+   - Production 與 Preview 都綁，然後重新部署。
 
 **選用環境變數：**
 
 - `REPORT_ADMIN_KEY`：讀取回報清單用的密鑰（自己設一組隨機字串）。Pages → Settings → Environment variables 加上（Production/Preview 都設）。
+- `DISCORD_WEBHOOK_URL`：Discord 頻道的 Webhook 網址。**設了就會在每筆新回報時自動發通知到該頻道**；沒設則跳過，回報照樣寫入 KV。（Discord → 頻道設定 → 整合 → Webhook → 複製網址）
 - reCAPTCHA 沿用投票同一組（`RECAPTCHA_SECRET` / `NEXT_PUBLIC_RECAPTCHA_SITEKEY`），action 用 `report`。採 best-effort：只有「有設 secret 且前端有帶 token」時才驗證，避免沒載到腳本的頁面誤擋。
 
 **怎麼讀回報：** 綁好後打開瀏覽器輸入（把 `你的密鑰` 換成 `REPORT_ADMIN_KEY` 的值）：
@@ -98,6 +105,6 @@ https://你的網域/api/report?key=你的密鑰
 
 **防濫用：** 蜜罐欄位（機器人常誤填）＋每 IP 每小時上限 5 筆＋內容長度限制。回報只進 KV 供人工查核，**不會即時改動網站**。
 
-**清空回報：** 到 KV namespace 刪掉 `report:*` 的 key 即可（`reportrate:*` 是限流計數、會自動過期）。
+**清空回報：** 到 `surf-reports` namespace 刪掉 `report:*` 的 key 即可（`reportrate:*` 是限流計數、會自動過期）。
 
-**未綁 KV 時：** 回報視窗按送出會顯示「回報功能尚未啟用」，不會壞。
+**未綁 `REPORT_KV` 時：** 回報視窗按送出會顯示「回報功能尚未啟用」，不會壞（投票不受影響，兩者已是不同 KV）。

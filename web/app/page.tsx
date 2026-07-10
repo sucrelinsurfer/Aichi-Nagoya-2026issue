@@ -10,6 +10,7 @@ import Poll from "@/components/Poll";
 import ShareBar from "@/components/ShareBar";
 import TakeAction from "@/components/TakeAction";
 import ReportError from "@/components/ReportError";
+import Glossary from "@/components/Glossary";
 import Sources from "@/components/Sources";
 
 export default function Home() {
@@ -21,13 +22,22 @@ export default function Home() {
           <p className="inline-block rounded-full bg-white/15 px-4 py-1 text-sm font-medium">
             2026 名古屋亞運 · 衝浪
           </p>
-          <h1 className="mt-6 text-3xl font-black leading-tight sm:text-[2.6rem]">
+          <p className="mx-auto mt-7 max-w-xl text-xl font-bold leading-relaxed text-white sm:text-2xl">
+            想像你苦練十年，終於贏得一張亞運門票——
+            <br className="hidden sm:block" />
+            然後被告知：<span className="text-coral">門票作廢</span>。
+            而作廢的標準，是比賽結束後才公布的。
+          </p>
+          <p className="mx-auto mt-3 text-sm font-medium text-white/55">
+            這不是假設。這是 2026 名古屋亞運，台灣衝浪隊真實發生的事。
+          </p>
+          <h1 className="mt-5 text-3xl font-black leading-tight sm:text-[2.6rem]">
             拿到 4 個亞運名額，
             <br className="hidden sm:block" />
             最後為什麼只派出 2 位選手？
           </h1>
-          <p className="mx-auto mt-5 max-w-2xl text-lg leading-relaxed text-white/85">
-            到底是哪個環節決定了最後只有 2 位選手出賽？為什麼通過遴選，最後卻不能代表台灣出賽？事件經過、制度依據與官方文件一次整理。
+          <p className="mx-auto mt-4 max-w-2xl text-base leading-relaxed text-white/85">
+            事件經過、制度依據與官方文件，一次看懂。
           </p>
           <div className="mx-auto mt-6 max-w-2xl rounded-2xl border border-white/20 bg-white/10 px-5 py-4 text-left">
             <p className="text-xs font-bold tracking-wide text-foam/80">本站主張</p>
@@ -41,6 +51,9 @@ export default function Home() {
           <div className="mt-8 flex flex-col items-center gap-3">
             <span className="text-sm text-white/70">距離名古屋亞運開幕</span>
             <Countdown />
+            <span className="mx-auto max-w-md text-xs leading-relaxed text-white/50">
+              但男子兩席的報名，早在 7/1 就截止了——這一屆已難挽回，能改的是制度，別讓下次再發生。
+            </span>
           </div>
           <div className="mt-8 flex flex-wrap justify-center gap-3">
             <a
@@ -65,6 +78,7 @@ export default function Home() {
           <div id="dispute" className="scroll-mt-20">
             <DisputeThree />
           </div>
+          <Glossary />
           <Link
             href="/relations"
             className="flex items-center justify-between gap-3 rounded-2xl border border-slate-100 bg-white p-5 shadow-sm transition hover:border-wave/40 hover:shadow-md"

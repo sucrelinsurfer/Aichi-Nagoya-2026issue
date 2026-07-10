@@ -1,5 +1,5 @@
 // Cloudflare Pages Function：錯誤回報 API
-// 綁定：KV namespace 變數名 POLL_KV（與投票共用同一個 namespace，回報用 report: 前綴）
+// 綁定：KV namespace 變數名 REPORT_KV（與投票共用同一個 namespace，回報用 report: 前綴）
 // 選用環境變數：
 //   RECAPTCHA_SECRET   Google reCAPTCHA v3 Secret；有設「且前端有帶 token」時才驗證
 //   REPORT_ADMIN_KEY   讀取回報清單用的密鑰；GET ?key=... 需與此相符
@@ -30,7 +30,7 @@ async function sha256(str) {
 }
 
 export async function onRequestPost({ request, env }) {
-  if (!env.POLL_KV) return json({ error: "no backend" }, 501);
+  if (!env.REPORT_KV) return json({ error: "no backend" }, 501);
 
   let body;
   try {
@@ -63,7 +63,7 @@ export async function onRequestPost({ request, env }) {
 
   // 每 IP 限流（滑動視窗近似）
   const rlKey = `reportrate:${ipHash}`;
-  const cnt = parseInt((await env.POLL_KV.get(rlKey)) || "0", 10);
+  const cnt = parseInt((await env.REPORT_KV.get(rlKey)) || "0", 10);
   if (cnt >= RATE_MAX) return json({ error: "rate limited" }, 429);
 
   // 選用 reCAPTCHA：僅在有設 secret「且」前端帶了 token 時才驗證，
@@ -97,24 +97,45 @@ export async function onRequestPost({ request, env }) {
     ua: (request.headers.get("User-Agent") || "").slice(0, 200),
   };
 
-  await env.POLL_KV.put(id, JSON.stringify(record)); // 回報不設 TTL，永久保留
-  await env.POLL_KV.put(rlKey, String(cnt + 1), { expirationTtl: RATE_WINDOW });
+  await env.REPORT_KV.put(id, JSON.stringify(record)); // 回報不設 TTL，永久保留
+  await env.REPORT_KV.put(rlKey, String(cnt + 1), { expirationTtl: RATE_WINDOW });
+
+  // 選用：Discord 通知（有設 DISCORD_WEBHOOK_URL 才發；失敗不影響回報）
+  if (env.DISCORD_WEBHOOK_URL) {
+    const lines = [
+      "🚩 **新的錯誤回報**",
+      record.context ? `**針對：**${record.context}` : null,
+      `**內容：**${record.message}`,
+      record.source ? `**建議來源：**${record.source}` : null,
+      record.contact ? `**聯絡：**${record.contact}` : null,
+      `**時間：**${record.ts}`,
+    ].filter(Boolean);
+    try {
+      await fetch(env.DISCORD_WEBHOOK_URL, {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({ content: lines.join("\n").slice(0, 1900) }),
+      });
+    } catch {
+      /* 通知失敗忽略 */
+    }
+  }
 
   return json({ ok: true });
 }
 
 export async function onRequestGet({ request, env }) {
-  if (!env.POLL_KV) return json({ error: "no backend" }, 501);
+  if (!env.REPORT_KV) return json({ error: "no backend" }, 501);
   const url = new URL(request.url);
   const key = url.searchParams.get("key");
   if (!env.REPORT_ADMIN_KEY || key !== env.REPORT_ADMIN_KEY) {
     return json({ error: "unauthorized" }, 401);
   }
 
-  const list = await env.POLL_KV.list({ prefix: "report:" });
+  const list = await env.REPORT_KV.list({ prefix: "report:" });
   const items = [];
   for (const k of list.keys) {
-    const raw = await env.POLL_KV.get(k.name);
+    const raw = await env.REPORT_KV.get(k.name);
     if (raw) items.push(JSON.parse(raw));
   }
   items.sort((a, b) => (a.ts < b.ts ? 1 : -1)); // 最新在前
