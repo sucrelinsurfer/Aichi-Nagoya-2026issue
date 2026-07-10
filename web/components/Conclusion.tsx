@@ -53,7 +53,7 @@ export default function Conclusion() {
       {/* 收尾：訴求（含名額怎麼用） */}
       <p className="mt-3 border-l-4 border-coral bg-coral/5 px-4 py-3 text-sm leading-relaxed text-slate-700">
         <span className="font-bold text-ink">
-          我們只要求運動部公開兩件事：這條標準的時間與依據，以及未派滿的名額接下來怎麼處理。
+          第一步很簡單：公開這條標準的時間與依據、以及未派滿的名額接下來怎麼處理——這正是我們主張「參賽原則要有規則、能檢驗」的起點。
         </span>
       </p>
     </div>

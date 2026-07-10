@@ -28,9 +28,15 @@ export default function Home() {
           <p className="mx-auto mt-5 max-w-2xl text-lg leading-relaxed text-white/85">
             到底是哪個環節決定了最後只有 2 位選手出賽？為什麼通過遴選，最後卻不能代表台灣出賽？事件經過、制度依據與官方文件一次整理。
           </p>
-          <p className="mx-auto mt-3 max-w-xl text-sm text-white/60">
-            每一句主張，旁邊都可點開官方來源與截圖。
-          </p>
+          <div className="mx-auto mt-6 max-w-2xl rounded-2xl border border-white/20 bg-white/10 px-5 py-4 text-left">
+            <p className="text-xs font-bold tracking-wide text-foam/80">本站主張</p>
+            <p className="mt-1 text-[15px] font-bold leading-relaxed text-white sm:text-base">
+              修正參賽原則：已取得國際資格的選手該不該派、依什麼標準、名額怎麼用，要有規則、能檢驗、不再重演。
+            </p>
+            <p className="mt-2.5 border-t border-white/15 pt-2.5 text-xs leading-relaxed text-white/70">
+              我們有立場，但不挑選事實——對選手或協會不利的細節，都在深入頁。每句話都附了官方來源與截圖，你不必相信我們，點開自己看。
+            </p>
+          </div>
           <div className="mt-8 flex flex-col items-center gap-3">
             <span className="text-sm text-white/70">距離名古屋亞運開幕</span>
             <Countdown />
@@ -58,6 +64,18 @@ export default function Home() {
           <div id="dispute" className="scroll-mt-20">
             <DisputeThree />
           </div>
+          <Link
+            href="/relations"
+            className="flex items-center justify-between gap-3 rounded-2xl border border-slate-100 bg-white p-5 shadow-sm transition hover:border-wave/40 hover:shadow-md"
+          >
+            <div>
+              <p className="text-sm font-medium text-wave">六方關係圖</p>
+              <p className="mt-0.5 text-[15px] font-bold text-ink">
+                這四關背後有六個單位——誰負責哪一關、誰把球踢給誰？
+              </p>
+            </div>
+            <span className="shrink-0 text-sm font-bold text-wave">看關係圖 →</span>
+          </Link>
           <Conclusion />
           <ScaleNote />
           <CountriesTeaser />

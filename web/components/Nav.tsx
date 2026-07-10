@@ -11,6 +11,9 @@ export default function Nav() {
           <Link href="/#timeline" className="hidden text-slate-600 hover:text-wave sm:inline">
             時間軸
           </Link>
+          <Link href="/relations" className="text-slate-600 hover:text-wave">
+            關係圖
+          </Link>
           <Link href="/countries" className="text-slate-600 hover:text-wave">
             遴選標準
           </Link>
