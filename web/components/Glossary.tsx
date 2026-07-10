@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { createPortal } from "react-dom";
 import Link from "next/link";
 
 // href 有值＝這是一個「單位」，點了跳到六方關係圖對應卡片
@@ -58,59 +59,83 @@ const TERMS: { term: string; def: string; href?: string }[] = [
 ];
 
 export default function Glossary() {
+  const [mounted, setMounted] = useState(false);
   const [open, setOpen] = useState(false);
-  return (
-    <div className="rounded-2xl border border-slate-100 bg-white shadow-sm">
-      <button
-        onClick={() => setOpen((v) => !v)}
-        className="flex w-full items-center justify-between gap-3 px-5 py-4 text-left"
-        aria-expanded={open}
-      >
-        <span>
-          <span className="text-sm font-bold text-ink">
-            看不懂這些詞？30 秒名詞速查
-          </span>
-          <span className="mt-0.5 block text-xs text-slate-400">
-            配額、遴選、組團、前16、非亞奧、中華奧會、ASF……一次看懂
-          </span>
-        </span>
-        <span
-          className={`shrink-0 text-slate-400 transition-transform ${
-            open ? "rotate-180" : ""
-          }`}
-        >
-          ⌄
-        </span>
-      </button>
 
-      {open && (
-        <div className="border-t border-slate-100 px-5 py-4">
-          <p className="mb-3 text-[11px] text-slate-400">
-            藍色的<span className="font-medium text-wave">單位名稱</span>可以點，會跳到「六方關係圖」看它的角色。
-          </p>
-          <dl className="grid gap-x-6 gap-y-3 sm:grid-cols-2">
-            {TERMS.map((t) => (
-              <div key={t.term}>
-                {t.href ? (
-                  <dt>
-                    <Link
-                      href={t.href}
-                      className="text-[13px] font-bold text-wave underline decoration-wave/30 underline-offset-2 hover:decoration-wave"
-                    >
-                      {t.term} →
-                    </Link>
-                  </dt>
-                ) : (
-                  <dt className="text-[13px] font-bold text-ink">{t.term}</dt>
-                )}
-                <dd className="mt-0.5 text-[13px] leading-relaxed text-slate-600">
-                  {t.def}
-                </dd>
-              </div>
-            ))}
-          </dl>
+  useEffect(() => setMounted(true), []);
+
+  // 開啟時鎖背景捲動
+  useEffect(() => {
+    if (!open) return;
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = prev;
+    };
+  }, [open]);
+
+  const modal = (
+    <div
+      onClick={() => setOpen(false)}
+      className="fixed inset-0 z-[100] flex items-end justify-center bg-black/50 p-0 sm:items-center sm:p-4"
+    >
+      <div
+        onClick={(e) => e.stopPropagation()}
+        className="max-h-[85vh] w-full max-w-lg overflow-y-auto rounded-t-2xl bg-white p-6 shadow-2xl sm:rounded-2xl"
+      >
+        <div className="flex items-start justify-between">
+          <div>
+            <h3 className="text-lg font-black text-ink">30 秒名詞速查</h3>
+            <p className="mt-0.5 text-xs text-slate-400">
+              藍色的<span className="font-medium text-wave">單位名稱</span>可以點，跳到「六方關係圖」看它的角色。
+            </p>
+          </div>
+          <button
+            onClick={() => setOpen(false)}
+            className="shrink-0 text-slate-400 transition hover:text-ink"
+            aria-label="關閉"
+          >
+            ✕
+          </button>
         </div>
-      )}
+
+        <dl className="mt-4 grid gap-x-6 gap-y-3 sm:grid-cols-2">
+          {TERMS.map((t) => (
+            <div key={t.term}>
+              {t.href ? (
+                <dt>
+                  <Link
+                    href={t.href}
+                    onClick={() => setOpen(false)}
+                    className="text-[13px] font-bold text-wave underline decoration-wave/30 underline-offset-2 hover:decoration-wave"
+                  >
+                    {t.term} →
+                  </Link>
+                </dt>
+              ) : (
+                <dt className="text-[13px] font-bold text-ink">{t.term}</dt>
+              )}
+              <dd className="mt-0.5 text-[13px] leading-relaxed text-slate-600">
+                {t.def}
+              </dd>
+            </div>
+          ))}
+        </dl>
+      </div>
     </div>
+  );
+
+  return (
+    <>
+      <button
+        onClick={() => setOpen(true)}
+        className="fixed bottom-5 right-5 z-40 flex items-center gap-1.5 rounded-full bg-ink/90 px-4 py-2.5 text-sm font-bold text-white shadow-lg backdrop-blur transition hover:bg-wave"
+        aria-label="打開名詞速查"
+      >
+        <span aria-hidden="true">📖</span>
+        名詞速查
+      </button>
+      {open && mounted && createPortal(modal, document.body)}
+    </>
   );
 }

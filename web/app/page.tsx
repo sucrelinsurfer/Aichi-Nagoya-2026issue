@@ -8,7 +8,6 @@ import Poll from "@/components/Poll";
 import ShareBar from "@/components/ShareBar";
 import TakeAction from "@/components/TakeAction";
 import ReportError from "@/components/ReportError";
-import Glossary from "@/components/Glossary";
 import Sources from "@/components/Sources";
 
 export default function Home() {
@@ -60,7 +59,6 @@ export default function Home() {
           <div id="dispute" className="scroll-mt-20">
             <DisputeThree />
           </div>
-          <Glossary />
           <Link
             href="/relations"
             className="flex items-center justify-between gap-3 rounded-2xl border border-slate-100 bg-white p-5 shadow-sm transition hover:border-wave/40 hover:shadow-md"
