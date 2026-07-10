@@ -7,6 +7,9 @@ export const SHOTS: Record<string, string | string[]> = {
   "https://asiansurfing.org/2026/06/quota-places/": "/verifications/asf-quota.png",
   "https://asiansurfing.org/2024/07/nagoya2026/":
     "/verifications/asf-qualification-pathway.png",
+  // 2021/3/31 衝浪納入 2026 亞運 公告
+  "https://asiansurfing.org/2021/03/surfing-in-asian-games-2026/":
+    "/verifications/surfing-added-2021.png",
   "https://www.surfingsingapore.com/_files/ugd/54f516_51da7a274a8d45f7b2c0ebfdcc8b793e.pdf":
     "/verifications/asf-2024-ranking.png",
   "https://liveheats.com/events/404396/divisions/716342/result": [
@@ -16,6 +19,12 @@ export const SHOTS: Record<string, string | string[]> = {
   ],
   "https://www.sports.gov.tw/CP/1659":
     "/verifications/sportsgov-elite-selection.png",
+  // 培訓參賽實施計畫 附件2：亞運第二類 參賽標準「前4名」＋「專案核定」彈性路徑
+  "https://www.sports.gov.tw/CP/1801":
+    "/verifications/training-plan-rule4.png",
+  // 運動部「非亞奧運單項運動協會」公告頁：衝浪運動協會列於此（含工作計畫/年度計畫/預算/決算）
+  "https://www.sports.gov.tw/News/2397":
+    "/verifications/surfing-non-asiad.png",
   // CTSA 三場選拔賽與成績公告
   "https://www.ctsasurf.org/single-post/114%E5%B9%B42026%E4%BA%9E%E9%81%8B%E8%A1%9D%E6%B5%AA%E9%A0%85%E7%9B%AE%E5%84%B2%E5%82%99%E5%9F%B9%E8%A8%93%E9%81%B8-%E8%B3%87%E6%A0%BC%E7%AC%AC%E4%B8%80%E5%A0%B4%E9%81%B8%E6%8B%94%E8%B3%BD":
     ["/verifications/race1-a.png", "/verifications/race1-b.jpg"],
