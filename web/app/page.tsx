@@ -20,15 +20,16 @@ export default function Home() {
           <p className="inline-block rounded-full bg-white/15 px-4 py-1 text-sm font-medium">
             2026 名古屋亞運 · 衝浪
           </p>
-          <p className="mx-auto mt-7 max-w-xl text-2xl font-black leading-snug text-white sm:text-[2rem]">
-            想像你苦練十年，贏得一張亞運門票——
+          <h1 className="mx-auto mt-7 max-w-2xl text-3xl font-black leading-tight text-white sm:text-[2.6rem]">
+            台灣拿到 4 個亞運名額，
             <br className="hidden sm:block" />
-            然後被告知：<span className="text-coral">門票作廢</span>，
-            而標準是比賽結束後才公布的。
-          </p>
-          <h1 className="mx-auto mt-5 max-w-xl text-base font-semibold leading-relaxed text-white/80 sm:text-lg">
-            這不是假設——台灣拿到 4 個亞運名額，最後為什麼只派出 2 位？
+            最後為什麼只派出 2 位？
           </h1>
+          <p className="mx-auto mt-5 max-w-2xl text-base leading-relaxed text-white/80 sm:text-lg">
+            想像你苦練十年，終於替台灣爭取到亞運參賽機會，最後卻沒能站上亞運舞台。這是一份
+            <span className="font-semibold text-white">逐句查證</span>
+            的懶人包，每個說法都附上公開來源與截圖。
+          </p>
           <div className="mt-8 flex flex-col items-center gap-3">
             <span className="text-sm text-white/70">距離名古屋亞運開幕</span>
             <Countdown />
