@@ -259,7 +259,8 @@ export default function RelationsPage() {
               return (
                 <div
                   key={u.name}
-                  className={`rounded-2xl border ${t.border} bg-white p-5 shadow-sm`}
+                  id={`u-${u.tone}`}
+                  className={`scroll-mt-24 rounded-2xl border ${t.border} bg-white p-5 shadow-sm`}
                 >
                   <div className="flex items-start justify-between gap-2">
                     <div className="flex items-center gap-2">

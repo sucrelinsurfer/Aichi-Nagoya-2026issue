@@ -1,8 +1,10 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 
-const TERMS: { term: string; def: string }[] = [
+// href 有值＝這是一個「單位」，點了跳到六方關係圖對應卡片
+const TERMS: { term: string; def: string; href?: string }[] = [
   {
     term: "名額 / 配額",
     def: "國際上分給每個國家的「參賽門票數」。台灣衝浪拿到 4 個（男 2、女 2）。",
@@ -26,14 +28,32 @@ const TERMS: { term: string; def: string }[] = [
   {
     term: "亞奧 / 非亞奧",
     def: "運動部把單項協會分成「亞奧項目」與「非亞奧」，分類決定拿到多少資源。衝浪至今被列非亞奧。",
+    href: "/relations#u-gov",
+  },
+  {
+    term: "運動部",
+    def: "中央主管機關，訂政策、監督國訓中心、對組團備查。",
+    href: "/relations#u-gov",
+  },
+  {
+    term: "國訓中心",
+    def: "培訓國家代表隊的行政法人；男子被刷掉的「審議」就在這一關。",
+    href: "/relations#u-nstc",
+  },
+  {
+    term: "衝浪協會（CTSA）",
+    def: "本項目的全國協會，辦選拔賽、產出遴選名單。",
+    href: "/relations#u-ctsa",
   },
   {
     term: "中華奧會（NOC）",
     def: "代表台灣對外參加奧運、亞運的組織，負責組團與報名。",
+    href: "/relations#u-ctoc",
   },
   {
     term: "ASF 亞洲衝浪聯盟",
     def: "衝浪的洲際管理組織（總部東京），負責分配亞運配額、也是致函總統府的那個單位。",
+    href: "/relations#u-ctoc",
   },
 ];
 
@@ -64,16 +84,32 @@ export default function Glossary() {
       </button>
 
       {open && (
-        <dl className="grid gap-x-6 gap-y-3 border-t border-slate-100 px-5 py-4 sm:grid-cols-2">
-          {TERMS.map((t) => (
-            <div key={t.term}>
-              <dt className="text-[13px] font-bold text-wave">{t.term}</dt>
-              <dd className="mt-0.5 text-[13px] leading-relaxed text-slate-600">
-                {t.def}
-              </dd>
-            </div>
-          ))}
-        </dl>
+        <div className="border-t border-slate-100 px-5 py-4">
+          <p className="mb-3 text-[11px] text-slate-400">
+            藍色的<span className="font-medium text-wave">單位名稱</span>可以點，會跳到「六方關係圖」看它的角色。
+          </p>
+          <dl className="grid gap-x-6 gap-y-3 sm:grid-cols-2">
+            {TERMS.map((t) => (
+              <div key={t.term}>
+                {t.href ? (
+                  <dt>
+                    <Link
+                      href={t.href}
+                      className="text-[13px] font-bold text-wave underline decoration-wave/30 underline-offset-2 hover:decoration-wave"
+                    >
+                      {t.term} →
+                    </Link>
+                  </dt>
+                ) : (
+                  <dt className="text-[13px] font-bold text-ink">{t.term}</dt>
+                )}
+                <dd className="mt-0.5 text-[13px] leading-relaxed text-slate-600">
+                  {t.def}
+                </dd>
+              </div>
+            ))}
+          </dl>
+        </div>
       )}
     </div>
   );

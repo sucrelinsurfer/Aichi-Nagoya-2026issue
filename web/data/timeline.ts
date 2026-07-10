@@ -161,11 +161,11 @@ export const TIMELINE: TimelineItem[] = [
       note: "ASF 官方《參賽資格制度》（文件版本日期 2024/3/29）白紙黑字：男 24／女 24、每國上限 2 男 2 女；配額由 2024 與 2025 兩屆亞錦賽分配、每屆每國上限 1 男 1 女——即兩屆累加，非單一賽事、也非個人前4名直接晉級。⚠️ 釐清：2024/3/29 是「資格規則」文件的版本日期（規則怎麼算），不是台灣拿到 4 席的日期；4 席是靠 2024、2025 兩屆亞錦賽成績累積，2025 打完才定案、2026/3 由中華奧會通知暫定配額。下方為 ASF 官方文件（含 QUALIFICATION PATHWAY）與配額表。",
       sources: [
         {
-          title: "ASF 參賽資格制度 PDF（中英雙語下載）",
+          title: "ASF 參賽資格制度 PDF · 2024/3/29 版（中英雙語下載）",
           url: "/docs/asf-qualification-nagoya2026-bilingual.pdf",
         },
         {
-          title: "ASF：名古屋2026 短板衝浪資格賽制度（資格路徑圖）",
+          title: "ASF：名古屋2026 短板衝浪資格賽制度 QUALIFICATION PATHWAY（2024/3/29 版）",
           url: "https://asiansurfing.org/2024/07/nagoya2026/",
         },
         {
