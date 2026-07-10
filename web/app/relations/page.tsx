@@ -62,6 +62,7 @@ type Unit = {
   powers: string;
   dispute: string;
   disputeFlag?: string; // 待查證等標記
+  extraSource?: { title: string; url: string }; // 爭議點的額外來源連結
 };
 
 const UNITS: Unit[] = [
@@ -74,7 +75,12 @@ const UNITS: Unit[] = [
     role: "2025/9 由教育部體育署升格的中央二級機關，監督國訓中心等行政法人。",
     powers: "訂定組團參賽政策與原則、監督所屬法人、編列經費、對組團計畫備查監督。",
     dispute:
-      "立場「亞運以爭取成績為目標、非取得配額即派員」，男子競爭力不足不予提名（「前16名」為賽後才對外說明的標準）。",
+      "立場「亞運以爭取成績為目標、非取得配額即派員」，男子競爭力不足不予提名（「前16名」為賽後才對外說明的標準）。更根本的一層：衝浪 2021 就納入亞運、2020 更已是奧運項目，運動部卻至今仍將衝浪協會列為「非亞奧」——分類決定資源，等於把衝浪關在亞奧培訓池外，卻又以競爭力不足不派。",
+    disputeFlag: "含結構性爭點",
+    extraSource: {
+      title: "非亞奧運單項運動協會公告 News/2397",
+      url: "https://www.sports.gov.tw/News/2397",
+    },
   },
   {
     tone: "nstc",
@@ -97,7 +103,7 @@ const UNITS: Unit[] = [
     role: "衝浪項目的全國管理組織，辦理選拔賽、由選訓委員會產出遴選名單。",
     powers: "辦三場選拔賽、產「儲備培訓名單」（積分為依據，非最終代表隊，須續送上級審議）。",
     dispute:
-      "被質疑遴選是否公開透明。至於「查不到培訓計畫」——運動部非亞奧公告頁其實查得到協會歷年年度計畫/預算/決算，只是沒有『亞運專項培訓計畫』，因為衝浪被歸在非亞奧（見下方結構性爭點）。",
+      "被質疑遴選是否公開透明。至於「查不到培訓計畫」——運動部非亞奧公告頁其實查得到協會歷年年度計畫/預算/決算，只是沒有『亞運專項培訓計畫』，因為衝浪被歸在非亞奧（見運動部一欄的結構性爭點）。",
     disputeFlag: "部分釐清",
   },
   {
@@ -287,16 +293,28 @@ export default function RelationsPage() {
                     {u.dispute}
                   </p>
 
-                  {u.url && (
-                    <a
-                      href={u.url}
-                      target="_blank"
-                      rel="noreferrer noopener"
-                      className="mt-3 inline-block text-xs font-medium text-wave underline underline-offset-2 hover:text-ink"
-                    >
-                      官網 · {u.urlLabel} ↗
-                    </a>
-                  )}
+                  <div className="mt-3 flex flex-wrap gap-x-4 gap-y-1">
+                    {u.url && (
+                      <a
+                        href={u.url}
+                        target="_blank"
+                        rel="noreferrer noopener"
+                        className="inline-block text-xs font-medium text-wave underline underline-offset-2 hover:text-ink"
+                      >
+                        官網 · {u.urlLabel} ↗
+                      </a>
+                    )}
+                    {u.extraSource && (
+                      <a
+                        href={u.extraSource.url}
+                        target="_blank"
+                        rel="noreferrer noopener"
+                        className="inline-block text-xs font-medium text-coral underline underline-offset-2 hover:text-ink"
+                      >
+                        {u.extraSource.title} ↗
+                      </a>
+                    )}
+                  </div>
                 </div>
               );
             })}
@@ -350,39 +368,6 @@ export default function RelationsPage() {
               </div>
             ))}
           </div>
-        </section>
-
-        {/* 結構性爭點：非亞奧 */}
-        <section className="rounded-2xl border border-coral/30 bg-coral/5 p-6">
-          <p className="text-sm font-medium text-coral">結構性爭點</p>
-          <h2 className="mt-1 text-2xl font-black text-ink">
-            衝浪至今仍被列在「非亞奧」
-          </h2>
-          <div className="mt-4 grid gap-3 sm:grid-cols-2">
-            <div className="rounded-xl border border-teal-200 bg-teal-50 p-4">
-              <p className="text-xs font-bold text-teal-700">國際：2021/3 就納入</p>
-              <p className="mt-1 text-[13px] leading-relaxed text-slate-600">
-                名古屋亞運籌備會 2021/3/30 決定納入衝浪；衝浪更早自 2020 東京奧運即為奧運項目。
-              </p>
-            </div>
-            <div className="rounded-xl border border-slate-300 bg-white p-4">
-              <p className="text-xs font-bold text-slate-500">國內：至今仍列非亞奧</p>
-              <p className="mt-1 text-[13px] leading-relaxed text-slate-600">
-                運動部「非亞奧運單項運動協會」公告頁仍把衝浪協會列在此（News/2397，截圖存證）。
-              </p>
-            </div>
-          </div>
-          <p className="mt-4 rounded-xl bg-white/70 px-4 py-3 text-[13px] leading-relaxed text-slate-700">
-            分類不是名目——它決定資源與培訓管道。列在非亞奧，等於衝浪被關在亞奧培訓資源池外：沒有多年期培育計畫把選手往亞運養，臨到組隊審查卻以「競爭力不足」不派。這也解釋了「查不到亞運培訓計畫」——因為體系內根本沒有這種東西。
-          </p>
-          <a
-            href="https://www.sports.gov.tw/News/2397"
-            target="_blank"
-            rel="noreferrer noopener"
-            className="mt-3 inline-block text-xs font-medium text-wave underline underline-offset-2 hover:text-ink"
-          >
-            運動部：非亞奧運單項運動協會公告 ↗
-          </a>
         </section>
 
         {/* 待釐清 */}

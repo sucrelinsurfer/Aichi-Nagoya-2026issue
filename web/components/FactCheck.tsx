@@ -3,8 +3,15 @@
 import { useState } from "react";
 import { STATUS_META, type FactCheck as FactCheckType } from "@/data/timeline";
 import { SHOTS, ARCHIVES } from "@/data/screenshots";
+import ReportError from "./ReportError";
 
-export default function FactCheck({ fact }: { fact: FactCheckType }) {
+export default function FactCheck({
+  fact,
+  context = "",
+}: {
+  fact: FactCheckType;
+  context?: string;
+}) {
   const [open, setOpen] = useState(false);
   const [zoom, setZoom] = useState<string | null>(null);
   const [failed, setFailed] = useState<Set<string>>(new Set());
@@ -93,6 +100,11 @@ export default function FactCheck({ fact }: { fact: FactCheckType }) {
               此項尚無公開來源，列為待補。
             </p>
           )}
+          <div className="mt-3 flex justify-end border-t border-slate-100 pt-2">
+            <ReportError
+              context={context ? `時間軸｜${context}` : "時間軸查證"}
+            />
+          </div>
         </div>
       )}
 

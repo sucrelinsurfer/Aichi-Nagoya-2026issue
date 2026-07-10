@@ -1,4 +1,5 @@
 import Link from "next/link";
+import ReportError from "./ReportError";
 
 export default function Nav() {
   return (
@@ -23,6 +24,9 @@ export default function Nav() {
           <Link href="/#poll" className="hidden text-slate-600 hover:text-wave sm:inline">
             投票
           </Link>
+          <span className="hidden sm:inline">
+            <ReportError variant="nav" label="回報錯誤" context="導覽列" />
+          </span>
           <a
             href="https://github.com/sucrelinsurfer/Aichi-Nagoya-2026issue"
             target="_blank"

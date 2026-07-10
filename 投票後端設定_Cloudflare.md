@@ -74,3 +74,30 @@ Cloudflare Dashboard → Workers & Pages → 你的專案 → Settings → Build
 
 - 綁好 KV 後投票，重新整理／換裝置，票數應該還在且會累加 → 成功。
 - 若投完顯示「單機示範計票」字樣 → 代表 KV 還沒綁成功（API 回 501），檢查 binding 變數名是否為 `POLL_KV`。
+
+---
+
+## 七、錯誤回報功能（`functions/api/report.js`）
+
+讓讀者回報「哪裡有誤／補充來源」。前端在每則查證面板旁、導覽列、頁尾都有入口（`components/ReportError.tsx`）。
+
+**不用另外建 KV**——回報與投票共用同一個 `POLL_KV` namespace，回報的 key 都以 `report:` 為前綴，不會跟票數衝突。所以只要投票的 KV 綁好了，回報就能寫入。
+
+**選用環境變數：**
+
+- `REPORT_ADMIN_KEY`：讀取回報清單用的密鑰（自己設一組隨機字串）。Pages → Settings → Environment variables 加上（Production/Preview 都設）。
+- reCAPTCHA 沿用投票同一組（`RECAPTCHA_SECRET` / `NEXT_PUBLIC_RECAPTCHA_SITEKEY`），action 用 `report`。採 best-effort：只有「有設 secret 且前端有帶 token」時才驗證，避免沒載到腳本的頁面誤擋。
+
+**怎麼讀回報：** 綁好後打開瀏覽器輸入（把 `你的密鑰` 換成 `REPORT_ADMIN_KEY` 的值）：
+
+```
+https://你的網域/api/report?key=你的密鑰
+```
+
+會回傳 JSON（最新在前），每筆含：時間、針對哪一則（context）、內容、建議來源、聯絡方式、IP 雜湊前綴。沒設 `REPORT_ADMIN_KEY` 或密鑰不符 → 回 401。
+
+**防濫用：** 蜜罐欄位（機器人常誤填）＋每 IP 每小時上限 5 筆＋內容長度限制。回報只進 KV 供人工查核，**不會即時改動網站**。
+
+**清空回報：** 到 KV namespace 刪掉 `report:*` 的 key 即可（`reportrate:*` 是限流計數、會自動過期）。
+
+**未綁 KV 時：** 回報視窗按送出會顯示「回報功能尚未啟用」，不會壞。

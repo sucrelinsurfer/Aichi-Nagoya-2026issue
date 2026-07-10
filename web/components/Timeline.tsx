@@ -127,7 +127,12 @@ export default function Timeline() {
                       </div>
                     )}
                     {item.folded && <FoldedRaces entries={item.folded} />}
-                    {item.fact && <FactCheck fact={item.fact} />}
+                    {item.fact && (
+                      <FactCheck
+                        fact={item.fact}
+                        context={`${item.date}｜${item.title}`}
+                      />
+                    )}
                   </div>
                 </div>
               </div>
