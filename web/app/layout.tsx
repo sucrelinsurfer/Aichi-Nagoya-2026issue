@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import Nav from "@/components/Nav";
+import { GoogleAnalytics } from "@next/third-parties/google";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://aichi-nagoya-2026issue.vercel.app"),
@@ -41,6 +42,7 @@ export default function RootLayout({
         <Nav />
         {children}
       </body>
+      <GoogleAnalytics gaId="G-EF7GGW10SP" />
     </html>
   );
 }
