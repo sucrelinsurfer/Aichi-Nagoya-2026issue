@@ -3,9 +3,7 @@ import Countdown from "@/components/Countdown";
 import DisputeThree from "@/components/DisputeThree";
 import Timeline from "@/components/Timeline";
 import Conclusion from "@/components/Conclusion";
-import ScaleNote from "@/components/ScaleNote";
 import StanceCompare from "@/components/StanceCompare";
-import CountriesTeaser from "@/components/CountriesTeaser";
 import Poll from "@/components/Poll";
 import ShareBar from "@/components/ShareBar";
 import TakeAction from "@/components/TakeAction";
@@ -39,15 +37,6 @@ export default function Home() {
           <p className="mx-auto mt-4 max-w-2xl text-base leading-relaxed text-white/85">
             事件經過、制度依據與官方文件，一次看懂。
           </p>
-          <div className="mx-auto mt-6 max-w-2xl rounded-2xl border border-white/20 bg-white/10 px-5 py-4 text-left">
-            <p className="text-xs font-bold tracking-wide text-foam/80">本站主張</p>
-            <p className="mt-1 text-[15px] font-bold leading-relaxed text-white sm:text-base">
-              修正參賽原則：已取得國際資格的選手該不該派、依什麼標準、名額怎麼用，要有規則、能檢驗、不再重演。
-            </p>
-            <p className="mt-2.5 border-t border-white/15 pt-2.5 text-xs leading-relaxed text-white/70">
-              我們有立場，但不挑選事實——對選手或協會不利的細節，都在深入頁。每句話都附了官方來源與截圖，你不必相信我們，點開自己看。
-            </p>
-          </div>
           <div className="mt-8 flex flex-col items-center gap-3">
             <span className="text-sm text-white/70">距離名古屋亞運開幕</span>
             <Countdown />
@@ -92,8 +81,21 @@ export default function Home() {
             <span className="shrink-0 text-sm font-bold text-wave">看關係圖 →</span>
           </Link>
           <Conclusion />
-          <ScaleNote />
-          <CountriesTeaser />
+          <Link
+            href="/countries"
+            className="block rounded-2xl border border-slate-100 bg-white p-6 shadow-sm transition hover:border-wave/40 hover:shadow-md"
+          >
+            <p className="text-sm font-medium text-wave">放進亞洲脈絡</p>
+            <p className="mt-1 text-[15px] font-bold text-ink sm:text-lg">
+              只有台灣，把「亞錦賽前 16」當成硬門檻——別國照樣派主力。
+            </p>
+            <p className="mt-2 text-sm leading-relaxed text-slate-600">
+              同一把尺下，孟加拉派出的男子名次（第 17、25）跟台灣落選男子一樣——孟加拉派了、台灣沒派。17 國 17 種選法，看完更懂台灣這次的處境。
+            </p>
+            <span className="mt-3 inline-block text-sm font-bold text-wave">
+              看 17 國怎麼選 →
+            </span>
+          </Link>
           <StanceCompare />
         </div>
       </div>
@@ -107,6 +109,15 @@ export default function Home() {
 
       {/* 行動：公民提案附議（連署，全站唯一 CTA 出口） */}
       <section id="action" className="mx-auto max-w-3xl px-6 pt-16">
+        <div className="mb-6 rounded-2xl border border-wave/20 bg-foam/40 p-5 sm:p-6">
+          <p className="text-xs font-bold tracking-wide text-wave">本站主張</p>
+          <p className="mt-1 text-[15px] font-bold leading-relaxed text-ink sm:text-base">
+            修正參賽原則：已取得國際資格的選手該不該派、依什麼標準、名額怎麼用，要有規則、能檢驗、不再重演。
+          </p>
+          <p className="mt-2.5 border-t border-slate-200 pt-2.5 text-xs leading-relaxed text-slate-500">
+            我們有立場，但不挑選事實——對選手或協會不利的細節，都在深入頁。每句話都附了官方來源與截圖，你不必相信我們，點開自己看。
+          </p>
+        </div>
         <TakeAction />
       </section>
 
