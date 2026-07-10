@@ -61,7 +61,7 @@ type Unit = {
   urlLabel: string;
   role: string;
   powers: string;
-  dispute: string;
+  dispute: string | string[]; // 字串＝單一爭議點；陣列＝多個，會編號成「爭議點1／2」
   disputeFlag?: string; // 待查證等標記
   extraSource?: { title: string; url: string }; // 爭議點的額外來源連結
 };
@@ -75,9 +75,10 @@ const UNITS: Unit[] = [
     urlLabel: "sports.gov.tw",
     role: "2025/9 由教育部體育署升格的中央二級機關，監督國訓中心等行政法人。",
     powers: "訂定組團參賽政策與原則、監督所屬法人、編列經費、對組團計畫備查監督。",
-    dispute:
-      "立場「亞運以爭取成績為目標、非取得配額即派員」，男子競爭力不足不予提名（「前16名」為賽後才對外說明的標準）。更根本的一層：衝浪 2021 就納入亞運、2020 更已是奧運項目，運動部卻至今仍將衝浪協會列為「非亞奧」——分類決定資源，等於把衝浪關在亞奧培訓池外，卻又以競爭力不足不派。",
-    disputeFlag: "含結構性爭點",
+    dispute: [
+      "立場「亞運以爭取成績為目標、非取得配額即派員」，男子競爭力不足不予提名——而「前16名」這條標準，是賽後才對外說明的。",
+      "衝浪早在 2021/3 就被納入 2026 亞運、2020 更已是奧運項目，運動部卻至今仍把衝浪協會歸在「非亞奧」。分類不是名目——它決定適用哪套資源辦法；列非亞奧＝衝浪被關在亞奧培訓資源池外，臨到組隊卻又以「競爭力不足」不派。這也解釋了為何「查不到亞運培訓計畫」。",
+    ],
     extraSource: {
       title: "非亞奧運單項運動協會公告 News/2397",
       url: "https://www.sports.gov.tw/News/2397",
@@ -104,7 +105,7 @@ const UNITS: Unit[] = [
     role: "衝浪項目的全國管理組織，辦理選拔賽、由選訓委員會產出遴選名單。",
     powers: "辦三場選拔賽、產「儲備培訓名單」（積分為依據，非最終代表隊，須續送上級審議）。",
     dispute:
-      "被質疑遴選是否公開透明。至於「查不到培訓計畫」——運動部非亞奧公告頁其實查得到協會歷年年度計畫/預算/決算，只是沒有『亞運專項培訓計畫』，因為衝浪被歸在非亞奧（見運動部一欄的結構性爭點）。",
+      "被質疑遴選是否公開透明。至於「查不到培訓計畫」——非亞奧公告頁查得到協會歷年年度計畫/預算/決算，但沒有「2026名古屋亞運選手培訓參賽實施計畫」這種亞運專項計畫；而棒球、游泳、拳擊等亞奧項目這屆都有公開此份。差別根源仍在衝浪被列非亞奧（見運動部一欄）。",
     disputeFlag: "部分釐清",
   },
   {
@@ -126,7 +127,7 @@ const UNITS: Unit[] = [
     url: "https://www.tpenoc.net/info/",
     urlLabel: "tpenoc.net",
     role: "OCA 與 IOC 承認的國家奧會，對外聯繫國際組織、組團參賽。",
-    powers: "依《處理辦法》組團報名亞運；2026/3 據 ASF 團體積分通知我國取得男2女2共4席配額。",
+    powers: "依《處理辦法》組團報名亞運；2026/3/9 通知衝浪協會取得男2女2共4席暫定配額（惟選手端 2025/8 前後即知取得資格）。",
     dispute:
       "報導中較沉默，卻是「對外報名」關鍵節點；被指在出賽尚未確定時即通知選手量製隊服，形成矛盾訊號——來源待補。",
     disputeFlag: "待查證",
@@ -231,7 +232,7 @@ export default function RelationsPage() {
         <section>
           <h2 className="text-2xl font-black text-ink">名額怎麼反方向流進來</h2>
           <p className="mt-2 text-[15px] leading-relaxed text-slate-500">
-            這 4 席不是打進亞錦賽前四就換一張票，而是團體積分換算的國家配額。
+            這 4 席不是打進亞錦賽前四就換一張票，而是團體積分換算的國家配額。（下方時序為協會／官方對外說法）
           </p>
           <div className="mt-6 flex flex-col items-center rounded-2xl border border-slate-100 bg-white p-6 text-center shadow-sm">
             <span className="inline-flex items-center gap-1.5 rounded-full border border-teal-200 bg-teal-50 px-3 py-1.5 text-sm font-bold text-ink">
@@ -247,6 +248,37 @@ export default function RelationsPage() {
             <p className="mt-4 text-xs leading-relaxed text-slate-400">
               註：ASF 是「亞洲」衝浪聯盟（總部東京），非日本政府、非亞運主辦單位。OCA
               亞奧理事會為亞運上級框架，名古屋籌備會為其地主組委會。
+            </p>
+          </div>
+
+          {/* 實際時序：知情早於官方通知 */}
+          <div className="mt-3 rounded-xl border border-amber/30 bg-amber/5 px-4 py-3 text-[13px] leading-relaxed text-slate-600">
+            <p className="font-bold text-ink">
+              實際時序（含待查）——「知情」比「官方通知」早
+            </p>
+            <ul className="mt-1.5 space-y-1">
+              <li>
+                · <b>2024/3/29</b>：ASF 資格制度公布，台灣屬 East Asia 可分配區，但未明列席次。
+              </li>
+              <li>
+                · <b>2025/8</b>：2025 亞錦賽後實際取得 4 席；選手端{" "}
+                <a
+                  href="https://www.instagram.com/p/DNjyzCIT1Qy/"
+                  target="_blank"
+                  rel="noreferrer noopener"
+                  className="font-medium text-wave underline underline-offset-2"
+                >
+                  IG 已有跡象
+                </a>
+                （手持標示2026之物），惟未明言「拿到門票」，<b>待查</b>。
+              </li>
+              <li>
+                · <b>2026/3/9</b>：協會才收到中華奧會正式通知。
+              </li>
+              <li>· <b>2026/6</b>：ASF 正式公布暫定配額。</li>
+            </ul>
+            <p className="mt-1.5">
+              上方流程圖是協會／官方對外的框架；此處時序點出「實際知情」與「官方通知」之間的落差。
             </p>
           </div>
         </section>
@@ -286,17 +318,33 @@ export default function RelationsPage() {
                     <span className="font-bold text-slate-400">職權：</span>
                     {u.powers}
                   </p>
-                  <p
-                    className={`mt-3 rounded-lg ${t.bg} px-3 py-2 text-[13px] leading-relaxed text-slate-700`}
-                  >
-                    <span className="font-bold text-ink">爭議點：</span>
-                    {u.disputeFlag && (
-                      <span className="mx-1 inline-block rounded bg-white/80 px-1.5 py-0.5 text-[11px] font-bold text-coral">
-                        {u.disputeFlag}
-                      </span>
-                    )}
-                    {u.dispute}
-                  </p>
+                  {Array.isArray(u.dispute) ? (
+                    <div className="mt-3 space-y-2">
+                      {u.dispute.map((d, i) => (
+                        <p
+                          key={i}
+                          className={`rounded-lg ${t.bg} px-3 py-2 text-[13px] leading-relaxed text-slate-700`}
+                        >
+                          <span className="font-bold text-ink">
+                            爭議點 {i + 1}：
+                          </span>
+                          {d}
+                        </p>
+                      ))}
+                    </div>
+                  ) : (
+                    <p
+                      className={`mt-3 rounded-lg ${t.bg} px-3 py-2 text-[13px] leading-relaxed text-slate-700`}
+                    >
+                      <span className="font-bold text-ink">爭議點：</span>
+                      {u.disputeFlag && (
+                        <span className="mx-1 inline-block rounded bg-white/80 px-1.5 py-0.5 text-[11px] font-bold text-coral">
+                          {u.disputeFlag}
+                        </span>
+                      )}
+                      {u.dispute}
+                    </p>
+                  )}
 
                   <div className="mt-3 flex flex-wrap gap-x-4 gap-y-1">
                     {u.url && (
@@ -388,8 +436,26 @@ export default function RelationsPage() {
               ：法規寫「送國訓中心審議」，但6/26是運動部＋國訓中心合開，決定權重與委員會組成待查。
             </li>
             <li>
-              3. <span className="font-bold">培訓計畫的公開可查性</span>
-              ：協會稱已送審查備查、媒體亦有「選訓報告」流出，但兩部會官網公開情形待實查。
+              3. <span className="font-bold">衝浪「亞運專項培訓計畫」查無——但責任歸屬未明</span>
+              ：其他亞奧項目（划船、武術、羽球…）的「2026名古屋亞運選手培訓參賽實施計畫」都公布在{" "}
+              <a
+                href="https://www.nstc.org.tw/Athletics/RelationFiles?CateID=cb7fa8ce-3ae3-4b9e-b5cb-d9f5aa7304f3&ModuleID=AthleticsF1"
+                target="_blank"
+                rel="noreferrer noopener"
+                className="font-medium text-wave underline underline-offset-2"
+              >
+                國訓中心亞運專頁
+              </a>
+              ；運動部{" "}
+              <a
+                href="https://www.sports.gov.tw/News/2397"
+                target="_blank"
+                rel="noreferrer noopener"
+                className="font-medium text-wave underline underline-offset-2"
+              >
+                非亞奧公告頁
+              </a>
+              也只有協會年度文件。兩處都找不到衝浪這份專項計畫（均有截圖存證）。可能原因四種、目前無法證實：(1) 協會沒送、(2) 國訓中心未核可、(3) 核可未公開、(4) 因列非亞奧、根本不在此提報體系內。故暫不歸咎單一方。
             </li>
             <li>
               4. <span className="font-bold">選手棄賽、中華奧會量隊服</span>
