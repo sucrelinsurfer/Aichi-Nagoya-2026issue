@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
-import Glossary from "@/components/Glossary";
+import FloatingActions from "@/components/FloatingActions";
 import { GoogleAnalytics } from "@next/third-parties/google";
 
 export const metadata: Metadata = {
@@ -44,7 +44,7 @@ export default function RootLayout({
         <Nav />
         {children}
         <Footer />
-        <Glossary />
+        <FloatingActions />
       </body>
       <GoogleAnalytics gaId="G-EF7GGW10SP" />
     </html>

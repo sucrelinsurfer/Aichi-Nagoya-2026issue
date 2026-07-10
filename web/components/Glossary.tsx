@@ -129,7 +129,7 @@ export default function Glossary() {
     <>
       <button
         onClick={() => setOpen(true)}
-        className="fixed bottom-5 right-5 z-40 flex items-center gap-1.5 rounded-full bg-ink/90 px-4 py-2.5 text-sm font-bold text-white shadow-lg backdrop-blur transition hover:bg-wave"
+        className="flex items-center gap-1.5 rounded-full bg-ink/90 px-4 py-2.5 text-sm font-bold text-white shadow-lg backdrop-blur transition hover:bg-wave"
         aria-label="打開名詞速查"
       >
         <span aria-hidden="true">📖</span>

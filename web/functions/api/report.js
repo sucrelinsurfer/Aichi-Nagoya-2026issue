@@ -121,6 +121,36 @@ export async function onRequestPost({ request, env }) {
     }
   }
 
+  // 選用：Email 通知（需設 RESEND_API_KEY 與 REPORT_TO_EMAIL；失敗不影響回報）
+  if (env.RESEND_API_KEY && env.REPORT_TO_EMAIL) {
+    const emailLines = [
+      record.context ? `<p><strong>針對段落：</strong>${record.context}</p>` : "",
+      `<p><strong>回報內容：</strong><br>${record.message.replace(/\n/g, "<br>")}</p>`,
+      record.suggestion ? `<p><strong>修改建議：</strong><br>${record.suggestion.replace(/\n/g, "<br>")}</p>` : "",
+      record.source ? `<p><strong>建議來源：</strong>${record.source}</p>` : "",
+      record.contact ? `<p><strong>聯絡方式：</strong>${record.contact}</p>` : "",
+      `<p><strong>時間：</strong>${record.ts}</p>`,
+    ].filter(Boolean).join("\n");
+
+    try {
+      await fetch("https://api.resend.com/emails", {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+          Authorization: `Bearer ${env.RESEND_API_KEY}`,
+        },
+        body: JSON.stringify({
+          from: "亞運回報系統 <onboarding@resend.dev>",
+          to: [env.REPORT_TO_EMAIL],
+          subject: `🚩 新的錯誤回報${record.context ? `：${record.context.slice(0, 40)}` : ""}`,
+          html: `<div style="font-family:sans-serif;line-height:1.6">\n${emailLines}\n</div>`,
+        }),
+      });
+    } catch {
+      /* 通知失敗忽略 */
+    }
+  }
+
   return json({ ok: true });
 }
 
