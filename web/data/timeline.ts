@@ -186,7 +186,7 @@ export const TIMELINE: TimelineItem[] = [
         {
           label: "男子組",
           rows: [
-            ["詹博宇 John John Chan", "—", "並列 7", "並列 17", "—"],
+            ["詹博宇 John John Chan", "並列 25", "並列 7", "並列 17", "—"],
             ["尤佳琦 Chia-Chi Yu", "—", "—", "並列 25", "並列 5"],
           ],
         },

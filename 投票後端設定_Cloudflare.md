@@ -123,3 +123,34 @@ https://你的網域/api/report?key=你的密鑰
 **清空回報：** 到 `surf-reports` namespace 刪掉 `report:*` 的 key 即可（`reportrate:*` 是限流計數、會自動過期）。
 
 **未綁 `REPORT_KV` 時：** 回報視窗按送出會顯示「回報功能尚未啟用」，不會壞（投票不受影響，兩者已是不同 KV）。
+
+---
+
+## 八、LINE 官方帳號群組通知（`functions/api/line-webhook.js` ＋ report.js）
+
+> ⚠️ **LINE Notify 已於 2025/3 停止服務**，改用官方帳號的 **Messaging API push**。程式已寫好，你只要在 LINE 後台設定＋填環境變數。
+
+**要設的環境變數（CF Pages → Settings → Environment variables，Production/Preview 都設）**
+- `LINE_CHANNEL_ACCESS_TOKEN`：Messaging API 的長期 Channel access token。
+- `LINE_CHANNEL_SECRET`：Basic settings 的 Channel secret（webhook 驗章用，建議設）。
+- `LINE_TARGET_ID`：要通知的**群組 ID**（下面步驟 4 取得）。
+- （沿用）`REPORT_ADMIN_KEY`：查群組 ID 用。
+
+**設定步驟**
+1. **LINE Developers Console** → 你的官方帳號對應的 **Messaging API channel**：
+   - Messaging API 分頁 → 發一組 **Channel access token（long-lived）** → 設成 `LINE_CHANNEL_ACCESS_TOKEN`。
+   - Basic settings → **Channel secret** → 設成 `LINE_CHANNEL_SECRET`。
+   - Messaging API 分頁 → **Webhook URL** 填 `https://你的網域/api/line-webhook`，開啟 **Use webhook**。
+2. **LINE Official Account Manager**（manager.line.biz）→ 設定 → 回應設定：
+   - **開啟「加入群組」**（允許官方帳號被邀進群組）。
+   - **關閉「自動回應訊息」**、**開啟「Webhook」**（不然預設罐頭訊息會干擾）。
+3. 先 **重新部署** CF Pages（讓 webhook 端點上線）。
+4. **取得群組 ID**：把官方帳號**加進你的 LINE 群組** → 它會自動在群組回覆一句「這個群組的 ID：Cxxxx…」→ 複製那個 ID（也可 GET `https://你的網域/api/line-webhook?key=你的ADMIN_KEY` 查最近擷取到的 ID）。
+5. 把該 ID 設成 `LINE_TARGET_ID`（群組是 `C` 開頭、個人 `U`、多人聊天 `R`）→ **再重新部署一次**。
+6. **測試**：到網站送一筆回報 → 群組就會收到「🚩 新的錯誤回報」。
+
+**注意**
+- 免費方案 push 訊息每月有額度上限（依方案，約數百則），回報量低通常夠用。
+- 只設 token 沒設 `LINE_TARGET_ID`（或反之）不會推播；兩個都要。
+- 推播失敗是靜默的（不影響回報寫入 KV）；debug 看 LINE Developers 的 webhook 回應或 push 回傳。
+- Discord／Email／LINE 三種通知互相獨立，可只開你要的那種。

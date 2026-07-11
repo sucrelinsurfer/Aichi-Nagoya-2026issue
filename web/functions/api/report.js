@@ -156,6 +156,38 @@ export async function onRequestPost({ request, env }) {
     }
   }
 
+  // 選用：LINE 群組推播（需 LINE_CHANNEL_ACCESS_TOKEN 與 LINE_TARGET_ID；失敗不影響回報）
+  // LINE_TARGET_ID 由 /api/line-webhook 取得（把官方帳號加入群組後即可拿到 groupId）
+  if (env.LINE_CHANNEL_ACCESS_TOKEN && env.LINE_TARGET_ID) {
+    const lineText = [
+      "🚩 新的錯誤回報",
+      record.context ? `針對：${record.context}` : null,
+      `內容：${record.message}`,
+      record.suggestion ? `建議：${record.suggestion}` : null,
+      record.source ? `來源：${record.source}` : null,
+      record.contact ? `聯絡：${record.contact}` : null,
+      `時間：${record.ts}`,
+    ]
+      .filter(Boolean)
+      .join("\n")
+      .slice(0, 4900); // LINE 文字訊息上限 5000 字
+    try {
+      await fetch("https://api.line.me/v2/bot/message/push", {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+          authorization: `Bearer ${env.LINE_CHANNEL_ACCESS_TOKEN}`,
+        },
+        body: JSON.stringify({
+          to: env.LINE_TARGET_ID,
+          messages: [{ type: "text", text: lineText }],
+        }),
+      });
+    } catch {
+      /* 推播失敗忽略 */
+    }
+  }
+
   return json({ ok: true });
 }
 

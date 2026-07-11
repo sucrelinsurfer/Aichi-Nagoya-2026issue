@@ -76,21 +76,21 @@ export default function Home() {
       {/* 擴散：分享 ＋ 深入入口 */}
       <section className="mx-auto max-w-3xl px-6 py-12">
         <div className="rounded-2xl border border-slate-100 bg-white p-6 text-center shadow-sm">
-          <h3 className="text-xl font-bold text-ink">讓更多人看見</h3>
+          {/* 深入入口（放上面，避免被分享鈕蓋過） */}
+          <p className="text-sm text-slate-500">想知道衝浪這一例的完整始末？</p>
+          <Link
+            href="/story"
+            className="mt-3 inline-block rounded-full bg-ink px-6 py-3 text-sm font-bold text-white transition hover:bg-wave"
+          >
+            時間軸・證據・各國・立場，一次看 →
+          </Link>
+
+          <h3 className="mt-8 border-t border-slate-100 pt-6 text-xl font-bold text-ink">讓更多人看見</h3>
           <p className="mx-auto mt-2 max-w-md text-sm text-slate-500">
             議題被看見，才有被回答的機會。連署之外，也把它分享出去。
           </p>
           <div className="mt-5 flex justify-center">
             <ShareBar />
-          </div>
-          <div className="mt-6 border-t border-slate-100 pt-5">
-            <p className="text-sm text-slate-500">想知道衝浪這一例的完整始末？</p>
-            <Link
-              href="/story"
-              className="mt-3 inline-block rounded-full bg-ink px-6 py-3 text-sm font-bold text-white transition hover:bg-wave"
-            >
-              時間軸・證據・各國・立場，一次看 →
-            </Link>
           </div>
         </div>
       </section>
