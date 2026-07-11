@@ -37,10 +37,11 @@ async function lineSignature(secret, body) {
 export async function onRequestPost({ request, env }) {
   const raw = await request.text();
 
-  // 簽章驗證（有設 channel secret 才驗）
-  if (env.LINE_CHANNEL_SECRET) {
+  // 簽章驗證（有設 channel secret 才驗；trim 掉貼上時多帶的空白/換行）
+  const channelSecret = (env.LINE_CHANNEL_SECRET || "").trim();
+  if (channelSecret) {
     const got = request.headers.get("x-line-signature") || "";
-    const want = await lineSignature(env.LINE_CHANNEL_SECRET, raw);
+    const want = await lineSignature(channelSecret, raw);
     if (got !== want) return new Response("bad signature", { status: 401 });
   }
 
@@ -65,10 +66,13 @@ export async function onRequestPost({ request, env }) {
       );
     }
 
-    // 在群組/聊天裡回覆該 ID（加入群組或有人 tag 時），方便直接複製
+    // 在群組/聊天裡回覆該 ID，方便直接複製。
+    // 只有把環境變數 LINE_REPLY_ID 設成 "on" 時才會回，避免平常洗版。
+    // 需要再抓一次 ID 時：設 LINE_REPLY_ID=on → 部署 → 群組打字 → 拿到後再關掉。
     if (
       ev.replyToken &&
       env.LINE_CHANNEL_ACCESS_TOKEN &&
+      env.LINE_REPLY_ID === "on" &&
       (ev.type === "join" || ev.type === "message")
     ) {
       try {

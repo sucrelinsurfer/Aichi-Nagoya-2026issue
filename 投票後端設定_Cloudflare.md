@@ -145,7 +145,9 @@ https://你的網域/api/report?key=你的密鑰
    - **開啟「加入群組」**（允許官方帳號被邀進群組）。
    - **關閉「自動回應訊息」**、**開啟「Webhook」**（不然預設罐頭訊息會干擾）。
 3. 先 **重新部署** CF Pages（讓 webhook 端點上線）。
-4. **取得群組 ID**：把官方帳號**加進你的 LINE 群組** → 它會自動在群組回覆一句「這個群組的 ID：Cxxxx…」→ 複製那個 ID（也可 GET `https://你的網域/api/line-webhook?key=你的ADMIN_KEY` 查最近擷取到的 ID）。
+4. **取得群組 ID**：把官方帳號**加進你的 LINE 群組**。取 ID 有兩種：
+   - **機器人自動回**：先設環境變數 `LINE_REPLY_ID=on` 並部署 → 在群組打一句話 → 它會回「這個群組的 ID：Cxxxx…」→ **拿到後把 `LINE_REPLY_ID` 關掉（刪掉或設非 on）再部署**，避免它每則訊息都洗版。
+   - **用網址讀**：GET `https://你的網域/api/line-webhook?key=你的ADMIN_KEY`，看 `line:lastsource` 擷取到的 ID（需先在群組觸發過任一事件）。
 5. 把該 ID 設成 `LINE_TARGET_ID`（群組是 `C` 開頭、個人 `U`、多人聊天 `R`）→ **再重新部署一次**。
 6. **測試**：到網站送一筆回報 → 群組就會收到「🚩 新的錯誤回報」。
 
