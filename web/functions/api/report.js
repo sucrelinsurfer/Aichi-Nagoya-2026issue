@@ -122,7 +122,12 @@ export async function onRequestPost({ request, env }) {
   }
 
   // 選用：Email 通知（需設 RESEND_API_KEY 與 REPORT_TO_EMAIL；失敗不影響回報）
-  if (env.RESEND_API_KEY && env.REPORT_TO_EMAIL) {
+  // REPORT_TO_EMAIL 可用逗號分隔多個收件人，例如 a@x.com,b@y.com,c@z.com
+  const toEmails = String(env.REPORT_TO_EMAIL || "")
+    .split(",")
+    .map((s) => s.trim())
+    .filter(Boolean);
+  if (env.RESEND_API_KEY && toEmails.length) {
     const emailLines = [
       record.context ? `<p><strong>針對段落：</strong>${record.context}</p>` : "",
       `<p><strong>回報內容：</strong><br>${record.message.replace(/\n/g, "<br>")}</p>`,
@@ -140,8 +145,8 @@ export async function onRequestPost({ request, env }) {
           Authorization: `Bearer ${env.RESEND_API_KEY}`,
         },
         body: JSON.stringify({
-          from: "亞運回報系統 <onboarding@resend.dev>",
-          to: [env.REPORT_TO_EMAIL],
+          from: env.REPORT_FROM_EMAIL || "亞運回報系統 <onboarding@resend.dev>",
+          to: toEmails,
           subject: `🚩 新的錯誤回報${record.context ? `：${record.context.slice(0, 40)}` : ""}`,
           html: `<div style="font-family:sans-serif;line-height:1.6">\n${emailLines}\n</div>`,
         }),

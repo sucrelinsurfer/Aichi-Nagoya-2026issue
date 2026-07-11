@@ -104,6 +104,10 @@ Cloudflare Dashboard → Workers & Pages → 你的專案 → Settings → Build
 
 - `REPORT_ADMIN_KEY`：讀取回報清單用的密鑰（自己設一組隨機字串）。Pages → Settings → Environment variables 加上（Production/Preview 都設）。
 - `DISCORD_WEBHOOK_URL`：Discord 頻道的 Webhook 網址。**設了就會在每筆新回報時自動發通知到該頻道**；沒設則跳過，回報照樣寫入 KV。（Discord → 頻道設定 → 整合 → Webhook → 複製網址）
+- **Email 通知（Resend）**：需**同時**設 `RESEND_API_KEY` 與 `REPORT_TO_EMAIL` 才會寄；只設一個不會動。
+  - `REPORT_TO_EMAIL`：收件人，**可逗號分隔多人**，例：`a@x.com,b@y.com,c@z.com`（程式會自動 trim 拆開）。
+  - `REPORT_FROM_EMAIL`（選用）：寄件人，例：`亞運回報 <report@你的網域>`。**沒設時用 Resend 測試寄件人 `onboarding@resend.dev`，那個只能寄到你 Resend 註冊帳號本人的信箱**；要寄到上面那三個 gmail，必須先在 Resend 驗證一個自己的網域，再把寄件人設成該網域地址。
+  - 改任何環境變數後都要**重新部署**才生效；寄信失敗是靜默的（不影響回報寫入），debug 去 Resend 後台看 Logs。
 - reCAPTCHA 沿用投票同一組（`RECAPTCHA_SECRET` / `NEXT_PUBLIC_RECAPTCHA_SITEKEY`），action 用 `report`。採 best-effort：只有「有設 secret 且前端有帶 token」時才驗證，避免沒載到腳本的頁面誤擋。
 
 **怎麼讀回報：** 綁好後打開瀏覽器輸入（把 `你的密鑰` 換成 `REPORT_ADMIN_KEY` 的值）：
