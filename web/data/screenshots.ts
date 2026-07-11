@@ -17,7 +17,7 @@ export const SHOTS: Record<string, string | string[]> = {
   "https://www.ctsasurf.org/_files/ugd/737dc7_e4a6c075b1d843949eb0969e82173d00.pdf":
     "/verifications/ctsa-plan-minutes-2025.jpg",
   "https://www.surfingsingapore.com/_files/ugd/54f516_51da7a274a8d45f7b2c0ebfdcc8b793e.pdf":
-    "/verifications/asf-2024-ranking.png",
+    ["/verifications/asf-2024-ranking.png", "/verifications/asf-2024-u18.png"],
   "https://liveheats.com/events/404396/divisions/716342/result": [
     "/verifications/asf-2025-ranking.png",
     "/verifications/asf-2025-chiachi.png",
