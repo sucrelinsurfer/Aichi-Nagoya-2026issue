@@ -50,10 +50,13 @@ export default function Conclusion() {
         標準不公開，受害的是所有人——連入選的女子選手，資格都可能被外界猜疑。唯有標準公開，女生的入選才站得更穩、男生的落選也才有人服氣。
       </p>
 
-      {/* 收尾：訴求（含名額怎麼用） */}
+      {/* 收尾：主訴＝讓選手出去（制度本有專案路徑）＋第一步透明 */}
       <p className="mt-3 border-l-4 border-coral bg-coral/5 px-4 py-3 text-sm leading-relaxed text-slate-700">
         <span className="font-bold text-ink">
-          第一步很簡單：公開這條標準的時間與依據、以及未派滿的名額接下來怎麼處理——這正是我們主張「參賽原則要有規則、能檢驗」的起點。
+          制度本就留了一條路：協會已依規寫了亞運培訓計畫、走「專案」評估，選手也取得資格——最後仍被 6/26 審議的裁量擋下。這條路存在，就該用它讓選手出去。
+        </span>
+        <span className="mt-1.5 block text-slate-600">
+          而第一步很簡單：公開這條標準的時間、依據、以及未派滿的名額怎麼處理。
         </span>
       </p>
     </div>

@@ -13,6 +13,9 @@ export const SHOTS: Record<string, string | string[]> = {
   // 2025/8 選手 IG：畫面手持標示 2026 之物（實際取得資格的跡象，待查）
   "https://www.instagram.com/p/DNjyzCIT1Qy/":
     "/verifications/2025-08-ticket.png",
+  // 協會第4屆第18次選訓會議記錄（2025/1/9 通過亞運培訓計畫，依國訓中心來函修正）
+  "https://www.ctsasurf.org/_files/ugd/737dc7_e4a6c075b1d843949eb0969e82173d00.pdf":
+    "/verifications/ctsa-plan-minutes-2025.jpg",
   "https://www.surfingsingapore.com/_files/ugd/54f516_51da7a274a8d45f7b2c0ebfdcc8b793e.pdf":
     "/verifications/asf-2024-ranking.png",
   "https://liveheats.com/events/404396/divisions/716342/result": [
