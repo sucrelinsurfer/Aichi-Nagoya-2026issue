@@ -42,7 +42,7 @@ const TERMS: { term: string; def: string; href?: string }[] = [
   },
   {
     term: "國訓中心",
-    def: "培訓國家代表隊的行政法人；男子被刷掉的「審議」就在這一關。",
+    def: "培訓國家代表隊的行政法人；男子未獲提名的「審議」就在這一關（但門檻是運動部訂的）。",
     href: "/relations#u-nstc",
   },
   {

@@ -20,8 +20,11 @@ export default function Nav() {
 
         {/* 桌機：橫列 */}
         <div className="hidden items-center gap-5 text-sm sm:flex">
-          <Link href="/#timeline" className={linkCls}>
-            時間軸
+          <Link href="/" className={linkCls}>
+            首頁
+          </Link>
+          <Link href="/story" className={linkCls}>
+            衝浪始末
           </Link>
           <Link href="/relations" className={linkCls}>
             關係圖
@@ -32,7 +35,7 @@ export default function Nav() {
           <Link href="/rosters" className={linkCls}>
             各國選手
           </Link>
-          <Link href="/#poll" className={linkCls}>
+          <Link href="/story#poll" className={linkCls}>
             投票
           </Link>
           <ReportError variant="nav" label="回報錯誤" context="導覽列" />
@@ -61,8 +64,11 @@ export default function Nav() {
       {open && (
         <div className="border-t border-slate-200 bg-white px-6 py-4 sm:hidden">
           <div className="flex flex-col gap-4 text-[15px]">
-            <Link href="/#timeline" className={linkCls} onClick={close}>
-              時間軸
+            <Link href="/" className={linkCls} onClick={close}>
+              首頁
+            </Link>
+            <Link href="/story" className={linkCls} onClick={close}>
+              衝浪始末
             </Link>
             <Link href="/relations" className={linkCls} onClick={close}>
               關係圖
@@ -73,7 +79,7 @@ export default function Nav() {
             <Link href="/rosters" className={linkCls} onClick={close}>
               各國選手
             </Link>
-            <Link href="/#poll" className={linkCls} onClick={close}>
+            <Link href="/story#poll" className={linkCls} onClick={close}>
               投票
             </Link>
             <span onClick={close}>

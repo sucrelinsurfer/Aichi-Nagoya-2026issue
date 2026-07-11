@@ -112,7 +112,7 @@ export default function CountriesPage() {
             看完各國脈絡，回頭看台灣的爭議——你怎麼想？
           </p>
           <Link
-            href="/#poll"
+            href="/story#poll"
             className="mt-4 inline-block rounded-full bg-ink px-6 py-3 text-sm font-bold text-white transition hover:bg-wave"
           >
             表達你的立場

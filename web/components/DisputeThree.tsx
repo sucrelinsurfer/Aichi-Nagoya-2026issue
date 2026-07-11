@@ -48,7 +48,7 @@ export default function DisputeThree() {
           return (
             <li key={s.no}>
               <a
-                href={s.href}
+                href={s.href.replace("#tl-", "/story#tl-")}
                 className={`group flex gap-3 rounded-xl border p-4 transition hover:shadow-sm ${
                   active
                     ? "border-amber/40 bg-amber/5 hover:border-amber/60"
@@ -87,7 +87,7 @@ export default function DisputeThree() {
       {/* 結果（附最佳成績，可點看查證） */}
       <div className="mt-4 grid gap-2.5 sm:grid-cols-2">
         <a
-          href="#tl-results"
+          href="/story#tl-results"
           className="group rounded-xl border border-slate-100 bg-white p-4 transition hover:border-wave/40 hover:shadow-sm"
         >
           <div className="flex items-center justify-between">
@@ -101,7 +101,7 @@ export default function DisputeThree() {
           </p>
         </a>
         <a
-          href="#tl-results"
+          href="/story#tl-results"
           className="group rounded-xl border border-slate-100 bg-white p-4 transition hover:border-wave/40 hover:shadow-sm"
         >
           <div className="flex items-center justify-between">

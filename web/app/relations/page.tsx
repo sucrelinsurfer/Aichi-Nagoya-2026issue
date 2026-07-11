@@ -115,7 +115,7 @@ const UNITS: Unit[] = [
     url: "",
     urlLabel: "",
     role: "男子詹博宇、尤佳琦（2席被作廢）；女子鍾昀蓉、陳宛榆（2席過關）。",
-    powers: "無正式決策權；表達願完全自費前往，家長7/6向總統府陳情。",
+    powers: "無正式決策權；家長 7/6 向總統府陳情。（「願自費」其實出自第三方名人與輿論——外界多把爭議理解為經費問題、質疑為何不能自費；非選手或家長主動提出。）",
     dispute:
       "四人在 2024、2025 兩屆亞錦賽多有 ASF 成績（公開組／U18），可供外界客觀檢視實力；唯獨尤佳琦缺 2024 年紀錄，是其資歷上較常被提出的一點。完整成績見時間軸「兩屆亞錦賽個人名次」。",
   },
@@ -210,7 +210,7 @@ export default function RelationsPage() {
               <div className="w-full rounded-xl border border-wave/30 bg-foam/50 p-3">
                 <FlowChip tone="nstc">國訓中心 審議</FlowChip>
                 <p className="mt-2 text-xs font-medium text-coral">
-                  ★ 爭議爆點：6/26 審查會（運動部＋國訓中心）在這關把男子2席刷掉
+                  ★ 爭議爆點：6/26 審查會（運動部＋國訓中心）在這關，依運動部訂的菁英門檻把男子2席擋在門外
                 </p>
               </div>
               <Arrow label="通過後組團" />
@@ -221,8 +221,7 @@ export default function RelationsPage() {
 
             <div className="mt-5 rounded-xl border border-sky-100 bg-sky-50/60 px-4 py-3 text-sm leading-relaxed text-slate-600">
               <span className="font-bold text-sky-700">運動部</span>{" "}
-              在最上層：訂政策與組團原則、<span className="font-medium">監督國訓中心</span>
-              （行政法人）、核撥經費、對組團計畫備查。它不在流程線上，卻定義了整條線的規則。
+              在最上層：訂政策、組團原則與那道<span className="font-medium">菁英參賽門檻</span>、監督國訓中心（行政法人）、核撥經費。它雖不在流程節點上，卻是把達標選手擋下的門檻的訂定者——真正定義結果的規則制定者。爭點的根源在這裡，不是替它把關的國訓中心。
             </div>
           </div>
         </section>
@@ -260,16 +259,19 @@ export default function RelationsPage() {
                 · <b>2024/3/29</b>：ASF 資格制度公布，台灣屬 East Asia 可分配區，但未明列席次。
               </li>
               <li>
-                · <b>2025/8</b>：2025 亞錦賽後實際取得 4 席；選手端{" "}
+                · <b>2024/8</b>：2024 亞錦賽後，公開男女組積分先取得一男一女；選手端{" "}
                 <a
-                  href="https://www.instagram.com/p/DNjyzCIT1Qy/"
+                  href="https://www.instagram.com/p/C_NmKjivIAD/"
                   target="_blank"
                   rel="noreferrer noopener"
                   className="font-medium text-wave underline underline-offset-2"
                 >
-                  IG 已有跡象
+                  IG 貼文「獲得門票」
                 </a>
-                （手持標示2026之物），惟未明言「拿到門票」，<b>待查</b>。
+                已可佐證。
+              </li>
+              <li>
+                · <b>2025/8</b>：2025 亞錦賽後再取得一男一女，兩屆累計男2女2共4席。
               </li>
               <li>
                 · <b>2026/3/9</b>：協會才收到中華奧會正式通知。

@@ -39,7 +39,7 @@ export default function RostersPage() {
             看完各國實際派出的名單，回頭看台灣男子名額作廢——你怎麼想？
           </p>
           <Link
-            href="/#poll"
+            href="/story#poll"
             className="mt-4 inline-block rounded-full bg-ink px-6 py-3 text-sm font-bold text-white transition hover:bg-wave"
           >
             表達你的立場

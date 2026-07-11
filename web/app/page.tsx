@@ -1,18 +1,14 @@
 import Link from "next/link";
 import Countdown from "@/components/Countdown";
-import DisputeThree from "@/components/DisputeThree";
-import Timeline from "@/components/Timeline";
-import Conclusion from "@/components/Conclusion";
-import StanceCompare from "@/components/StanceCompare";
-import Poll from "@/components/Poll";
+import Precedents from "@/components/Precedents";
+import DisputeFlow from "@/components/DisputeFlow";
 import ShareBar from "@/components/ShareBar";
 import TakeAction from "@/components/TakeAction";
-import Sources from "@/components/Sources";
 
 export default function Home() {
   return (
     <main className="min-h-screen">
-      {/* Hero：核心句 */}
+      {/* Hero：系統開場 */}
       <section className="relative overflow-hidden bg-gradient-to-b from-ink to-wave px-6 pb-20 pt-16 text-white">
         <div className="mx-auto max-w-3xl text-center">
           <p className="inline-block rounded-full bg-white/15 px-4 py-1 text-sm font-medium">
@@ -23,17 +19,17 @@ export default function Home() {
             <br className="hidden sm:block" />
             最後只派出 2 位。
           </h1>
-          <p className="mx-auto mt-5 max-w-2xl text-lg font-bold leading-relaxed text-white sm:text-xl">
-            苦練達標、拿到亞運資格，卻被一道「國際賽前 3～4 名」的菁英門檻擋下——達標了還是不能去，說不過去。
+          <p className="mx-auto mt-6 max-w-2xl text-lg font-bold leading-relaxed text-white sm:text-xl">
+            為什麼？因為一套只認奪牌成績的「菁英計畫」——選手已經達標拿到資格，還是被留在門外。這說不過去。
           </p>
           <p className="mx-auto mt-3 max-w-2xl text-sm leading-relaxed text-white/70">
             逐句查證的懶人包，每個說法都附公開來源與截圖。
           </p>
           <div className="mt-8 flex flex-col items-center gap-3">
-            <span className="text-sm text-white/70">距離名古屋亞運開幕</span>
+            <span className="text-sm text-white/70">距離公民連署截止</span>
             <Countdown />
             <span className="mx-auto max-w-md text-xs leading-relaxed text-white/50">
-              男子兩席報名早在 7/1 截止，這屆已難挽回——能改的是制度。
+              這屆選手雖已難挽回，但改制度還來得及——連署達 5,000 就進政府正式回應程序。
             </span>
           </div>
           <div className="mt-8 flex flex-wrap justify-center gap-3">
@@ -43,60 +39,25 @@ export default function Home() {
             >
               30 秒看懂爭點
             </a>
-            <a
-              href="#timeline"
+            <Link
+              href="/story"
               className="rounded-full border border-white/40 px-6 py-3 text-sm font-bold text-white transition hover:bg-white/10"
             >
-              完整時序與查證
-            </a>
+              看衝浪完整始末
+            </Link>
           </div>
         </div>
       </section>
 
-      {/* 理解：懂爭點 → 賽後才出現的門檻 → 各國脈絡（兩塊相鄰）→ 各方立場 */}
+      {/* 理解：這一再發生（先例）→ 衝浪這關怎麼卡的（四關） */}
       <div className="relative z-10 -mt-12">
         <div className="mx-auto max-w-3xl space-y-6 px-6">
           <div id="dispute" className="scroll-mt-20">
-            <DisputeThree />
+            <DisputeFlow />
           </div>
-          <Link
-            href="/relations"
-            className="flex items-center justify-between gap-3 rounded-2xl border border-slate-100 bg-white p-5 shadow-sm transition hover:border-wave/40 hover:shadow-md"
-          >
-            <div>
-              <p className="text-sm font-medium text-wave">六方關係圖</p>
-              <p className="mt-0.5 text-[15px] font-bold text-ink">
-                這四關背後有六個單位——誰負責哪一關、誰把球踢給誰？
-              </p>
-            </div>
-            <span className="shrink-0 text-sm font-bold text-wave">看關係圖 →</span>
-          </Link>
-          <Conclusion />
-          <Link
-            href="/countries"
-            className="block rounded-2xl border border-slate-100 bg-white p-6 shadow-sm transition hover:border-wave/40 hover:shadow-md"
-          >
-            <p className="text-sm font-medium text-wave">放進亞洲脈絡</p>
-            <p className="mt-1 text-[15px] font-bold text-ink sm:text-lg">
-              只有台灣，把「亞錦賽前 16」當成硬門檻——別國照樣派主力。
-            </p>
-            <p className="mt-2 text-sm leading-relaxed text-slate-600">
-              同一把尺下，孟加拉派出的男子名次（第 17、25）跟台灣落選男子一樣——孟加拉派了、台灣沒派。17 國 17 種選法，看完更懂台灣這次的處境。
-            </p>
-            <span className="mt-3 inline-block text-sm font-bold text-wave">
-              看 17 國怎麼選 →
-            </span>
-          </Link>
-          <StanceCompare />
+          <Precedents />
         </div>
       </div>
-
-      {/* 表態：投票 */}
-      <section id="poll" className="bg-foam px-6 py-20">
-        <div className="mx-auto max-w-3xl">
-          <Poll />
-        </div>
-      </section>
 
       {/* 行動：公民提案附議（連署，全站唯一 CTA 出口） */}
       <section id="action" className="mx-auto max-w-3xl px-6 pt-16">
@@ -112,8 +73,8 @@ export default function Home() {
         <TakeAction />
       </section>
 
-      {/* 擴散：分享 */}
-      <section className="mx-auto max-w-3xl px-6 pt-12">
+      {/* 擴散：分享 ＋ 深入入口 */}
+      <section className="mx-auto max-w-3xl px-6 py-12">
         <div className="rounded-2xl border border-slate-100 bg-white p-6 text-center shadow-sm">
           <h3 className="text-xl font-bold text-ink">讓更多人看見</h3>
           <p className="mx-auto mt-2 max-w-md text-sm text-slate-500">
@@ -122,23 +83,16 @@ export default function Home() {
           <div className="mt-5 flex justify-center">
             <ShareBar />
           </div>
+          <div className="mt-6 border-t border-slate-100 pt-5">
+            <p className="text-sm text-slate-500">想知道衝浪這一例的完整始末？</p>
+            <Link
+              href="/story"
+              className="mt-3 inline-block rounded-full bg-ink px-6 py-3 text-sm font-bold text-white transition hover:bg-wave"
+            >
+              時間軸・證據・各國・立場，一次看 →
+            </Link>
+          </div>
         </div>
-      </section>
-
-      {/* 完整時序（查證附錄，降到行動之後） */}
-      <section id="timeline" className="mx-auto max-w-3xl px-6 py-16">
-        <header className="mb-10">
-          <h2 className="text-3xl font-black text-ink">完整時序（給想查證的人）</h2>
-          <p className="mt-2 text-slate-500">
-            事件怎麼一步步走到今天。點開每則的「查證」標籤，看它的來源與可信度。
-          </p>
-        </header>
-        <Timeline />
-      </section>
-
-      {/* Sources */}
-      <section className="mx-auto max-w-3xl px-6 py-20">
-        <Sources />
       </section>
     </main>
   );

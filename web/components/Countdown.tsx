@@ -2,8 +2,8 @@
 
 import { useEffect, useState } from "react";
 
-// 名古屋亞運開幕：2026/9/19（可調整為衝浪項目正式賽日）
-const TARGET = new Date("2026-09-19T00:00:00+09:00").getTime();
+// 公民連署附議截止（提案 2026/7 進入附議、期程 60 日）。到期或人數達標即截止。
+const TARGET = new Date("2026-09-06T23:59:59+08:00").getTime();
 
 function diff() {
   const now = Date.now();

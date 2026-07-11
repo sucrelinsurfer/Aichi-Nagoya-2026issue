@@ -10,6 +10,9 @@ export const SHOTS: Record<string, string | string[]> = {
   // 2021/3/31 衝浪納入 2026 亞運 公告
   "https://asiansurfing.org/2021/03/surfing-in-asian-games-2026/":
     "/verifications/surfing-added-2021.png",
+  // 2024/8 選手 IG「獲得門票」：公開男女組積分取得一男一女（已查證）
+  "https://www.instagram.com/p/C_NmKjivIAD/":
+    "/verifications/2024-08-ticket.png",
   // 2025/8 選手 IG：畫面手持標示 2026 之物（實際取得資格的跡象，待查）
   "https://www.instagram.com/p/DNjyzCIT1Qy/":
     "/verifications/2025-08-ticket.png",

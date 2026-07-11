@@ -77,6 +77,17 @@ Cloudflare Dashboard → Workers & Pages → 你的專案 → Settings → Build
 
 ---
 
+## 六之一、連署即時人數（`functions/api/petition.js`）
+
+首頁連署卡的進度條會即時顯示 join.gov.tw 的附議人數。
+
+- 端點：`GET /api/petition`。伺服器端（Cloudflare 邊緣）fetch 提案頁、解析「已附議 N／尚須 M 個附議／尚餘 X 日」，回 JSON `{ signed, goal, daysLeft, asOf, live }`，邊緣快取 10 分鐘。
+- 前端：`components/PetitionProgress.tsx`（client）在載入時打 `/api/petition`，成功就顯示即時數字（標「即時」），失敗回退到 `TakeAction.tsx` 內建常數（標「截至 日期」）。
+- **不需綁 KV、不需環境變數**，部署到 CF Pages 就會動。若 join.gov.tw 改版導致解析失敗，會自動回退到內建數字（不會壞），只要更新 `petition.js` 的正則或 `FALLBACK`／`TakeAction.tsx` 常數即可。
+- 提案 UUID：`d1a49641-2382-49e5-bcdd-b51db932d771`；門檻 5,000。
+
+---
+
 ## 七、錯誤回報功能（`functions/api/report.js`）
 
 讓讀者回報「哪裡有誤／補充來源」。前端在每則查證面板旁、導覽列、頁尾都有入口（`components/ReportError.tsx`）。
