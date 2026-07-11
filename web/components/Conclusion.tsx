@@ -22,7 +22,7 @@ export default function Conclusion() {
     <div className="rounded-2xl border border-slate-100 bg-white p-6 shadow-sm sm:p-7">
       <p className="text-sm font-medium text-wave">證據</p>
       <h2 className="mt-1 text-2xl font-black text-ink sm:text-3xl">
-        把男生刷掉的門檻，是賽後才出現的
+        同一場比賽，賽前賽後兩套標準
       </h2>
 
       {/* 賽前 vs 賽後 標準對照（可點看時間軸查證） */}
@@ -47,16 +47,16 @@ export default function Conclusion() {
 
       {/* 保護入選女生 */}
       <p className="mt-5 rounded-xl border border-slate-100 bg-foam/50 px-4 py-3 text-sm leading-relaxed text-slate-700">
-        標準不公開，受害的是所有人——連入選的女子選手，資格都可能被外界猜疑。唯有標準公開，女生的入選才站得更穩、男生的落選也才有人服氣。
+        標準不一，受害的是所有人——連入選的女子選手，資格都可能被外界猜疑。標準講清楚，女生的入選才站得更穩、男生的落選也才有依據。
       </p>
 
-      {/* 收尾：主訴＝讓選手出去（制度本有專案路徑）＋第一步透明 */}
+      {/* 收尾：看似有活路，卻雙標不透明 */}
       <p className="mt-3 border-l-4 border-coral bg-coral/5 px-4 py-3 text-sm leading-relaxed text-slate-700">
         <span className="font-bold text-ink">
-          制度本就留了一條路：協會已依規寫了亞運培訓計畫、走「專案」評估，選手也取得資格——最後仍被 6/26 審議的裁量擋下。這條路存在，就該用它讓選手出去。
+          制度看似留了「專案」活路，實際卻標準不一、事後才補——達標選手照樣被擋在門外。這不是選手不夠好，是那把尺自己說不清楚。
         </span>
         <span className="mt-1.5 block text-slate-600">
-          而第一步很簡單：公開這條標準的時間、依據、以及未派滿的名額怎麼處理。
+          第一步很簡單：把標準的時間、依據，還有名額怎麼用，事先講清楚。
         </span>
       </p>
     </div>

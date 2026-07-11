@@ -21,12 +21,13 @@ export default function Home() {
           <h1 className="mx-auto mt-7 max-w-2xl text-3xl font-black leading-tight text-white sm:text-[2.6rem]">
             台灣拿到 4 個亞運名額，
             <br className="hidden sm:block" />
-            最後為什麼只派出 2 位？
+            最後只派出 2 位。
           </h1>
-          <p className="mx-auto mt-5 max-w-2xl text-base leading-relaxed text-white/80 sm:text-lg">
-            想像你苦練十年，終於替台灣爭取到亞運參賽機會，最後卻沒能站上亞運舞台。這是一份
-            <span className="font-semibold text-white">逐句查證</span>
-            的懶人包，每個說法都附上公開來源與截圖。
+          <p className="mx-auto mt-5 max-w-2xl text-lg font-bold leading-relaxed text-white sm:text-xl">
+            苦練達標、拿到亞運資格，卻被一道「國際賽前 3～4 名」的菁英門檻擋下——達標了還是不能去，說不過去。
+          </p>
+          <p className="mx-auto mt-3 max-w-2xl text-sm leading-relaxed text-white/70">
+            逐句查證的懶人包，每個說法都附公開來源與截圖。
           </p>
           <div className="mt-8 flex flex-col items-center gap-3">
             <span className="text-sm text-white/70">距離名古屋亞運開幕</span>
@@ -102,10 +103,10 @@ export default function Home() {
         <div className="mb-6 rounded-2xl border border-wave/20 bg-foam/40 p-5 sm:p-6">
           <p className="text-xs font-bold tracking-wide text-wave">本站主張</p>
           <p className="mt-1 text-[15px] font-bold leading-relaxed text-ink sm:text-base">
-            修正參賽原則：已取得國際資格的選手該不該派、依什麼標準、名額怎麼用，要有規則、能檢驗、不再重演。
+            達標就該派、標準要事先講清楚且一致適用——別再讓下一個選手白練。
           </p>
           <p className="mt-2.5 border-t border-slate-200 pt-2.5 text-xs leading-relaxed text-slate-500">
-            我們有立場，但不挑選事實——對選手或協會不利的細節，都在深入頁。每句話都附了官方來源與截圖，你不必相信我們，點開自己看。
+            我們有立場，但不挑選事實——對選手或協會不利的細節都在深入頁，每句話都附官方來源與截圖，你不必相信我們，點開自己看。
           </p>
         </div>
         <TakeAction />

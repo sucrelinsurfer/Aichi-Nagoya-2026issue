@@ -15,10 +15,10 @@ export default function TakeAction() {
     <div className="rounded-2xl border border-wave/20 bg-white p-6 shadow-sm sm:p-7">
       <p className="text-sm font-medium text-wave">了解之後，你可以做一件事</p>
       <h2 className="mt-1 text-2xl font-black text-ink sm:text-3xl">
-        這不是單一事件，而是一套制度
+        問題不在選手，在制度太菁英
       </h2>
       <p className="mt-2 text-[15px] leading-relaxed text-slate-600">
-        這次爭議的背後，是那份《我國參加國際大型運動賽會組團參賽原則》——它把「得牌奪金」列為參賽目標，即使選手已取得資格，仍要由行政體系依「奪牌希望」決定能否出賽。有公民在公共政策網路參與平臺發起提案，請求檢討修正。
+        癥結在制度設計：參賽標準訂在「國際賽前 3～4 名」的菁英門檻，背後是運動部《我國參加國際大型運動賽會組團參賽原則》以「奪牌」為主要考量——選手就算達標拿到資格，仍可能因名次不夠被擋下。這屆報名已截止，但制度可以改：已有公民在公共政策平臺發起提案。
       </p>
 
       {/* 公民提案卡 */}

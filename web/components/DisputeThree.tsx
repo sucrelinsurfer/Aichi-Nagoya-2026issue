@@ -120,10 +120,9 @@ export default function DisputeThree() {
       <div className="mt-4 rounded-xl border border-slate-200 bg-slate-50 px-4 py-4">
         <p className="text-sm font-bold text-ink">核心爭議在哪裡</p>
         <p className="mt-1.5 text-[15px] leading-relaxed text-slate-700">
-          明明拿到 4 個名額，為什麼最後只派出 2 位選手？重點不在「男生第 17 名夠不夠強」，而是那條把男生刷掉的門檻——
-          <span className="font-bold text-ink">
-            「亞錦賽前 16 名」到底是什麼時候定的、根據什麼定的？選手在比賽前知不知道？
-          </span>
+          一來<span className="font-bold text-ink">門檻菁英</span>：參賽標準要「國際賽前 3～4 名」，對剛進亞運的衝浪本就苛刻。二來
+          <span className="font-bold text-ink">執行還雙標</span>
+          ——真正把男子擋掉的「亞錦賽前 16 名」是賽後才冒出來的，同一把尺下女子（第 7、13 名）派了、男子（第 17、25 名）沒派。
         </p>
       </div>
     </div>
